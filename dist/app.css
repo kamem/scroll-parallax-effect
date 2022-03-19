@@ -1,0 +1,116 @@
+@supports (animation-timeline: works) {
+	.warning {
+		display: none;
+	}
+
+	@scroll-timeline scroll-for-100vh {
+		time-range: 10s;
+		start: 0;
+		end: 100vh;
+		scroll-offsets: 0, 100vh;
+	}
+
+	@-webkit-keyframes parallax {
+		to {
+			transform: translateY(var(--offset));
+		}
+	}
+
+	@keyframes parallax {
+		to {
+			transform: translateY(var(--offset));
+		}
+	}
+
+	.parallax__layer {
+		-webkit-animation: 10s parallax linear;
+		        animation: 10s parallax linear;
+		animation-timeline: scroll-for-100vh;
+	}
+
+	.parallax__layer__0 {
+		--offset: 100vh;
+	}
+
+	.parallax__layer__1 {
+		--offset: 83vh;
+	}
+
+	.parallax__layer__2 {
+		--offset: 67vh;
+	}
+
+	.parallax__layer__3 {
+		--offset: 50vh;
+	}
+
+	.parallax__layer__4 {
+		--offset: 34vh;
+	}
+
+	.parallax__layer__5 {
+		--offset: 17vh;
+	}
+
+	.parallax__layer__6 {
+		--offset: 0vh;
+	}
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	background: #2d112b;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	min-height: 200vh;
+}
+
+.parallax {
+	background: #fedcc8;
+	height: 100vh;
+	overflow: hidden;
+	position: relative;
+}
+
+.parallax__layer {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	right: 0;
+	bottom: 0;
+	margin-left: -1500px;
+}
+
+.parallax__layer img {
+	display: block;
+	position: absolute;
+	bottom: 0;
+}
+
+/* Show warning for older browser */
+.warning {
+	position: fixed;
+	top: 1em;
+	right: 1em;
+	left: 1em;
+	padding: 1em;
+	border: 1px solid black;
+	z-index: 9999;
+	text-align: center;
+	color: black;
+	background: rgba(255, 255, 225, 0.9);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+.warning a {
+	color: blue;
+	text-decoration: underline;
+}
+

@@ -1,0 +1,71 @@
+{
+  "name": "scroll-parallax-effect",
+  "description": "Implementing parallax effect by utilizing various events of scroll.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "./dist/scroll-parallax-effect/index.js",
+  "exports": {
+    ".": "./dist/scroll-parallax-effect/index.js",
+    "./timing": "./dist/scroll-parallax-effect/timing.js",
+    "./speed": "./dist/scroll-parallax-effect/speed.js",
+    "./fit": "./dist/scroll-parallax-effect/fit.js"
+  },
+  "typesVersions": {
+    "*": {
+      ".": ["./dist/scroll-parallax-effect/index.d.ts"],
+      "timing": ["./dist/scroll-parallax-effect/timing.d.ts"],
+      "speed": ["./dist/scroll-parallax-effect/speed.d.ts"],
+      "fit": ["./dist/scroll-parallax-effect/fit.d.ts"]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kamem/scroll-parallax-effect.git"
+  },
+  "author": {
+    "name": "kamem",
+    "url": "https://github.com/kamem"
+  },
+  "dependencies": {
+    "copy-webpack-plugin": "^10.2.4",
+    "html-loader": "^3.1.0",
+    "jquery": "^3.6.0",
+    "postcss-preset-env": "^7.4.2",
+    "vue": "^3.2.31",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "devDependencies": {
+    "@webpack-cli/generators": "^2.4.2",
+    "autoprefixer": "^10.4.2",
+    "css-loader": "^6.7.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.0",
+    "postcss": "^8.4.7",
+    "postcss-loader": "^6.2.1",
+    "prettier": "^2.5.1",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.2.7",
+    "typescript": "^4.6.2",
+    "webpack-dev-server": "^4.7.4"
+  },
+  "scripts": {
+    "build": "webpack --mode=production --node-env=production",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "watch": "webpack --watch",
+    "serve": "webpack serve"
+  },
+  "keywords": [
+    "scroll",
+    "scrolling",
+    "animation",
+    "parallax",
+    "effect",
+    "events",
+    "jquery-plugin",
+    "vue"
+  ]
+}
