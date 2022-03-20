@@ -1,7 +1,7 @@
 const requestAnimationFrame = window.requestAnimationFrame
 
 type Ele = Element | HTMLElement
-type Duration = 'y' | 'x'
+type Direction = 'y' | 'x'
 type Stage = typeof globalThis | Window | Ele
 export type DirectionPositionName = 'Top' | 'Left'
 export type StageSizeName = 'Height' | 'Width'
@@ -9,7 +9,7 @@ type ScrollName = 'pageYOffset' | 'pageXOffset' |'scrollTop' | 'scrollLeft'
 
 export interface StatusParams {
   stage?: Stage
-  direction?: Duration
+  direction?: Direction
   functions?: ([(status: ScrollStatus) => void, ScrollPosition])[]
   targetPercentage?: number
   threshold?: number
@@ -18,7 +18,7 @@ export interface StatusParams {
 
 export default class ScrollStatus {
   stage?: Stage
-  direction?: Duration
+  direction?: Direction
   functions?: ([(status: ScrollStatus) => void, ScrollPosition])[]
   targetPercentage?: number
   scrollPosition?: number
@@ -89,27 +89,32 @@ export default class ScrollStatus {
 }
 
 export class ScrollPosition {
-  status: ScrollStatus
+  stage: Stage
   targetPercentage?: number
   threshold?: number
+  stageSize: number
+  direction: Direction
+
   scrollPosition: number
   endScrollPosition: number
   scrollName: ScrollName
 
   constructor(opt: ScrollStatus) {
-    this.status = opt
+    this.stage = opt.stage
+    this.direction = opt.direction
+    this.stage = opt.stage
     this.targetPercentage = opt.targetPercentage || 0.2
     this.threshold = opt.threshold || 0
-    this.scrollName = this.status.stage === window ? `page${this.status.direction.toUpperCase() as 'Y' | 'X'}Offset` : `scroll${opt.directionPositionName}`
+    this.scrollName = this.stage === window ? `page${this.direction.toUpperCase() as 'Y' | 'X'}Offset` : `scroll${opt.directionPositionName}`
     const scrollPosition = this.getScrollPosition()
     this.scrollPosition = scrollPosition // 実際にスクロール
     this.endScrollPosition = scrollPosition // 最後スクロールが止まる位置
   }
 
   getScrollPosition() {
-    const stageThreshold = (this.status.stageSize || 0) * this.threshold || 0
+    const stageThreshold = (this.stageSize || 0) * this.threshold || 0
     // @ts-ignore
-    return this.status.stage[this.scrollName] as number + stageThreshold
+    return this.stage[this.scrollName] as number + stageThreshold
   }
   generateScrollPosition() {
     const scrollPosition = this.getScrollPosition()

@@ -15,7 +15,6 @@ export class ParallaxTiming {
       {
         el: opt?.target ? getElement(opt.target) :  el,
         triggerPosition: opt?.triggerPosition,
-        eventTriggerWindowPercentage: opt?.eventTriggerWindowPercentage,
         toggle: timingEvent || [
           (t, o) => { el.classList.add(c) },
           (t, o) => { el.classList.remove(c) },

@@ -8,14 +8,13 @@ import ScrollStatus from './scrollStatus'
 
 export type EventFunctionType = (target: Ele, isOver: boolean) => {}
 
-type Ele = string | Element | HTMLElement
+type Ele = Element | HTMLElement
 export interface TimingOotions {
   el?: Ele
   target?: Ele
   status?: ScrollStatus
   className?: string
   triggerPosition?: TriggerPosiiton
-  eventTriggerWindowPercentage?: number
   targetPercentage?: number
   threshold?: number
   start?: EventFunctionType
@@ -28,23 +27,19 @@ export default class Timing {
   isLineOver: boolean
   triggerPosition: number
   eventScrollElementPosition: TriggerPosiiton
-  eventTriggerWindowPercentage: number
-  eventScrollPlussWindowPerCentPosition: number
   toggle: [EventFunctionType, EventFunctionType]
 
   constructor(opt: TimingOotions) {
     this.isLineOver = false
     this.el = opt.el
     this.eventScrollElementPosition = opt.triggerPosition
-    this.eventTriggerWindowPercentage = opt.eventTriggerWindowPercentage || 0.5
     this.toggle = opt.toggle
   }
   getEventScrollElementPosition(status: ScrollStatus) {
     return scrollPositionStringToNumber(this.eventScrollElementPosition ? this.eventScrollElementPosition : _offset(this.el, status.endScrollPosition, status.directionPositionName), status)
   }
   timingEvent(status: ScrollStatus) {
-    this.eventScrollPlussWindowPerCentPosition = status.scrollPosition
-    const isLineOver = this.eventScrollPlussWindowPerCentPosition >= this.getEventScrollElementPosition(status)
+    const isLineOver = status.scrollPosition >= this.getEventScrollElementPosition(status)
 
     if(isLineOver !== this.isLineOver) {
       this.isLineOver = isLineOver

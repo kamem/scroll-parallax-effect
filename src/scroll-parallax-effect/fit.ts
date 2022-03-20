@@ -12,11 +12,7 @@ export class ParallaxFit {
     const fit = new Fit(el)
     this.fit = fit
 
-    if(Array.isArray(opt)) {
-      opt?.forEach((motion) => fit.setMotion(motion))
-    } else {
-      fit.setMotion(opt)
-    }
+    fit.setMotion(opt)
 
     fit.setFromStyle()
     fit.setStyleValues()
