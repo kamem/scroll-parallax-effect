@@ -135,7 +135,7 @@ export const scrollPositionStringToNumber = (triggerPosition: TriggerPosiiton, s
     const triggerPositionArray = (typeof triggerPosition === 'string' ? triggerPosition.split(',') : triggerPosition) as TriggerPositionArray
     const positionName = triggerPositionArray[0] || ''
     const position = isEnd(positionName) ? stageEndScrollNum : _offset(positionName, status.endScrollPosition, status.directionPositionName)
-    const s = (parseInt(triggerPositionArray[1].toString()) || 0) + Math.min(position, stageEndScrollNum)
+    const s = (parseInt(String(triggerPositionArray[1])) || 0) + Math.min(position, stageEndScrollNum)
     return Math.min(s, stageEndScrollNum)
   }
   

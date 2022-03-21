@@ -102,7 +102,7 @@ export class ScrollPosition {
   constructor(opt: ScrollStatus) {
     this.stage = opt.stage
     this.direction = opt.direction
-    this.stage = opt.stage
+    this.stageSize = opt.stageSize
     this.targetPercentage = opt.targetPercentage || 0.2
     this.threshold = opt.threshold || 0
     this.scrollName = this.stage === window ? `page${this.direction.toUpperCase() as 'Y' | 'X'}Offset` : `scroll${opt.directionPositionName}`
@@ -112,7 +112,7 @@ export class ScrollPosition {
   }
 
   getScrollPosition() {
-    const stageThreshold = (this.stageSize || 0) * this.threshold || 0
+    const stageThreshold = (this.stageSize || 0) * (this.threshold || 0)
     // @ts-ignore
     return this.stage[this.scrollName] as number + stageThreshold
   }
