@@ -23,7 +23,7 @@ export default class Fit {
     rangeMotions: Motion[];
     styleValues: MotionStyles;
     constructor(el: Ele);
-    setMotion(motion: Motion): void;
+    setMotion(motion: Motion | Motion[]): void;
     setStyleValues(): void;
     generateStyleValues(motionStyles: MotionStyles): MotionValues;
     setStyleValue(motionStyles: MotionStyles): MotionStyles;

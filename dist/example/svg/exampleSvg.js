@@ -109,18 +109,20 @@ var ScrollStatus = /** @class */ (function () {
 /* harmony default export */ const scrollStatus = (ScrollStatus);
 var ScrollPosition = /** @class */ (function () {
     function ScrollPosition(opt) {
-        this.status = opt;
+        this.stage = opt.stage;
+        this.direction = opt.direction;
+        this.stageSize = opt.stageSize;
         this.targetPercentage = opt.targetPercentage || 0.2;
         this.threshold = opt.threshold || 0;
-        this.scrollName = this.status.stage === window ? "page".concat(this.status.direction.toUpperCase(), "Offset") : "scroll".concat(opt.directionPositionName);
+        this.scrollName = this.stage === window ? "page".concat(this.direction.toUpperCase(), "Offset") : "scroll".concat(opt.directionPositionName);
         var scrollPosition = this.getScrollPosition();
         this.scrollPosition = scrollPosition; // 実際にスクロール
         this.endScrollPosition = scrollPosition; // 最後スクロールが止まる位置
     }
     ScrollPosition.prototype.getScrollPosition = function () {
-        var stageThreshold = (this.status.stageSize || 0) * this.threshold || 0;
+        var stageThreshold = (this.stageSize || 0) * (this.threshold || 0);
         // @ts-ignore
-        return this.status.stage[this.scrollName] + stageThreshold;
+        return this.stage[this.scrollName] + stageThreshold;
     };
     ScrollPosition.prototype.generateScrollPosition = function () {
         var scrollPosition = this.getScrollPosition();
@@ -216,7 +218,7 @@ var getStringColor = function (styleValue) {
 var _offset = function (element, endScrollPosition, directionPositionName) {
     var el = typeof element === 'string' ? document.querySelector(element) : element;
     var dir = directionPositionName === 'Left' ? 'left' : 'top';
-    return el && el.getBoundingClientRect()[dir] + endScrollPosition;
+    return el ? el.getBoundingClientRect()[dir] + endScrollPosition : 0;
 };
 var isEnd = function (value) {
     return typeof value === 'string' && ~['end'].indexOf(value);
@@ -231,8 +233,8 @@ var scrollPositionStringToNumber = function (triggerPosition, status) {
     if (~['string', 'object'].indexOf(typeof triggerPosition)) {
         var triggerPositionArray = (typeof triggerPosition === 'string' ? triggerPosition.split(',') : triggerPosition);
         var positionName = triggerPositionArray[0] || '';
-        var position = isEnd(triggerPosition) ? stageEndScrollNum : _offset(positionName, status.endScrollPosition, status.directionPositionName);
-        var s = (triggerPositionArray[1] || 0) + Math.min(position, stageEndScrollNum);
+        var position = isEnd(positionName) ? stageEndScrollNum : _offset(positionName, status.endScrollPosition, status.directionPositionName);
+        var s = (parseInt(String(triggerPositionArray[1])) || 0) + Math.min(position, stageEndScrollNum);
         return Math.min(s, stageEndScrollNum);
     }
     if (typeof triggerPosition === 'number') {
@@ -247,15 +249,13 @@ var Timing = /** @class */ (function () {
         this.isLineOver = false;
         this.el = opt.el;
         this.eventScrollElementPosition = opt.triggerPosition;
-        this.eventTriggerWindowPercentage = opt.eventTriggerWindowPercentage || 0.5;
         this.toggle = opt.toggle;
     }
     Timing.prototype.getEventScrollElementPosition = function (status) {
         return scrollPositionStringToNumber(this.eventScrollElementPosition ? this.eventScrollElementPosition : _offset(this.el, status.endScrollPosition, status.directionPositionName), status);
     };
     Timing.prototype.timingEvent = function (status) {
-        this.eventScrollPlussWindowPerCentPosition = status.scrollPosition;
-        var isLineOver = this.eventScrollPlussWindowPerCentPosition >= this.getEventScrollElementPosition(status);
+        var isLineOver = status.scrollPosition >= this.getEventScrollElementPosition(status);
         if (isLineOver !== this.isLineOver) {
             this.isLineOver = isLineOver;
             var eventSelect = this.toggle[isLineOver ? 0 : 1];
@@ -422,7 +422,6 @@ var SvgTiming = /** @class */ (function () {
         this.timing = new timing({
             el: opt.el,
             triggerPosition: opt.triggerPosition,
-            eventTriggerWindowPercentage: opt.eventTriggerWindowPercentage,
             toggle: [toggle, toggle]
         });
     }
@@ -480,13 +479,17 @@ var Fit = /** @class */ (function () {
         this.rangeMotions = [];
     }
     Fit.prototype.setMotion = function (motion) {
-        var fromStyle = this.setStyleValue(motion.fromStyle);
-        var toStyle = this.setStyleValue(motion.toStyle);
-        this.motions.push(Object.assign({}, motion, {
-            easing: motion.easing || 'linear',
-            fromStyle: fromStyle,
-            toStyle: toStyle,
-        }));
+        var _this = this;
+        var m = Array.isArray(motion) ? motion : [motion];
+        this.motions = m.map(function (motion) {
+            var fromStyle = _this.setStyleValue(motion.fromStyle);
+            var toStyle = _this.setStyleValue(motion.toStyle);
+            return Object.assign({}, motion, {
+                easing: motion.easing || 'linear',
+                fromStyle: fromStyle,
+                toStyle: toStyle,
+            });
+        });
     };
     Fit.prototype.setStyleValues = function () {
         var _this = this;
@@ -620,37 +623,31 @@ var Fit = /** @class */ (function () {
 
 var SvgFit = /** @class */ (function () {
     function SvgFit(opt) {
-        var _this = this;
-        var _a;
         this.path = opt === null || opt === void 0 ? void 0 : opt.path;
         this.pathLength = getMaxPathLength([this.path]);
         this.fit = new fit(this.path);
-        if (Array.isArray(opt.motion)) {
-            (_a = opt.motion) === null || _a === void 0 ? void 0 : _a.forEach(function (motion) {
-                return _this.fit.setMotion(_this.generateSvgMotion(motion));
-            });
-        }
-        else {
-            this.fit.setMotion(this.generateSvgMotion(opt.motion));
-        }
+        this.fit.setMotion(this.generateSvgMotion(Array.isArray(opt.motion) ? opt.motion : [opt.motion]));
     }
-    SvgFit.prototype.generateSvgMotion = function (motion) {
-        var m = {
-            start: motion.start,
-            end: motion.end,
-            easing: motion.easing
-        };
-        var fromPath = motion.from && this.pathLength * (1 - motion.from);
-        var toPath = this.pathLength * (1 - motion.to);
-        if (fromPath) {
-            m.fromStyle = {
-                strokeDashoffset: fromPath
+    SvgFit.prototype.generateSvgMotion = function (motions) {
+        var _this = this;
+        return motions.map(function (motion) {
+            var m = {
+                start: motion.start,
+                end: motion.end,
+                easing: motion.easing
             };
-        }
-        m.toStyle = {
-            strokeDashoffset: toPath
-        };
-        return m;
+            var fromPath = motion.from && _this.pathLength * (1 - motion.from);
+            var toPath = _this.pathLength * (1 - motion.to);
+            if (fromPath) {
+                m.fromStyle = {
+                    strokeDashoffset: fromPath
+                };
+            }
+            m.toStyle = {
+                strokeDashoffset: toPath
+            };
+            return m;
+        });
     };
     return SvgFit;
 }());
@@ -768,7 +765,7 @@ var music = new SvgParallaxSpeed('#music', {
 });
 var music3 = new SvgParallaxFit('#music2', { motion: [
         {
-            start: 0,
+            start: ['#music2', -380],
             end: ['#music2', -300],
             from: 0,
             to: 0.5,
