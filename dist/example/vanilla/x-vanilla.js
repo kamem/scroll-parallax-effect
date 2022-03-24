@@ -1,24 +1,56 @@
-import '../css/x.css'
-import {
-  updateStatus,
-  ParallaxTiming,
-  ParallaxSpeed,
-  ParallaxFit
-} from '../../scroll-parallax-effect/index'
+/*!
+ * scroll-parallax-effect
+ * Implementing parallax effect by utilizing various events of scroll.
+ * https://github.com/kamem/scroll-parallax-effect.git
+ * @version 1.0.0
+ * @license Released under MIT license
+ * @author kamem
+ */
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["scroll-parallax-effect"] = factory();
+	else
+		root["scroll-parallax-effect"] = factory();
+})(self, function() {
+return /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	// The require scope
+/******/ 	var __webpack_require__ = {};
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+__webpack_require__.r(__webpack_exports__);
 
-updateStatus({ direction: 'x' })
+
+Parallax.updateStatus({ direction: 'x' })
 
 document.querySelectorAll('.gnav > ul > *').forEach(function(el) {
   const targetElementName = el.querySelector('a').getAttribute('href')
-  new ParallaxTiming(el, { target: document.querySelector(targetElementName) } )
+  new Parallax.Timing(el, { target: document.querySelector(targetElementName) } )
 })
 
-new ParallaxTiming('#timing')
+new Parallax.Timing('#timing')
 
 const borders = document.createElement('div')
 borders.setAttribute('class', 'borders')
 
-new ParallaxSpeed(
+new Parallax.Speed(
   'body', 
   {
     contentScrollPosition: 0,
@@ -40,7 +72,7 @@ for (let i = 0; i < borderContent; i++) {
   
   document.querySelector('.borders').append(border)
   
-  new ParallaxSpeed(
+  new Parallax.Speed(
     border, 
     {
       contentScrollPosition: 0,
@@ -51,7 +83,7 @@ for (let i = 0; i < borderContent; i++) {
 }
 
 
-const bird = new ParallaxFit('.bird', [
+const bird = new Parallax.Fit('.bird', [
   {
     start: 0,
     end: '#timing',
@@ -82,7 +114,7 @@ const bird = new ParallaxFit('.bird', [
     easing: 'easeInQuart'
   },
 ])
-const birdPath = new ParallaxFit('.birdPath', [
+const birdPath = new Parallax.Fit('.birdPath', [
   {
     start: 0,
     end: '#timing',
@@ -109,8 +141,7 @@ const birdPath = new ParallaxFit('.birdPath', [
 
 // setInterval(() => console.log(drop.getValues().styleValues), 100)
 
-
-new ParallaxSpeed('.gear', {
+new Parallax.Speed('.gear', {
     style: 'transform',
     contentScrollPositionStyleValue: 'rotate(0deg)',
     targetPercentage: 0.05,
@@ -121,7 +152,7 @@ new ParallaxSpeed('.gear', {
 
 
 document.querySelectorAll('.triangle').forEach((el, i) => {
-  new ParallaxSpeed(el, {
+  new Parallax.Speed(el, {
     style: [
       'transform',
       'top',
@@ -138,8 +169,8 @@ document.querySelectorAll('.triangle').forEach((el, i) => {
 })
 
 
-document.querySelectorAll<HTMLElement>('.circle').forEach((el, i) => {
-  new ParallaxFit(el, [
+document.querySelectorAll('.circle').forEach((el, i) => {
+  new Parallax.Fit(el, [
     {
       start: ['#fit', -300 + i * 50],
       end: ['#fit', i * 100],
@@ -161,3 +192,7 @@ document.querySelectorAll<HTMLElement>('.circle').forEach((el, i) => {
     },
   ])
 })
+/******/ 	return __webpack_exports__;
+/******/ })()
+;
+});

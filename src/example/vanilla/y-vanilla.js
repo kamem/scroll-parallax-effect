@@ -1,24 +1,18 @@
-import '../css/x.css'
-import {
-  updateStatus,
-  ParallaxTiming,
-  ParallaxSpeed,
-  ParallaxFit
-} from '../../scroll-parallax-effect/index'
-
-updateStatus({ direction: 'x' })
+import '../css/y.css'
 
 document.querySelectorAll('.gnav > ul > *').forEach(function(el) {
   const targetElementName = el.querySelector('a').getAttribute('href')
-  new ParallaxTiming(el, { target: document.querySelector(targetElementName) } )
+  new Parallax.Timing(el, { target: document.querySelector(targetElementName) } )
 })
 
-new ParallaxTiming('#timing')
+new Parallax.Timing('#timing', {
+  threshold: 0.5
+})
 
 const borders = document.createElement('div')
 borders.setAttribute('class', 'borders')
 
-new ParallaxSpeed(
+new Parallax.Speed(
   'body', 
   {
     contentScrollPosition: 0,
@@ -26,7 +20,6 @@ new ParallaxSpeed(
     style: ['backgroundColor'],
     speed: [[0.02, 0.03, 0.039]],
     min: [[30, 30, 30]],
-    max: [[100, 100, 100]],
   }
 )
 
@@ -40,7 +33,7 @@ for (let i = 0; i < borderContent; i++) {
   
   document.querySelector('.borders').append(border)
   
-  new ParallaxSpeed(
+  new Parallax.Speed(
     border, 
     {
       contentScrollPosition: 0,
@@ -51,38 +44,22 @@ for (let i = 0; i < borderContent; i++) {
 }
 
 
-const bird = new ParallaxFit('.bird', [
+const drop = new Parallax.Fit('.drop', [
   {
     start: 0,
-    end: '#timing',
-    fromStyle: {
-      top: '30px',
-      left: '50%'
-    },
-    toStyle: {
-      left: '60%',
-      top: '100px'
-    },
-    easing: 'easeOutCubic'
-  },
-  {
-    end: '#speed',
-    toStyle: {
-      left: '40%',
-      top: '90px'
-    },
-    easing: 'easeInQuart'
-  },
-  {
     end: 'end',
-    toStyle: {
-      left: '65%',
-      top: '80px'
+    fromStyle: {
+      top: '5%'
     },
-    easing: 'easeInQuart'
-  },
+    toStyle: {
+      top: '80%'
+    },
+  }
 ])
-const birdPath = new ParallaxFit('.birdPath', [
+
+// setInterval(() => console.log(drop.getValues().styleValues), 100)
+
+const dropPath = new Parallax.Fit('.dropPath', [
   {
     start: 0,
     end: '#timing',
@@ -94,23 +71,21 @@ const birdPath = new ParallaxFit('.birdPath', [
     },
   },
   {
-    end: '#speed',
+    end: ['#speed', -300],
     toStyle: {
       fill: '#ff15d0'
     },
   },
   {
-    end: '#fit',
+    end: 'end',
     toStyle: {
       fill: '#1176ff'
     },
   },
 ])
 
-// setInterval(() => console.log(drop.getValues().styleValues), 100)
 
-
-new ParallaxSpeed('.gear', {
+new Parallax.Speed('.gear', {
     style: 'transform',
     contentScrollPositionStyleValue: 'rotate(0deg)',
     targetPercentage: 0.05,
@@ -121,7 +96,7 @@ new ParallaxSpeed('.gear', {
 
 
 document.querySelectorAll('.triangle').forEach((el, i) => {
-  new ParallaxSpeed(el, {
+  new Parallax.Speed(el, {
     style: [
       'transform',
       'top',
@@ -138,8 +113,8 @@ document.querySelectorAll('.triangle').forEach((el, i) => {
 })
 
 
-document.querySelectorAll<HTMLElement>('.circle').forEach((el, i) => {
-  new ParallaxFit(el, [
+document.querySelectorAll('.circle').forEach((el, i) => {
+  new Parallax.Fit(el, [
     {
       start: ['#fit', -300 + i * 50],
       end: ['#fit', i * 100],

@@ -1,24 +1,18 @@
 import '../css/x.css'
-import {
-  updateStatus,
-  ParallaxTiming,
-  ParallaxSpeed,
-  ParallaxFit
-} from '../../scroll-parallax-effect/index'
 
-updateStatus({ direction: 'x' })
+Parallax.updateStatus({ direction: 'x' })
 
 document.querySelectorAll('.gnav > ul > *').forEach(function(el) {
   const targetElementName = el.querySelector('a').getAttribute('href')
-  new ParallaxTiming(el, { target: document.querySelector(targetElementName) } )
+  new Parallax.Timing(el, { target: document.querySelector(targetElementName) } )
 })
 
-new ParallaxTiming('#timing')
+new Parallax.Timing('#timing')
 
 const borders = document.createElement('div')
 borders.setAttribute('class', 'borders')
 
-new ParallaxSpeed(
+new Parallax.Speed(
   'body', 
   {
     contentScrollPosition: 0,
@@ -40,7 +34,7 @@ for (let i = 0; i < borderContent; i++) {
   
   document.querySelector('.borders').append(border)
   
-  new ParallaxSpeed(
+  new Parallax.Speed(
     border, 
     {
       contentScrollPosition: 0,
@@ -51,7 +45,7 @@ for (let i = 0; i < borderContent; i++) {
 }
 
 
-const bird = new ParallaxFit('.bird', [
+const bird = new Parallax.Fit('.bird', [
   {
     start: 0,
     end: '#timing',
@@ -82,7 +76,7 @@ const bird = new ParallaxFit('.bird', [
     easing: 'easeInQuart'
   },
 ])
-const birdPath = new ParallaxFit('.birdPath', [
+const birdPath = new Parallax.Fit('.birdPath', [
   {
     start: 0,
     end: '#timing',
@@ -109,8 +103,7 @@ const birdPath = new ParallaxFit('.birdPath', [
 
 // setInterval(() => console.log(drop.getValues().styleValues), 100)
 
-
-new ParallaxSpeed('.gear', {
+new Parallax.Speed('.gear', {
     style: 'transform',
     contentScrollPositionStyleValue: 'rotate(0deg)',
     targetPercentage: 0.05,
@@ -121,7 +114,7 @@ new ParallaxSpeed('.gear', {
 
 
 document.querySelectorAll('.triangle').forEach((el, i) => {
-  new ParallaxSpeed(el, {
+  new Parallax.Speed(el, {
     style: [
       'transform',
       'top',
@@ -138,8 +131,8 @@ document.querySelectorAll('.triangle').forEach((el, i) => {
 })
 
 
-document.querySelectorAll<HTMLElement>('.circle').forEach((el, i) => {
-  new ParallaxFit(el, [
+document.querySelectorAll('.circle').forEach((el, i) => {
+  new Parallax.Fit(el, [
     {
       start: ['#fit', -300 + i * 50],
       end: ['#fit', i * 100],

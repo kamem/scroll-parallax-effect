@@ -1,1 +1,1 @@
-import './y.css';
+import '../css/y.css';
