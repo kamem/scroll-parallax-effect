@@ -33,7 +33,7 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    publicPath: '/',
+    publicPath: '/scroll-parallax-effect/dist/',
     filename: '[name].js',
     library: "scroll-parallax-effect",
     libraryTarget: "umd"
