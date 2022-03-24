@@ -18,6 +18,8 @@ const config = {
     'app': './src/index.ts',
     'example/typescript/x-typescript': './src/example/typescript/x-typescript.ts',
     'example/typescript/y-typescript': './src/example/typescript/y-typescript.ts',
+    'example/vanilla/x-vanilla': './src/example/vanilla/x-vanilla.js',
+    'example/vanilla/y-vanilla': './src/example/vanilla/y-vanilla.js',
     'example/svg/exampleSvg': './src/example/svg/exampleSvg.ts',
     // 'jquery.scrollParallax': './src/scroll-parallax-effect/jquery.index.js',
     // 'jquery.scrollParallax.min': './src/scroll-parallax-effect/jquery.index.js',
@@ -33,7 +35,7 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    publicPath: '/scroll-parallax-effect/dist/',
+    publicPath: isProduction ? '/scroll-parallax-effect/dist/' : '/',
     filename: '[name].js',
     library: "scroll-parallax-effect",
     libraryTarget: "umd"
@@ -46,6 +48,8 @@ const config = {
     new HtmlWebpackPlugin({
       template: "public/index.html",
     }),
+
+    // typescript
     new HtmlWebpackPlugin({
       template: "public/example/typescript/x-typescript.html",
       filename: 'example/typescript/x-typescript.html',
@@ -56,6 +60,20 @@ const config = {
       filename: 'example/typescript/y-typescript.html',
       chunks: ['example/typescript/y-typescript']
     }),
+
+    // vanilla
+    new HtmlWebpackPlugin({
+      template: "public/example/vanilla/x-vanilla.html",
+      filename: 'example/vanilla/x-vanilla.html',
+      chunks: ['example/vanilla/x-vanilla']
+    }),
+    new HtmlWebpackPlugin({
+      template: "public/example/vanilla/y-vanilla.html",
+      filename: 'example/vanilla/y-vanilla.html',
+      chunks: ['example/vanilla/y-vanilla']
+    }),
+
+    // svg
     new HtmlWebpackPlugin({
       template: "public/example/svg/svg.html",
       filename: 'example/svg/svg.html',

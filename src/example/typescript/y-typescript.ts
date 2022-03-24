@@ -1,4 +1,4 @@
-import './y.css'
+import '../css/y.css'
 import {
   ParallaxTiming,
   ParallaxSpeed,
