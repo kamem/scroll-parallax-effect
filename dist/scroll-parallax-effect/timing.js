@@ -77,18 +77,20 @@ var ScrollStatus = /** @class */ (function () {
 /* unused harmony default export */ var __WEBPACK_DEFAULT_EXPORT__ = ((/* unused pure expression or super */ null && (ScrollStatus)));
 var ScrollPosition = /** @class */ (function () {
     function ScrollPosition(opt) {
-        this.status = opt;
+        this.stage = opt.stage;
+        this.direction = opt.direction;
+        this.stageSize = opt.stageSize;
         this.targetPercentage = opt.targetPercentage || 0.2;
         this.threshold = opt.threshold || 0;
-        this.scrollName = this.status.stage === window ? "page".concat(this.status.direction.toUpperCase(), "Offset") : "scroll".concat(opt.directionPositionName);
+        this.scrollName = this.stage === window ? "page".concat(this.direction.toUpperCase(), "Offset") : "scroll".concat(opt.directionPositionName);
         var scrollPosition = this.getScrollPosition();
         this.scrollPosition = scrollPosition; // 実際にスクロール
         this.endScrollPosition = scrollPosition; // 最後スクロールが止まる位置
     }
     ScrollPosition.prototype.getScrollPosition = function () {
-        var stageThreshold = (this.status.stageSize || 0) * this.threshold || 0;
+        var stageThreshold = (this.stageSize || 0) * (this.threshold || 0);
         // @ts-ignore
-        return this.status.stage[this.scrollName] + stageThreshold;
+        return this.stage[this.scrollName] + stageThreshold;
     };
     ScrollPosition.prototype.generateScrollPosition = function () {
         var scrollPosition = this.getScrollPosition();
@@ -197,7 +199,7 @@ var getStringColor = function (styleValue) {
 var _offset = function (element, endScrollPosition, directionPositionName) {
     var el = typeof element === 'string' ? document.querySelector(element) : element;
     var dir = directionPositionName === 'Left' ? 'left' : 'top';
-    return el && el.getBoundingClientRect()[dir] + endScrollPosition;
+    return el ? el.getBoundingClientRect()[dir] + endScrollPosition : 0;
 };
 var isEnd = function (value) {
     return typeof value === 'string' && ~['end'].indexOf(value);
@@ -212,8 +214,8 @@ var scrollPositionStringToNumber = function (triggerPosition, status) {
     if (~['string', 'object'].indexOf(typeof triggerPosition)) {
         var triggerPositionArray = (typeof triggerPosition === 'string' ? triggerPosition.split(',') : triggerPosition);
         var positionName = triggerPositionArray[0] || '';
-        var position = isEnd(triggerPosition) ? stageEndScrollNum : _offset(positionName, status.endScrollPosition, status.directionPositionName);
-        var s = (triggerPositionArray[1] || 0) + Math.min(position, stageEndScrollNum);
+        var position = isEnd(positionName) ? stageEndScrollNum : _offset(positionName, status.endScrollPosition, status.directionPositionName);
+        var s = (parseInt(String(triggerPositionArray[1])) || 0) + Math.min(position, stageEndScrollNum);
         return Math.min(s, stageEndScrollNum);
     }
     if (typeof triggerPosition === 'number') {
@@ -315,15 +317,13 @@ var Timing = /** @class */ (function () {
         this.isLineOver = false;
         this.el = opt.el;
         this.eventScrollElementPosition = opt.triggerPosition;
-        this.eventTriggerWindowPercentage = opt.eventTriggerWindowPercentage || 0.5;
         this.toggle = opt.toggle;
     }
     Timing.prototype.getEventScrollElementPosition = function (status) {
         return (0,util/* scrollPositionStringToNumber */.U3)(this.eventScrollElementPosition ? this.eventScrollElementPosition : (0,util/* _offset */.LR)(this.el, status.endScrollPosition, status.directionPositionName), status);
     };
     Timing.prototype.timingEvent = function (status) {
-        this.eventScrollPlussWindowPerCentPosition = status.scrollPosition;
-        var isLineOver = this.eventScrollPlussWindowPerCentPosition >= this.getEventScrollElementPosition(status);
+        var isLineOver = status.scrollPosition >= this.getEventScrollElementPosition(status);
         if (isLineOver !== this.isLineOver) {
             this.isLineOver = isLineOver;
             var eventSelect = this.toggle[isLineOver ? 0 : 1];
@@ -350,7 +350,6 @@ var ParallaxTiming = /** @class */ (function () {
         this.timing = new timing({
             el: (opt === null || opt === void 0 ? void 0 : opt.target) ? (0,util/* getElement */.sb)(opt.target) : el,
             triggerPosition: opt === null || opt === void 0 ? void 0 : opt.triggerPosition,
-            eventTriggerWindowPercentage: opt === null || opt === void 0 ? void 0 : opt.eventTriggerWindowPercentage,
             toggle: timingEvent || [
                 function (t, o) { el.classList.add(c); },
                 function (t, o) { el.classList.remove(c); },

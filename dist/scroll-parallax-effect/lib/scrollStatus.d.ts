@@ -1,12 +1,12 @@
 declare type Ele = Element | HTMLElement;
-declare type Duration = 'y' | 'x';
+declare type Direction = 'y' | 'x';
 declare type Stage = typeof globalThis | Window | Ele;
 export declare type DirectionPositionName = 'Top' | 'Left';
 export declare type StageSizeName = 'Height' | 'Width';
 declare type ScrollName = 'pageYOffset' | 'pageXOffset' | 'scrollTop' | 'scrollLeft';
 export interface StatusParams {
     stage?: Stage;
-    direction?: Duration;
+    direction?: Direction;
     functions?: ([(status: ScrollStatus) => void, ScrollPosition])[];
     targetPercentage?: number;
     threshold?: number;
@@ -14,7 +14,7 @@ export interface StatusParams {
 }
 export default class ScrollStatus {
     stage?: Stage;
-    direction?: Duration;
+    direction?: Direction;
     functions?: ([(status: ScrollStatus) => void, ScrollPosition])[];
     targetPercentage?: number;
     scrollPosition?: number;
@@ -33,9 +33,11 @@ export default class ScrollStatus {
     setDirectionInfo(): void;
 }
 export declare class ScrollPosition {
-    status: ScrollStatus;
+    stage: Stage;
     targetPercentage?: number;
     threshold?: number;
+    stageSize: number;
+    direction: Direction;
     scrollPosition: number;
     endScrollPosition: number;
     scrollName: ScrollName;

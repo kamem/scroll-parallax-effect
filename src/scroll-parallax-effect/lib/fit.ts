@@ -38,14 +38,17 @@ export default class Fit {
     this.motions = []
     this.rangeMotions = []
   }
-  setMotion(motion: Motion) {
+  setMotion(motion: Motion | Motion[]) {
+    const m = Array.isArray(motion) ? motion : [motion]
+    this.motions = m.map(motion => {
     const fromStyle = this.setStyleValue(motion.fromStyle)
     const toStyle = this.setStyleValue(motion.toStyle)
-    this.motions.push(Object.assign({}, motion, {
-      easing: motion.easing || 'linear',
-      fromStyle,
-      toStyle,
-    }))
+      return Object.assign({}, motion, {
+        easing: motion.easing || 'linear',
+        fromStyle,
+        toStyle,
+      })
+    })
   }
 
   setStyleValues() {

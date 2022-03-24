@@ -24,7 +24,7 @@ export declare const hexadecimalToRgb: (value: string) => string;
 export declare const getStringColor: (styleValue: string) => string;
 export declare const _offset: (element: string | Element | HTMLElement, endScrollPosition: number, directionPositionName: DirectionPositionName) => number;
 export declare type TriggerPositionType = 'end' | string | Element | HTMLElement;
-export declare type TriggerPositionArray = [TriggerPositionType, number];
+export declare type TriggerPositionArray = [TriggerPositionType, number | string];
 export declare type TriggerPosiiton = number | TriggerPositionType | TriggerPositionArray;
 export declare const scrollPositionStringToNumber: (triggerPosition: TriggerPosiiton, status?: ScrollStatus) => number;
 export {};

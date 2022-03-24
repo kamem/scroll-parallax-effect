@@ -10,7 +10,7 @@ updateStatus({ direction: 'x' })
 
 document.querySelectorAll('.gnav > ul > *').forEach(function(el) {
   const targetElementName = el.querySelector('a').getAttribute('href')
-  new ParallaxTiming(el, { target: targetElementName } )
+  new ParallaxTiming(el, { target: document.querySelector(targetElementName) } )
 })
 
 new ParallaxTiming('#timing')

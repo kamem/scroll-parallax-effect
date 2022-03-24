@@ -85,18 +85,20 @@ var ScrollStatus = /** @class */ (function () {
 /* unused harmony default export */ var __WEBPACK_DEFAULT_EXPORT__ = ((/* unused pure expression or super */ null && (ScrollStatus)));
 var ScrollPosition = /** @class */ (function () {
     function ScrollPosition(opt) {
-        this.status = opt;
+        this.stage = opt.stage;
+        this.direction = opt.direction;
+        this.stageSize = opt.stageSize;
         this.targetPercentage = opt.targetPercentage || 0.2;
         this.threshold = opt.threshold || 0;
-        this.scrollName = this.status.stage === window ? "page".concat(this.status.direction.toUpperCase(), "Offset") : "scroll".concat(opt.directionPositionName);
+        this.scrollName = this.stage === window ? "page".concat(this.direction.toUpperCase(), "Offset") : "scroll".concat(opt.directionPositionName);
         var scrollPosition = this.getScrollPosition();
         this.scrollPosition = scrollPosition; // 実際にスクロール
         this.endScrollPosition = scrollPosition; // 最後スクロールが止まる位置
     }
     ScrollPosition.prototype.getScrollPosition = function () {
-        var stageThreshold = (this.status.stageSize || 0) * this.threshold || 0;
+        var stageThreshold = (this.stageSize || 0) * (this.threshold || 0);
         // @ts-ignore
-        return this.status.stage[this.scrollName] + stageThreshold;
+        return this.stage[this.scrollName] + stageThreshold;
     };
     ScrollPosition.prototype.generateScrollPosition = function () {
         var scrollPosition = this.getScrollPosition();
@@ -207,7 +209,7 @@ var getStringColor = function (styleValue) {
 var _offset = function (element, endScrollPosition, directionPositionName) {
     var el = typeof element === 'string' ? document.querySelector(element) : element;
     var dir = directionPositionName === 'Left' ? 'left' : 'top';
-    return el && el.getBoundingClientRect()[dir] + endScrollPosition;
+    return el ? el.getBoundingClientRect()[dir] + endScrollPosition : 0;
 };
 var isEnd = function (value) {
     return typeof value === 'string' && ~['end'].indexOf(value);
@@ -222,8 +224,8 @@ var scrollPositionStringToNumber = function (triggerPosition, status) {
     if (~['string', 'object'].indexOf(typeof triggerPosition)) {
         var triggerPositionArray = (typeof triggerPosition === 'string' ? triggerPosition.split(',') : triggerPosition);
         var positionName = triggerPositionArray[0] || '';
-        var position = isEnd(triggerPosition) ? stageEndScrollNum : _offset(positionName, status.endScrollPosition, status.directionPositionName);
-        var s = (triggerPositionArray[1] || 0) + Math.min(position, stageEndScrollNum);
+        var position = isEnd(positionName) ? stageEndScrollNum : _offset(positionName, status.endScrollPosition, status.directionPositionName);
+        var s = (parseInt(String(triggerPositionArray[1])) || 0) + Math.min(position, stageEndScrollNum);
         return Math.min(s, stageEndScrollNum);
     }
     if (typeof triggerPosition === 'number') {
@@ -443,13 +445,17 @@ var Fit = /** @class */ (function () {
         this.rangeMotions = [];
     }
     Fit.prototype.setMotion = function (motion) {
-        var fromStyle = this.setStyleValue(motion.fromStyle);
-        var toStyle = this.setStyleValue(motion.toStyle);
-        this.motions.push(Object.assign({}, motion, {
-            easing: motion.easing || 'linear',
-            fromStyle: fromStyle,
-            toStyle: toStyle,
-        }));
+        var _this = this;
+        var m = Array.isArray(motion) ? motion : [motion];
+        this.motions = m.map(function (motion) {
+            var fromStyle = _this.setStyleValue(motion.fromStyle);
+            var toStyle = _this.setStyleValue(motion.toStyle);
+            return Object.assign({}, motion, {
+                easing: motion.easing || 'linear',
+                fromStyle: fromStyle,
+                toStyle: toStyle,
+            });
+        });
     };
     Fit.prototype.setStyleValues = function () {
         var _this = this;
@@ -589,12 +595,7 @@ var ParallaxFit = /** @class */ (function () {
         var el = (0,util/* getElement */.sb)(element);
         var fit = new lib_fit(el);
         this.fit = fit;
-        if (Array.isArray(opt)) {
-            opt === null || opt === void 0 ? void 0 : opt.forEach(function (motion) { return fit.setMotion(motion); });
-        }
-        else {
-            fit.setMotion(opt);
-        }
+        fit.setMotion(opt);
         fit.setFromStyle();
         fit.setStyleValues();
         fit.setStart();

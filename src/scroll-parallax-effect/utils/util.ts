@@ -113,7 +113,7 @@ export const getStringColor = (styleValue: string) => {
 export const _offset = (element: string | Element | HTMLElement, endScrollPosition: number, directionPositionName: DirectionPositionName) => {
   const el = typeof element === 'string' ? document.querySelector(element) : element
   const dir = directionPositionName === 'Left' ? 'left' : 'top'
-  return el && el.getBoundingClientRect()[dir] + endScrollPosition
+  return el ? el.getBoundingClientRect()[dir] + endScrollPosition : 0
 }
 
 const isEnd = (value: any) => {
@@ -121,7 +121,7 @@ const isEnd = (value: any) => {
 }
 
 export type TriggerPositionType = 'end' | string | Element | HTMLElement
-export type TriggerPositionArray = [TriggerPositionType, number]
+export type TriggerPositionArray = [TriggerPositionType, number | string]
 export type TriggerPosiiton = number | TriggerPositionType | TriggerPositionArray
 export const scrollPositionStringToNumber = (triggerPosition: TriggerPosiiton, status = defaultParallaxStatus) => {
   const stageEndScrollNum = status.contentSize - status.stageSize
@@ -134,8 +134,8 @@ export const scrollPositionStringToNumber = (triggerPosition: TriggerPosiiton, s
   if (~['string', 'object'].indexOf(typeof triggerPosition)) {
     const triggerPositionArray = (typeof triggerPosition === 'string' ? triggerPosition.split(',') : triggerPosition) as TriggerPositionArray
     const positionName = triggerPositionArray[0] || ''
-    const position = isEnd(triggerPosition) ? stageEndScrollNum : _offset(positionName, status.endScrollPosition, status.directionPositionName)
-    const s = (triggerPositionArray[1] || 0) + Math.min(position, stageEndScrollNum)
+    const position = isEnd(positionName) ? stageEndScrollNum : _offset(positionName, status.endScrollPosition, status.directionPositionName)
+    const s = (parseInt(String(triggerPositionArray[1])) || 0) + Math.min(position, stageEndScrollNum)
     return Math.min(s, stageEndScrollNum)
   }
   

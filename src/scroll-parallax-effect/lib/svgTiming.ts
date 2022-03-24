@@ -44,7 +44,6 @@ export default class SvgTiming {
     this.timing = new Timing({
       el: opt.el,
       triggerPosition: opt.triggerPosition,
-      eventTriggerWindowPercentage: opt.eventTriggerWindowPercentage,
       toggle: [toggle , toggle]
     })
   }

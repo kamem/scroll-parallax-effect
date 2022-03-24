@@ -23,5 +23,5 @@ export default class SvgFit {
     path?: SVGGeometryElement;
     fit: Fit;
     constructor(opt?: SvgFitOotions);
-    generateSvgMotion(motion: SvgFitMotion): Motion;
+    generateSvgMotion(motions: SvgFitMotion[]): Motion[];
 }

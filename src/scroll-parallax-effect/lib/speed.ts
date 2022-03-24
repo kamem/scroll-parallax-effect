@@ -85,7 +85,6 @@ export default class Speed {
     })
   }
   getStyleValues(status: ScrollStatus) {
-    
     return this.styles.reduce((result, style) => {
       return Object.assign(
         {},

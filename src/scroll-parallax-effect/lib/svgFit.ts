@@ -34,34 +34,30 @@ export default class SvgFit {
 
     this.fit = new Fit(this.path)
 
-    if(Array.isArray(opt.motion)) {
-      opt.motion?.forEach((motion) => {
-        return this.fit.setMotion(this.generateSvgMotion(motion))
-      })
-    } else {
-      this.fit.setMotion(this.generateSvgMotion(opt.motion))
-    }
+    this.fit.setMotion(this.generateSvgMotion(Array.isArray(opt.motion) ? opt.motion : [opt.motion]))
   }
 
-  generateSvgMotion(motion: SvgFitMotion) {
-    const m: Motion  = {
-      start: motion.start,
-      end: motion.end,
-      easing: motion.easing
-    }
-    const fromPath = motion.from && this.pathLength * (1 - motion.from)
-    const toPath = this.pathLength * (1 - motion.to)
-
-    if(fromPath) {
-      m.fromStyle = {
-        strokeDashoffset: fromPath
+  generateSvgMotion(motions: SvgFitMotion[]) {
+    return motions.map((motion) => {
+      const m: Motion  = {
+        start: motion.start,
+        end: motion.end,
+        easing: motion.easing
       }
-    }
-
-    m.toStyle = {
-      strokeDashoffset: toPath
-    }
-
-    return m
+      const fromPath = motion.from && this.pathLength * (1 - motion.from)
+      const toPath = this.pathLength * (1 - motion.to)
+  
+      if(fromPath) {
+        m.fromStyle = {
+          strokeDashoffset: fromPath
+        }
+      }
+  
+      m.toStyle = {
+        strokeDashoffset: toPath
+      }
+  
+      return m
+    })
   }
 }
