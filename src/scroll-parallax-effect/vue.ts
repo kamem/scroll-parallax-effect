@@ -1,7 +1,7 @@
 // @ts-nocheck
 import _Vue, { reactive } from 'vue'
 
-import ScrollStatus, { Status, StatusParams } from './lib/scrollStatus'
+import ScrollStatus, { Status } from './lib/scrollStatus'
 import * as p from './index'
 
 const generateScrollStatusValues = (Vue, opt: any = {}, $scrollStatus) => {
@@ -124,7 +124,7 @@ const Parallax = {
           return status
         },
         parallaxTiming(opt = {}) {
-          const timing = new p.ParallaxTiming(
+          return new p.ParallaxTiming(
             opt.target || opt.el,
             opt,
             {
@@ -135,7 +135,7 @@ const Parallax = {
           )
         },
         parallaxSpeed(opt) {
-          const speed = new p.ParallaxSpeed(
+          return new p.ParallaxSpeed(
             opt.el,
             {
               ...opt,
@@ -149,7 +149,7 @@ const Parallax = {
           )
         },
         parallaxFit(opt) {
-          const fit = new p.ParallaxFit(
+          return new p.ParallaxFit(
             opt.el,
             opt,
             {
