@@ -10,7 +10,7 @@ export interface ScrollEventOpt {
   threshold?: number
   status?: ScrollStatus
 }
-export  const setScrollEvents = (
+export const setScrollEvents = (
   func: (status: ScrollStatus) => void,
   {
     targetPercentage,
@@ -35,9 +35,10 @@ export type CamelToKebab<T extends object> = {
   [K in keyof T as `${CamelToKebabCase<string & K>}`]: T[K] extends object ? CamelToKebab<T[K]> : T[K]
 }
 
-export type CSSStyleDeclarationName = keyof CSSStyleDeclaration | keyof CamelToKebab<CSSStyleDeclaration>
+export type CSSStyleDeclarationName = (keyof CSSStyleDeclaration | keyof CamelToKebab<CSSStyleDeclaration>) & string
 
-export const kebabToCamelCase = (str: string) => {
+export const kebabToCamelCase = (str: CSSStyleDeclarationName) => {
+  if(!~str.indexOf('-')) return str
   return str.split('-').map((word: string ,i: number) => {
     if (i === 0) {
       return word.toLowerCase();
@@ -45,8 +46,8 @@ export const kebabToCamelCase = (str: string) => {
     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   }).join('')
 }
-export const generateCamelCaseStyle = (str: CSSStyleDeclarationName ) => {
-  return kebabToCamelCase(str as string) as keyof CSSStyleDeclaration
+export const generateCamelCaseStyle = (str: CSSStyleDeclarationName) => {
+  return kebabToCamelCase(str) as keyof CSSStyleDeclaration
 }
 
 export type Ele = string | Element | HTMLElement | null
@@ -118,7 +119,7 @@ export const getStringColor = (styleValue: string) => {
 export const _offset = (element: Ele | undefined, endScrollPosition: number, directionPositionName: DirectionPositionName) => {
   const el = typeof element === 'string' ? element ? document.querySelector(element) : '' : element
   const dir = directionPositionName === 'Left' ? 'left' : 'top'
-  return el ? el.getBoundingClientRect()[dir] + endScrollPosition : 0
+  return el ? el.getBoundingClientRect()[dir] + endScrollPosition : 0 // window表示領域内の位置 + 今のスクロール量とすることでブラウザ実際の位置を取得する
 }
 
 const isEnd = (value: any) => {

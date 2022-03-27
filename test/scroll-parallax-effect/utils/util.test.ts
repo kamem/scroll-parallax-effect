@@ -6,6 +6,8 @@
 import ScrollStatus from '../../../src/scroll-parallax-effect/lib/scrollStatus'
 
 import {
+  _offset,
+  generateCamelCaseStyle,
   getStyleValues,
   generateStyleValue,
   generateStyleValueString,
@@ -14,6 +16,16 @@ import {
   scrollPositionStringToNumber,
   getStringColor,
 } from '../../../src/scroll-parallax-effect/utils/util'
+
+
+describe('generateCamelCaseStyle', () => {
+  it('スタイルシートのケバブケースを渡すとキャメルケースで返してくれる', () => {
+    expect(generateCamelCaseStyle('background-color')).toEqual('backgroundColor')
+  })
+  it('キャメルケースで渡した場合はそのまま返す', () => {
+    expect(generateCamelCaseStyle('backgroundColor')).toEqual('backgroundColor')
+  })
+})
 
 describe('getStyleValues', () => {
   it('数字が入った文字を数字部分を抜き出した配列として返すべき', () => {
@@ -28,6 +40,9 @@ describe('getStyleValues', () => {
 })
 
 describe('generateStyleValue', () => {
+  it('undefinedで渡した場合空文字で返す', () => {
+    expect(generateStyleValue(undefined)).toBe('')
+  })
   it('16進数カラーコード3つの場合4つ返す', () => {
     expect(generateStyleValue('#fff')).toBe('rgb(255,255,255)')
   })
