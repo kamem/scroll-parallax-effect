@@ -36,7 +36,7 @@ interface Style {
 }
 
 export default class Speed {
-  el: Ele
+  el?: Ele
   styles: Style[]
   speeds?: number[] | number[][]
   mins?: number[] | number[][]
@@ -46,22 +46,22 @@ export default class Speed {
   
   constructor(ops: SpeedOptions) {
     this.el = ops.el
-    this.speeds = typeof ops.speed === 'object' ? ops.speed : [ops.speed]
-    this.mins = typeof ops.min === 'object' ? ops.min : [ops.min]
-    this.maxs = typeof ops.max === 'object' ? ops.max : [ops.max]
-    this.contentScrollPositionStyleValues = typeof ops.contentScrollPositionStyleValue === 'object' ? ops.contentScrollPositionStyleValue : [ops.contentScrollPositionStyleValue]
+    this.speeds = typeof ops.speed === 'object' ? ops.speed : ops.speed ? [ops.speed] : []
+    this.mins = typeof ops.min === 'object' ? ops.min : ops.min ? [ops.min] : []
+    this.maxs = typeof ops.max === 'object' ? ops.max : ops.max ? [ops.max] : []
+    this.contentScrollPositionStyleValues = typeof ops.contentScrollPositionStyleValue === 'object' ? ops.contentScrollPositionStyleValue : ops.contentScrollPositionStyleValue ? [ops.contentScrollPositionStyleValue] : []
     this.contentScrollPosition = ops.contentScrollPosition || 0
-    this.styles = this.generateStyles((typeof ops.style === 'object' ? ops.style : [ops.style]))
+    this.styles = this.generateStyles((typeof ops.style === 'object' ? ops.style : ops.style ? [ops.style] : []))
   }
   generateStyles(styles: (CSSStyleDeclarationName)[]) {
     return styles.map((name, i: number) => {
-      const contentScrollPositionStyleValues = this.contentScrollPositionStyleValues[i] || document.defaultView.getComputedStyle(typeof this.el === 'string' ? document.querySelector(this.el) : this.el, null)[generateCamelCaseStyle(name)] as string | number
+      const contentScrollPositionStyleValues = this.contentScrollPositionStyleValues[i] || (this.el ? document.defaultView?.getComputedStyle(this.el, null)[generateCamelCaseStyle(name)] as string | number : 0 )
       const styleValue = generateStyleValue(contentScrollPositionStyleValues)
       return {
         name: name as CSSStyleDeclarationName,
-        speed: this.speeds[i] || this.speeds[0],
-        min: this.mins[i] || this.mins[0],
-        max: this.maxs[i] || this.maxs[0],
+        speed: this.speeds![i] || this.speeds![0],
+        min: this.mins![i] || this.mins![0],
+        max: this.maxs![i] || this.maxs![0],
         contentStyleValue: styleValue,
         styleValues: getStyleValues(styleValue)
       }

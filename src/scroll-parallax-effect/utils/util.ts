@@ -1,6 +1,8 @@
 import ScrollStatus, { ScrollPosition, Status, DirectionPositionName } from '../lib/scrollStatus'
 const defaultParallaxStatus = Status
 
+const ERRROR_PREFIX = '[scroll-parallax-effect]'
+
 export interface ScrollEventOpt {
   targetPercentage?: number
   threshold?: number
@@ -19,7 +21,7 @@ export  const setScrollEvents = (
     func,
     // targetPercentageが違った場合は新しくScrollPositionを作る、statusが異なった場合もstatusのscrollPositiuonを入れる
     isNewScrollPosition ? new ScrollPosition(Object.assign({}, status, { targetPercentage, threshold })) :
-    status !== defaultParallaxStatus && status.ScrollPosition
+    status !== defaultParallaxStatus ? status.ScrollPosition : undefined
   ])
 }
 
@@ -45,10 +47,10 @@ export const generateCamelCaseStyle = (str: CSSStyleDeclarationName ) => {
   return kebabToCamelCase(str as string) as keyof CSSStyleDeclaration
 }
 
-export type Ele = string | Element | HTMLElement
+export type Ele = string | Element | HTMLElement | null
 export const getElement = (element: Ele) => {
-  const el: HTMLElement = typeof element === 'string' ? document.querySelector<HTMLElement>(element) : element as HTMLElement
-  if(!el) throw `undefined element "${element}"`
+  const el: HTMLElement | null = typeof element === 'string' ? document.querySelector<HTMLElement>(element) : element as HTMLElement
+  if(!el) throw new Error(`${ERRROR_PREFIX} [${getElement.name}] undefined element "${element}"`)
   return el 
 }
 
@@ -65,7 +67,8 @@ export const getStyleValues = (value: string) => {
 }
 
 // カラーの値や、16真数カラーがあった場合は数値(rgb(0,0,0))に変換して返す
-export const generateStyleValue = (styleValue: string | number) => {
+export const generateStyleValue = (styleValue?: string | number) => {
+  if(!styleValue) return ''
   let value = String(styleValue)
   value = getStringColor(value)
   value = hexadecimalToRgb(value)
@@ -110,8 +113,8 @@ export const getStringColor = (styleValue: string) => {
 }
 
 
-export const _offset = (element: string | Element | HTMLElement, endScrollPosition: number, directionPositionName: DirectionPositionName) => {
-  const el = typeof element === 'string' ? document.querySelector(element) : element
+export const _offset = (element: Ele | undefined, endScrollPosition: number, directionPositionName: DirectionPositionName) => {
+  const el = typeof element === 'string' ? element ? document.querySelector(element) : '' : element
   const dir = directionPositionName === 'Left' ? 'left' : 'top'
   return el ? el.getBoundingClientRect()[dir] + endScrollPosition : 0
 }
@@ -122,11 +125,11 @@ const isEnd = (value: any) => {
 
 export type TriggerPositionType = 'end' | string | Element | HTMLElement
 export type TriggerPositionArray = [TriggerPositionType, number | string]
-export type TriggerPosiiton = number | TriggerPositionType | TriggerPositionArray
+export type TriggerPosiiton = number | TriggerPositionType | TriggerPositionArray | undefined
 export const scrollPositionStringToNumber = (triggerPosition: TriggerPosiiton, status = defaultParallaxStatus) => {
   const stageEndScrollNum = status.contentSize - status.stageSize
 
-  if (triggerPosition > stageEndScrollNum || isEnd(triggerPosition)) {
+  if (triggerPosition! > stageEndScrollNum || isEnd(triggerPosition)) {
     return stageEndScrollNum
   }
 
@@ -142,4 +145,6 @@ export const scrollPositionStringToNumber = (triggerPosition: TriggerPosiiton, s
   if(typeof triggerPosition === 'number') {
     return Math.min(triggerPosition, stageEndScrollNum)
   }
+
+  return 0
 }

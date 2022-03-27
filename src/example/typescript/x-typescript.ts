@@ -9,8 +9,8 @@ import {
 updateStatus({ direction: 'x' })
 
 document.querySelectorAll('.gnav > ul > *').forEach(function(el) {
-  const targetElementName = el.querySelector('a').getAttribute('href')
-  new ParallaxTiming(el, { target: document.querySelector(targetElementName) } )
+  const targetElementName = el!.querySelector('a')?.getAttribute('href')
+  new ParallaxTiming(el, { target: targetElementName } )
 })
 
 new ParallaxTiming('#timing')
@@ -30,7 +30,7 @@ new ParallaxSpeed(
   }
 )
 
-document.querySelector('.material').append(borders)
+document.querySelector('.material')?.append(borders)
 const borderContent = 8
 for (let i = 0; i < borderContent; i++) {
   const border = document.createElement('div')
@@ -38,7 +38,7 @@ for (let i = 0; i < borderContent; i++) {
   border.style.width = Math.floor(Math.random() * 300) + 300 + 'px'
   border.style.opacity = (Math.random() + 0.1).toString()
   
-  document.querySelector('.borders').append(border)
+  document.querySelector('.borders')?.append(border)
   
   new ParallaxSpeed(
     border, 
@@ -154,8 +154,8 @@ document.querySelectorAll<HTMLElement>('.circle').forEach((el, i) => {
         top: el.style.top
       },
       easing: function (t, b, c, d) {
-        var ts = (t /= d) * t;
-        var tc = ts * t;
+        const ts = (t /= d) * t;
+        const tc = ts * t;
         return b + c * (-49 * tc * ts + 135 * ts * ts + -130 * tc + 50 * ts + -5 * t);
       }
     },

@@ -8,5 +8,5 @@ export declare class ParallaxFit {
     getValues(): Fit;
 }
 export interface NewParallaxFit {
-    new (element: Ele, opt?: Motion | Motion[], scrollEventOpt?: ScrollEventOpt): ParallaxFit;
+    new (element: Ele, opt: Motion | Motion[], scrollEventOpt?: ScrollEventOpt): ParallaxFit;
 }

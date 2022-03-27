@@ -5,7 +5,7 @@ import { Easing, EasingFunction } from '../utils/easing';
 export interface SvgFitOotions {
     el?: Element | HTMLElement;
     paths?: NodeListOf<SVGGeometryElement>;
-    path?: SVGGeometryElement;
+    path: SVGGeometryElement;
     motion: SvgFitMotion | SvgFitMotion[];
     status?: ScrollStatus;
     targetPercentage?: number;
@@ -20,8 +20,8 @@ export interface SvgFitMotion {
 }
 export default class SvgFit {
     pathLength: number;
-    path?: SVGGeometryElement;
+    path: SVGGeometryElement;
     fit: Fit;
-    constructor(opt?: SvgFitOotions);
+    constructor(opt: SvgFitOotions);
     generateSvgMotion(motions: SvgFitMotion[]): Motion[];
 }

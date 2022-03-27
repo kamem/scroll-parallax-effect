@@ -6,7 +6,7 @@ import { Ele, ScrollEventOpt } from './utils/util';
 export declare const updateStatus: (opt: StatusParams) => ScrollStatus;
 export declare class SvgParallaxFit {
     svgFits: SvgFit[];
-    constructor(element: Ele, opt?: SvgFitOotions, scrollEventOpt?: ScrollEventOpt);
+    constructor(element: Ele, opt: Omit<SvgFitOotions, 'path'>, scrollEventOpt?: ScrollEventOpt);
     getValues(): SvgFit[];
 }
 export declare class SvgParallaxTiming {

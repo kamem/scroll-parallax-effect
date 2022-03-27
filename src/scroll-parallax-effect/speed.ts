@@ -9,6 +9,7 @@ export class ParallaxSpeed {
   speed: Speed
   constructor(element: Ele, opt?: SpeedOptions, scrollEventOpt?: ScrollEventOpt) {
     const el = getElement(element)
+    
     const s = new Speed(
       {
         el,
@@ -25,6 +26,7 @@ export class ParallaxSpeed {
 
     setScrollEvents((status: ScrollStatus) => {
       Object.assign(el.style, s.getStyleValues(status));
+      return this.speed
     }, {
       targetPercentage: opt?.targetPercentage || scrollEventOpt?.targetPercentage,
       threshold: opt?.threshold || scrollEventOpt?.threshold,

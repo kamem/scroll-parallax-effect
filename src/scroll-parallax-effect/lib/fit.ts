@@ -8,7 +8,7 @@ import {
 } from '../utils/util'
 import { easing, Easing, EasingFunction } from '../utils/easing'
 import ScrollStatus from './scrollStatus'
-type Ele = Element | HTMLElement
+type Ele = Element | HTMLElement | null
 
 type MotionStyles =  {
   [key in CSSStyleDeclarationName]?: string | number
@@ -27,12 +27,12 @@ export interface Motion {
 }
 
 export default class Fit {
-  el: Ele
+  el?: Ele
   motions: Motion[]
   rangeMotions: Motion[]
   styleValues: MotionStyles
 
-  constructor(el: Ele) {
+  constructor(el?: Ele) {
     this.el = typeof el === 'string' ? document.querySelector(el) : el
     this.styleValues = {}
     this.motions = []
@@ -58,18 +58,20 @@ export default class Fit {
     })))
   }
 
-  generateStyleValues(motionStyles: MotionStyles) {
+  generateStyleValues(motionStyles?: MotionStyles) {
     let styles: MotionValues = {}
     for (let style in motionStyles) {
-      styles[style] = getStyleValues(motionStyles[style].toString())
+      const styleName = style as CSSStyleDeclarationName
+      styles[styleName] = getStyleValues(motionStyles[styleName]!.toString())
     }
     return styles
   }
 
-  setStyleValue(motionStyles: MotionStyles) {
+  setStyleValue(motionStyles?: MotionStyles) {
     let styles: MotionStyles = {}
     for (let style in motionStyles) {
-      styles[style] = generateStyleValue(motionStyles[style])
+      const styleName = style as CSSStyleDeclarationName
+      styles[styleName] = generateStyleValue(motionStyles[styleName])
     }
     return styles
   }
@@ -88,7 +90,8 @@ export default class Fit {
     let defaultStyles: MotionStyles = {}
     this.motions.forEach(({ fromStyle }) => {
       for (let style in fromStyle) {
-        if (defaultStyles[style] === undefined) defaultStyles[style] = fromStyle[style]
+        const styleName = style as CSSStyleDeclarationName
+        if (defaultStyles[styleName] === undefined) defaultStyles[styleName] = fromStyle[styleName]
       }
     })
     this.styleValues = defaultStyles
@@ -97,9 +100,10 @@ export default class Fit {
   setFromStyle() {
     this.motions.forEach(({ fromStyle, toStyle }, i) => {
       for (let style in toStyle) {
+        const styleName = style as CSSStyleDeclarationName
         if (fromStyle === undefined) fromStyle = {}
-        if (fromStyle[style] === undefined) {
-          fromStyle[style] = this.getLastToStyle(style as CSSStyleDeclarationName, i)
+        if (fromStyle[styleName] === undefined) {
+          fromStyle[styleName] = this.getLastToStyle(styleName, i)
         }
       }
     })
@@ -109,8 +113,8 @@ export default class Fit {
     const k = Math.max(i - 1, 0)
     for (let j = k; j >= 0; j--) {
       const motion = this.motions[j]
-      if (motion.fromStyle[style] !== undefined) {
-        fromStyle = motion.toStyle[style].toString()
+      if (motion.fromStyle![style] !== undefined) {
+        fromStyle = motion.toStyle![style]!.toString()
         break
       }
     }
@@ -141,7 +145,7 @@ export default class Fit {
     return start
   }
 
-  generateScrollStyleValues(style: string, fromtStyle: number, toStyle: number, easingName: string | Easing, scrollPercent?: number) {
+  generateScrollStyleValues(style: string, fromtStyle: number, toStyle: number, easingName: string | Easing = 'linear', scrollPercent: number) {
     const abs = Math.abs(fromtStyle - toStyle)
     const fixAbs = fromtStyle < toStyle ? abs : -abs
     const e = typeof easingName === 'string' ? easing[easingName as (keyof typeof easing)] as EasingFunction : easingName
@@ -165,22 +169,23 @@ export default class Fit {
           (scrollPosition < end) ? 0 : 0
 
       for (let style in motion.fromStyle) {
-        const fromStyleValue = motion.fromStyle[style].toString()
-        const fromStyleValues = motion.fromStyleValues[style]
-        const toStyleValues = motion.toStyleValues[style]
+        const styleName = style as CSSStyleDeclarationName
+        const fromStyleValue = motion.fromStyle[styleName]!.toString()
+        const fromStyleValues = motion.fromStyleValues![styleName]
+        const toStyleValues = motion.toStyleValues![styleName]
 
-        const values = []
-        for (let i = 0; i < fromStyleValues.length; i++) {
+        const values: number[] = []
+        for (let i = 0; i < fromStyleValues!.length; i++) {
           values[i] = this.generateScrollStyleValues(
             fromStyleValue,
-            fromStyleValues[i],
-            toStyleValues[i],
+            fromStyleValues![i],
+            toStyleValues![i],
             motion.easing,
             scrollPercent
           )
         }
 
-        this.styleValues[style] = generateStyleValueString(fromStyleValue, values)
+        this.styleValues[styleName] = generateStyleValueString(fromStyleValue, values)
       }
     })
 

@@ -3,15 +3,15 @@ import {
   _offset,
   TriggerPosiiton,
 } from '../utils/util'
+import type { Ele } from '../utils/util'
 
 import ScrollStatus from './scrollStatus'
 
-export type EventFunctionType = (target: Ele, isOver: boolean) => {}
+export type EventFunctionType = (target: Ele | undefined, isOver: boolean) => void
 
-type Ele = Element | HTMLElement
 export interface TimingOotions {
   el?: Ele
-  target?: Ele
+  target?: Ele | keyof HTMLElementTagNameMap | null
   status?: ScrollStatus
   className?: string
   triggerPosition?: TriggerPosiiton
@@ -23,9 +23,8 @@ export interface TimingOotions {
 }
 
 export default class Timing {
-  el: Ele
+  el?: Ele
   isLineOver: boolean
-  triggerPosition: number
   eventScrollElementPosition: TriggerPosiiton
   toggle: [EventFunctionType, EventFunctionType]
 
@@ -33,7 +32,7 @@ export default class Timing {
     this.isLineOver = false
     this.el = opt.el
     this.eventScrollElementPosition = opt.triggerPosition
-    this.toggle = opt.toggle
+    this.toggle = opt.toggle || [(e, o) => {}, (e, o) => {}]
   }
   getEventScrollElementPosition(status: ScrollStatus) {
     return scrollPositionStringToNumber(this.eventScrollElementPosition ? this.eventScrollElementPosition : _offset(this.el, status.endScrollPosition, status.directionPositionName), status)

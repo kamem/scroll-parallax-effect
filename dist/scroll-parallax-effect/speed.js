@@ -30,8 +30,11 @@ return /******/ (() => { // webpackBootstrap
 var requestAnimationFrame = window.requestAnimationFrame;
 var ScrollStatus = /** @class */ (function () {
     function ScrollStatus() {
-        this.stage = __webpack_require__.g;
+        this.stage = typeof __webpack_require__.g !== 'undefined' ? __webpack_require__.g : window;
+        this.stageSize = 0;
+        this.contentSize = 0;
         this.direction = 'y';
+        this.directionPositionName = 'Top';
         this.functions = [];
         this.targetPercentage = 0.2;
         this.setDirectionInfo();
@@ -41,7 +44,7 @@ var ScrollStatus = /** @class */ (function () {
         this.scrollEventUpdate();
     }
     ScrollStatus.prototype.setVal = function (opt) {
-        this.stage = opt.stage ? opt.stage : __webpack_require__.g;
+        this.stage = opt.stage ? opt.stage : typeof __webpack_require__.g !== 'undefined' ? __webpack_require__.g : window;
         this.direction = opt.direction || this.direction;
         this.targetPercentage = opt.targetPercentage || 0.2;
         this.updateFunction = opt.updateFunction;
@@ -54,12 +57,13 @@ var ScrollStatus = /** @class */ (function () {
     };
     ScrollStatus.prototype.scrollEventUpdate = function () {
         var _this = this;
+        var _a;
         this.update();
         if (this.updateFunction) {
             this.updateFunction(this);
         }
         else {
-            this.functions.forEach(function (_a) {
+            (_a = this.functions) === null || _a === void 0 ? void 0 : _a.forEach(function (_a) {
                 var func = _a[0], scrollPosition = _a[1];
                 func(scrollPosition ?
                     Object.assign({}, _this, { scrollPosition: scrollPosition.generateScrollPosition() }) :
@@ -69,8 +73,9 @@ var ScrollStatus = /** @class */ (function () {
         requestAnimationFrame(this.scrollEventUpdate.bind(this));
     };
     ScrollStatus.prototype.update = function () {
+        var _a;
         this.scrollPosition = this.ScrollPosition.generateScrollPosition();
-        this.endScrollPosition = this.ScrollPosition.endScrollPosition;
+        this.endScrollPosition = (_a = this.ScrollPosition) === null || _a === void 0 ? void 0 : _a.endScrollPosition;
         // @ts-ignore
         this.stageSize = this.stage["inner".concat(this.stageSizeName)] || this.stage["client".concat(this.stageSizeName)];
         // @ts-ignore
@@ -131,6 +136,7 @@ var Status = new ScrollStatus();
 /* harmony import */ var _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(251);
 
 var defaultParallaxStatus = _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__/* .Status */ .qb;
+var ERRROR_PREFIX = '[scroll-parallax-effect]';
 var setScrollEvents = function (func, _a) {
     var _b = _a === void 0 ? {} : _a, targetPercentage = _b.targetPercentage, threshold = _b.threshold, _c = _b.status, status = _c === void 0 ? defaultParallaxStatus : _c;
     var isNewScrollPosition = !!(targetPercentage && (targetPercentage !== status.targetPercentage)) || !!(threshold && (threshold !== status.threshold));
@@ -138,7 +144,7 @@ var setScrollEvents = function (func, _a) {
         func,
         // targetPercentageが違った場合は新しくScrollPositionを作る、statusが異なった場合もstatusのscrollPositiuonを入れる
         isNewScrollPosition ? new _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__/* .ScrollPosition */ .Ij(Object.assign({}, status, { targetPercentage: targetPercentage, threshold: threshold })) :
-            status !== defaultParallaxStatus && status.ScrollPosition
+            status !== defaultParallaxStatus ? status.ScrollPosition : undefined
     ]);
 };
 var kebabToCamelCase = function (str) {
@@ -155,7 +161,7 @@ var generateCamelCaseStyle = function (str) {
 var getElement = function (element) {
     var el = typeof element === 'string' ? document.querySelector(element) : element;
     if (!el)
-        throw "undefined element \"".concat(element, "\"");
+        throw new Error("".concat(ERRROR_PREFIX, " [").concat(getElement.name, "] undefined element \"").concat(element, "\""));
     return el;
 };
 var numRegExp = /([-]?([1-9]\d*|0)(\.\d+)?)(deg|\)|px|em|rem|%|$|\,)/g;
@@ -170,6 +176,8 @@ var getStyleValues = function (value) {
 };
 // カラーの値や、16真数カラーがあった場合は数値(rgb(0,0,0))に変換して返す
 var generateStyleValue = function (styleValue) {
+    if (!styleValue)
+        return '';
     var value = String(styleValue);
     value = getStringColor(value);
     value = hexadecimalToRgb(value);
@@ -208,7 +216,7 @@ var getStringColor = function (styleValue) {
     return styleValue.replace(/red|blue|green|yellow/g, function (color) { return '#' + colors[color]; });
 };
 var _offset = function (element, endScrollPosition, directionPositionName) {
-    var el = typeof element === 'string' ? document.querySelector(element) : element;
+    var el = typeof element === 'string' ? element ? document.querySelector(element) : '' : element;
     var dir = directionPositionName === 'Left' ? 'left' : 'top';
     return el ? el.getBoundingClientRect()[dir] + endScrollPosition : 0;
 };
@@ -232,6 +240,7 @@ var scrollPositionStringToNumber = function (triggerPosition, status) {
     if (typeof triggerPosition === 'number') {
         return Math.min(triggerPosition, stageEndScrollNum);
     }
+    return 0;
 };
 
 
@@ -326,17 +335,18 @@ var util = __webpack_require__(833);
 var Speed = /** @class */ (function () {
     function Speed(ops) {
         this.el = ops.el;
-        this.speeds = typeof ops.speed === 'object' ? ops.speed : [ops.speed];
-        this.mins = typeof ops.min === 'object' ? ops.min : [ops.min];
-        this.maxs = typeof ops.max === 'object' ? ops.max : [ops.max];
-        this.contentScrollPositionStyleValues = typeof ops.contentScrollPositionStyleValue === 'object' ? ops.contentScrollPositionStyleValue : [ops.contentScrollPositionStyleValue];
+        this.speeds = typeof ops.speed === 'object' ? ops.speed : ops.speed ? [ops.speed] : [];
+        this.mins = typeof ops.min === 'object' ? ops.min : ops.min ? [ops.min] : [];
+        this.maxs = typeof ops.max === 'object' ? ops.max : ops.max ? [ops.max] : [];
+        this.contentScrollPositionStyleValues = typeof ops.contentScrollPositionStyleValue === 'object' ? ops.contentScrollPositionStyleValue : ops.contentScrollPositionStyleValue ? [ops.contentScrollPositionStyleValue] : [];
         this.contentScrollPosition = ops.contentScrollPosition || 0;
-        this.styles = this.generateStyles((typeof ops.style === 'object' ? ops.style : [ops.style]));
+        this.styles = this.generateStyles((typeof ops.style === 'object' ? ops.style : ops.style ? [ops.style] : []));
     }
     Speed.prototype.generateStyles = function (styles) {
         var _this = this;
         return styles.map(function (name, i) {
-            var contentScrollPositionStyleValues = _this.contentScrollPositionStyleValues[i] || document.defaultView.getComputedStyle(typeof _this.el === 'string' ? document.querySelector(_this.el) : _this.el, null)[(0,util/* generateCamelCaseStyle */.Di)(name)];
+            var _a;
+            var contentScrollPositionStyleValues = _this.contentScrollPositionStyleValues[i] || (_this.el ? (_a = document.defaultView) === null || _a === void 0 ? void 0 : _a.getComputedStyle(_this.el, null)[(0,util/* generateCamelCaseStyle */.Di)(name)] : 0);
             var styleValue = (0,util/* generateStyleValue */.Mv)(contentScrollPositionStyleValues);
             return {
                 name: name,
@@ -385,6 +395,7 @@ var defaultParallaxStatus = scrollStatus/* Status */.qb;
 var updateStatus = function (opt) { return defaultParallaxStatus.setVal(opt); };
 var ParallaxSpeed = /** @class */ (function () {
     function ParallaxSpeed(element, opt, scrollEventOpt) {
+        var _this = this;
         var el = (0,util/* getElement */.sb)(element);
         var s = new speed({
             el: el,
@@ -398,6 +409,7 @@ var ParallaxSpeed = /** @class */ (function () {
         this.speed = s;
         (0,util/* setScrollEvents */.Ih)(function (status) {
             Object.assign(el.style, s.getStyleValues(status));
+            return _this.speed;
         }, {
             targetPercentage: (opt === null || opt === void 0 ? void 0 : opt.targetPercentage) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.targetPercentage),
             threshold: (opt === null || opt === void 0 ? void 0 : opt.threshold) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.threshold),

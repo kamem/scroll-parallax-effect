@@ -10,30 +10,33 @@ type ScrollName = 'pageYOffset' | 'pageXOffset' |'scrollTop' | 'scrollLeft'
 export interface StatusParams {
   stage?: Stage
   direction?: Direction
-  functions?: ([(status: ScrollStatus) => void, ScrollPosition])[]
+  functions?: ([(status: ScrollStatus) => void, ScrollPosition?])[]
   targetPercentage?: number
   threshold?: number
   updateFunction?: (status: ScrollStatus) => void
 }
 
 export default class ScrollStatus {
-  stage?: Stage
-  direction?: Direction
-  functions?: ([(status: ScrollStatus) => void, ScrollPosition])[]
-  targetPercentage?: number
-  scrollPosition?: number
-  endScrollPosition?: number
+  stage: Stage
+  direction: Direction
+  functions: ([(status: ScrollStatus) => void, ScrollPosition?])[]
+  targetPercentage: number
+  scrollPosition: number
+  endScrollPosition: number
   threshold?: number
-  ScrollPosition?: ScrollPosition
+  ScrollPosition: ScrollPosition
   updateFunction?: (status: ScrollStatus) => void
-  stageSize?: number
-  contentSize?: number
+  stageSize: number
+  contentSize: number
   stageSizeName?: StageSizeName
-  directionPositionName?: DirectionPositionName
+  directionPositionName: DirectionPositionName
   
   constructor() {
-    this.stage = global
+    this.stage = typeof global !== 'undefined' ? global : window
+    this.stageSize = 0
+    this.contentSize = 0
     this.direction = 'y'
+    this.directionPositionName = 'Top'
     this.functions = []
     this.targetPercentage = 0.2
     this.setDirectionInfo()
@@ -43,7 +46,7 @@ export default class ScrollStatus {
     this.scrollEventUpdate()
   }
   setVal(opt: StatusParams) {
-    this.stage = opt.stage ? opt.stage : global
+    this.stage = opt.stage ? opt.stage : typeof global !== 'undefined' ? global : window
     this.direction = opt.direction || this.direction
     this.targetPercentage = opt.targetPercentage || 0.2
     this.updateFunction = opt.updateFunction
@@ -60,7 +63,7 @@ export default class ScrollStatus {
     if(this.updateFunction) {
       this.updateFunction(this)
     } else {
-      this.functions.forEach(([func, scrollPosition]) => {
+      this.functions?.forEach(([func, scrollPosition]) => {
         func(
           scrollPosition ?
             Object.assign({}, this, { scrollPosition: scrollPosition.generateScrollPosition() }) :
@@ -74,7 +77,7 @@ export default class ScrollStatus {
   update() {
     this.scrollPosition = this.ScrollPosition.generateScrollPosition()
     
-    this.endScrollPosition = this.ScrollPosition.endScrollPosition
+    this.endScrollPosition = this.ScrollPosition?.endScrollPosition
 
     // @ts-ignore
     this.stageSize = this.stage[`inner${this.stageSizeName}`] || this.stage[`client${this.stageSizeName}`]
@@ -90,7 +93,7 @@ export default class ScrollStatus {
 
 export class ScrollPosition {
   stage: Stage
-  targetPercentage?: number
+  targetPercentage: number
   threshold?: number
   stageSize: number
   direction: Direction

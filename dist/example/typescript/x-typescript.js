@@ -182,14 +182,16 @@ var Fit = /** @class */ (function () {
     Fit.prototype.generateStyleValues = function (motionStyles) {
         var styles = {};
         for (var style in motionStyles) {
-            styles[style] = (0,util/* getStyleValues */.fL)(motionStyles[style].toString());
+            var styleName = style;
+            styles[styleName] = (0,util/* getStyleValues */.fL)(motionStyles[styleName].toString());
         }
         return styles;
     };
     Fit.prototype.setStyleValue = function (motionStyles) {
         var styles = {};
         for (var style in motionStyles) {
-            styles[style] = (0,util/* generateStyleValue */.Mv)(motionStyles[style]);
+            var styleName = style;
+            styles[styleName] = (0,util/* generateStyleValue */.Mv)(motionStyles[styleName]);
         }
         return styles;
     };
@@ -207,8 +209,9 @@ var Fit = /** @class */ (function () {
         this.motions.forEach(function (_a) {
             var fromStyle = _a.fromStyle;
             for (var style in fromStyle) {
-                if (defaultStyles[style] === undefined)
-                    defaultStyles[style] = fromStyle[style];
+                var styleName = style;
+                if (defaultStyles[styleName] === undefined)
+                    defaultStyles[styleName] = fromStyle[styleName];
             }
         });
         this.styleValues = defaultStyles;
@@ -218,10 +221,11 @@ var Fit = /** @class */ (function () {
         this.motions.forEach(function (_a, i) {
             var fromStyle = _a.fromStyle, toStyle = _a.toStyle;
             for (var style in toStyle) {
+                var styleName = style;
                 if (fromStyle === undefined)
                     fromStyle = {};
-                if (fromStyle[style] === undefined) {
-                    fromStyle[style] = _this.getLastToStyle(style, i);
+                if (fromStyle[styleName] === undefined) {
+                    fromStyle[styleName] = _this.getLastToStyle(styleName, i);
                 }
             }
         });
@@ -262,6 +266,7 @@ var Fit = /** @class */ (function () {
         return start;
     };
     Fit.prototype.generateScrollStyleValues = function (style, fromtStyle, toStyle, easingName, scrollPercent) {
+        if (easingName === void 0) { easingName = 'linear'; }
         var abs = Math.abs(fromtStyle - toStyle);
         var fixAbs = fromtStyle < toStyle ? abs : -abs;
         var e = typeof easingName === 'string' ? easing[easingName] : easingName;
@@ -283,14 +288,15 @@ var Fit = /** @class */ (function () {
                 (scrollPosition > start) ? 1 :
                     (scrollPosition < end) ? 0 : 0;
             for (var style in motion.fromStyle) {
-                var fromStyleValue = motion.fromStyle[style].toString();
-                var fromStyleValues = motion.fromStyleValues[style];
-                var toStyleValues = motion.toStyleValues[style];
+                var styleName = style;
+                var fromStyleValue = motion.fromStyle[styleName].toString();
+                var fromStyleValues = motion.fromStyleValues[styleName];
+                var toStyleValues = motion.toStyleValues[styleName];
                 var values = [];
                 for (var i = 0; i < fromStyleValues.length; i++) {
                     values[i] = _this.generateScrollStyleValues(fromStyleValue, fromStyleValues[i], toStyleValues[i], motion.easing, scrollPercent);
                 }
-                _this.styleValues[style] = (0,util/* generateStyleValueString */.fF)(fromStyleValue, values);
+                _this.styleValues[styleName] = (0,util/* generateStyleValueString */.fF)(fromStyleValue, values);
             }
         });
         return this.styleValues;
@@ -307,6 +313,7 @@ var defaultParallaxStatus = scrollStatus/* Status */.qb;
 var updateStatus = function (opt) { return defaultParallaxStatus.setVal(opt); };
 var ParallaxFit = /** @class */ (function () {
     function ParallaxFit(element, opt, scrollEventOpt) {
+        var _this = this;
         var el = (0,util/* getElement */.sb)(element);
         var fit = new lib_fit(el);
         this.fit = fit;
@@ -318,6 +325,7 @@ var ParallaxFit = /** @class */ (function () {
             fit.setRangeMotions(status);
             fit.setDefaultStyles();
             Object.assign(el.style, fit.getStyleValues(status));
+            return _this.fit;
         }, {
             targetPercentage: scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.targetPercentage,
             threshold: scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.threshold,
@@ -379,8 +387,11 @@ window.Parallax = {
 var requestAnimationFrame = window.requestAnimationFrame;
 var ScrollStatus = /** @class */ (function () {
     function ScrollStatus() {
-        this.stage = __webpack_require__.g;
+        this.stage = typeof __webpack_require__.g !== 'undefined' ? __webpack_require__.g : window;
+        this.stageSize = 0;
+        this.contentSize = 0;
         this.direction = 'y';
+        this.directionPositionName = 'Top';
         this.functions = [];
         this.targetPercentage = 0.2;
         this.setDirectionInfo();
@@ -390,7 +401,7 @@ var ScrollStatus = /** @class */ (function () {
         this.scrollEventUpdate();
     }
     ScrollStatus.prototype.setVal = function (opt) {
-        this.stage = opt.stage ? opt.stage : __webpack_require__.g;
+        this.stage = opt.stage ? opt.stage : typeof __webpack_require__.g !== 'undefined' ? __webpack_require__.g : window;
         this.direction = opt.direction || this.direction;
         this.targetPercentage = opt.targetPercentage || 0.2;
         this.updateFunction = opt.updateFunction;
@@ -403,12 +414,13 @@ var ScrollStatus = /** @class */ (function () {
     };
     ScrollStatus.prototype.scrollEventUpdate = function () {
         var _this = this;
+        var _a;
         this.update();
         if (this.updateFunction) {
             this.updateFunction(this);
         }
         else {
-            this.functions.forEach(function (_a) {
+            (_a = this.functions) === null || _a === void 0 ? void 0 : _a.forEach(function (_a) {
                 var func = _a[0], scrollPosition = _a[1];
                 func(scrollPosition ?
                     Object.assign({}, _this, { scrollPosition: scrollPosition.generateScrollPosition() }) :
@@ -418,8 +430,9 @@ var ScrollStatus = /** @class */ (function () {
         requestAnimationFrame(this.scrollEventUpdate.bind(this));
     };
     ScrollStatus.prototype.update = function () {
+        var _a;
         this.scrollPosition = this.ScrollPosition.generateScrollPosition();
-        this.endScrollPosition = this.ScrollPosition.endScrollPosition;
+        this.endScrollPosition = (_a = this.ScrollPosition) === null || _a === void 0 ? void 0 : _a.endScrollPosition;
         // @ts-ignore
         this.stageSize = this.stage["inner".concat(this.stageSizeName)] || this.stage["client".concat(this.stageSizeName)];
         // @ts-ignore
@@ -484,17 +497,18 @@ var util = __webpack_require__(833);
 var Speed = /** @class */ (function () {
     function Speed(ops) {
         this.el = ops.el;
-        this.speeds = typeof ops.speed === 'object' ? ops.speed : [ops.speed];
-        this.mins = typeof ops.min === 'object' ? ops.min : [ops.min];
-        this.maxs = typeof ops.max === 'object' ? ops.max : [ops.max];
-        this.contentScrollPositionStyleValues = typeof ops.contentScrollPositionStyleValue === 'object' ? ops.contentScrollPositionStyleValue : [ops.contentScrollPositionStyleValue];
+        this.speeds = typeof ops.speed === 'object' ? ops.speed : ops.speed ? [ops.speed] : [];
+        this.mins = typeof ops.min === 'object' ? ops.min : ops.min ? [ops.min] : [];
+        this.maxs = typeof ops.max === 'object' ? ops.max : ops.max ? [ops.max] : [];
+        this.contentScrollPositionStyleValues = typeof ops.contentScrollPositionStyleValue === 'object' ? ops.contentScrollPositionStyleValue : ops.contentScrollPositionStyleValue ? [ops.contentScrollPositionStyleValue] : [];
         this.contentScrollPosition = ops.contentScrollPosition || 0;
-        this.styles = this.generateStyles((typeof ops.style === 'object' ? ops.style : [ops.style]));
+        this.styles = this.generateStyles((typeof ops.style === 'object' ? ops.style : ops.style ? [ops.style] : []));
     }
     Speed.prototype.generateStyles = function (styles) {
         var _this = this;
         return styles.map(function (name, i) {
-            var contentScrollPositionStyleValues = _this.contentScrollPositionStyleValues[i] || document.defaultView.getComputedStyle(typeof _this.el === 'string' ? document.querySelector(_this.el) : _this.el, null)[(0,util/* generateCamelCaseStyle */.Di)(name)];
+            var _a;
+            var contentScrollPositionStyleValues = _this.contentScrollPositionStyleValues[i] || (_this.el ? (_a = document.defaultView) === null || _a === void 0 ? void 0 : _a.getComputedStyle(_this.el, null)[(0,util/* generateCamelCaseStyle */.Di)(name)] : 0);
             var styleValue = (0,util/* generateStyleValue */.Mv)(contentScrollPositionStyleValues);
             return {
                 name: name,
@@ -543,6 +557,7 @@ var defaultParallaxStatus = scrollStatus/* Status */.qb;
 var updateStatus = function (opt) { return defaultParallaxStatus.setVal(opt); };
 var ParallaxSpeed = /** @class */ (function () {
     function ParallaxSpeed(element, opt, scrollEventOpt) {
+        var _this = this;
         var el = (0,util/* getElement */.sb)(element);
         var s = new speed({
             el: el,
@@ -556,6 +571,7 @@ var ParallaxSpeed = /** @class */ (function () {
         this.speed = s;
         (0,util/* setScrollEvents */.Ih)(function (status) {
             Object.assign(el.style, s.getStyleValues(status));
+            return _this.speed;
         }, {
             targetPercentage: (opt === null || opt === void 0 ? void 0 : opt.targetPercentage) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.targetPercentage),
             threshold: (opt === null || opt === void 0 ? void 0 : opt.threshold) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.threshold),
@@ -594,7 +610,7 @@ var Timing = /** @class */ (function () {
         this.isLineOver = false;
         this.el = opt.el;
         this.eventScrollElementPosition = opt.triggerPosition;
-        this.toggle = opt.toggle;
+        this.toggle = opt.toggle || [function (e, o) { }, function (e, o) { }];
     }
     Timing.prototype.getEventScrollElementPosition = function (status) {
         return (0,util/* scrollPositionStringToNumber */.U3)(this.eventScrollElementPosition ? this.eventScrollElementPosition : (0,util/* _offset */.LR)(this.el, status.endScrollPosition, status.directionPositionName), status);
@@ -621,19 +637,20 @@ var updateStatus = function (opt) { return defaultParallaxStatus.setVal(opt); };
 var ParallaxTiming = /** @class */ (function () {
     function ParallaxTiming(element, opt, scrollEventOpt) {
         var _this = this;
-        var el = (0,util/* getElement */.sb)(element);
+        var el = element ? (0,util/* getElement */.sb)(element) : undefined;
         var timingEvent = Object.prototype.toString.call(opt) === '[object Array]' ? opt : ((opt === null || opt === void 0 ? void 0 : opt.start) ? [opt === null || opt === void 0 ? void 0 : opt.start, opt === null || opt === void 0 ? void 0 : opt.end] : opt === null || opt === void 0 ? void 0 : opt.toggle);
         var c = (opt === null || opt === void 0 ? void 0 : opt.className) || 'on';
         this.timing = new timing({
             el: (opt === null || opt === void 0 ? void 0 : opt.target) ? (0,util/* getElement */.sb)(opt.target) : el,
             triggerPosition: opt === null || opt === void 0 ? void 0 : opt.triggerPosition,
             toggle: timingEvent || [
-                function (t, o) { el.classList.add(c); },
-                function (t, o) { el.classList.remove(c); },
+                function (t, o) { el === null || el === void 0 ? void 0 : el.classList.add(c); },
+                function (t, o) { el === null || el === void 0 ? void 0 : el.classList.remove(c); },
             ]
         });
         (0,util/* setScrollEvents */.Ih)(function (status) {
             _this.timing.timingEvent(status);
+            return _this.timing;
         }, {
             targetPercentage: (opt === null || opt === void 0 ? void 0 : opt.targetPercentage) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.targetPercentage),
             threshold: (opt === null || opt === void 0 ? void 0 : opt.threshold) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.threshold),
@@ -667,6 +684,7 @@ var ParallaxTiming = /** @class */ (function () {
 /* harmony import */ var _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(251);
 
 var defaultParallaxStatus = _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__/* .Status */ .qb;
+var ERRROR_PREFIX = '[scroll-parallax-effect]';
 var setScrollEvents = function (func, _a) {
     var _b = _a === void 0 ? {} : _a, targetPercentage = _b.targetPercentage, threshold = _b.threshold, _c = _b.status, status = _c === void 0 ? defaultParallaxStatus : _c;
     var isNewScrollPosition = !!(targetPercentage && (targetPercentage !== status.targetPercentage)) || !!(threshold && (threshold !== status.threshold));
@@ -674,7 +692,7 @@ var setScrollEvents = function (func, _a) {
         func,
         // targetPercentageが違った場合は新しくScrollPositionを作る、statusが異なった場合もstatusのscrollPositiuonを入れる
         isNewScrollPosition ? new _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__/* .ScrollPosition */ .Ij(Object.assign({}, status, { targetPercentage: targetPercentage, threshold: threshold })) :
-            status !== defaultParallaxStatus && status.ScrollPosition
+            status !== defaultParallaxStatus ? status.ScrollPosition : undefined
     ]);
 };
 var kebabToCamelCase = function (str) {
@@ -691,7 +709,7 @@ var generateCamelCaseStyle = function (str) {
 var getElement = function (element) {
     var el = typeof element === 'string' ? document.querySelector(element) : element;
     if (!el)
-        throw "undefined element \"".concat(element, "\"");
+        throw new Error("".concat(ERRROR_PREFIX, " [").concat(getElement.name, "] undefined element \"").concat(element, "\""));
     return el;
 };
 var numRegExp = /([-]?([1-9]\d*|0)(\.\d+)?)(deg|\)|px|em|rem|%|$|\,)/g;
@@ -706,6 +724,8 @@ var getStyleValues = function (value) {
 };
 // カラーの値や、16真数カラーがあった場合は数値(rgb(0,0,0))に変換して返す
 var generateStyleValue = function (styleValue) {
+    if (!styleValue)
+        return '';
     var value = String(styleValue);
     value = getStringColor(value);
     value = hexadecimalToRgb(value);
@@ -744,7 +764,7 @@ var getStringColor = function (styleValue) {
     return styleValue.replace(/red|blue|green|yellow/g, function (color) { return '#' + colors[color]; });
 };
 var _offset = function (element, endScrollPosition, directionPositionName) {
-    var el = typeof element === 'string' ? document.querySelector(element) : element;
+    var el = typeof element === 'string' ? element ? document.querySelector(element) : '' : element;
     var dir = directionPositionName === 'Left' ? 'left' : 'top';
     return el ? el.getBoundingClientRect()[dir] + endScrollPosition : 0;
 };
@@ -768,6 +788,7 @@ var scrollPositionStringToNumber = function (triggerPosition, status) {
     if (typeof triggerPosition === 'number') {
         return Math.min(triggerPosition, stageEndScrollNum);
     }
+    return 0;
 };
 
 
@@ -846,12 +867,14 @@ var __webpack_exports__ = {};
 (() => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(417);
+var _a, _b;
 
 
 (0,_scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__.updateStatus)({ direction: 'x' });
 document.querySelectorAll('.gnav > ul > *').forEach(function (el) {
-    var targetElementName = el.querySelector('a').getAttribute('href');
-    new _scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__.ParallaxTiming(el, { target: document.querySelector(targetElementName) });
+    var _a;
+    var targetElementName = (_a = el.querySelector('a')) === null || _a === void 0 ? void 0 : _a.getAttribute('href');
+    new _scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__.ParallaxTiming(el, { target: targetElementName });
 });
 new _scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__.ParallaxTiming('#timing');
 var borders = document.createElement('div');
@@ -864,14 +887,14 @@ new _scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__.ParallaxSpeed('bo
     min: [[30, 30, 30]],
     max: [[100, 100, 100]],
 });
-document.querySelector('.material').append(borders);
+(_a = document.querySelector('.material')) === null || _a === void 0 ? void 0 : _a.append(borders);
 var borderContent = 8;
 for (var i = 0; i < borderContent; i++) {
     var border = document.createElement('div');
     border.setAttribute('class', 'border');
     border.style.width = Math.floor(Math.random() * 300) + 300 + 'px';
     border.style.opacity = (Math.random() + 0.1).toString();
-    document.querySelector('.borders').append(border);
+    (_b = document.querySelector('.borders')) === null || _b === void 0 ? void 0 : _b.append(border);
     new _scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__.ParallaxSpeed(border, {
         contentScrollPosition: 0,
         style: ['width', 'left'],

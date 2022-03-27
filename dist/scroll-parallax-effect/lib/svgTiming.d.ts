@@ -14,14 +14,13 @@ export interface SvgTimingOotions {
     eventTriggerWindowPercentage?: number;
 }
 export default class SvgTiming {
-    el: Ele;
+    el?: Ele;
     timingValue: number;
     maxPathLength: number;
     speed: number;
     easingName: Easing | EasingFunction;
     paths?: NodeListOf<SVGGeometryElement>;
     timing: Timing;
-    eventScrollElementPosition: TriggerPosiiton;
     constructor(opt?: SvgTimingOotions);
     startPathDrawing(isStart?: boolean): void;
 }

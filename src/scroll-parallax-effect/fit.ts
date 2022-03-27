@@ -21,8 +21,8 @@ export class ParallaxFit {
     setScrollEvents((status) => {
       fit.setRangeMotions(status)
       fit.setDefaultStyles()
-
       Object.assign(el.style, fit.getStyleValues(status));
+      return this.fit
     }, {
       targetPercentage: scrollEventOpt?.targetPercentage,
       threshold: scrollEventOpt?.threshold,
@@ -36,5 +36,5 @@ export class ParallaxFit {
 }
 
 export interface NewParallaxFit {
-  new (element: Ele, opt?: Motion | Motion[], scrollEventOpt?: ScrollEventOpt): ParallaxFit;
+  new (element: Ele, opt: Motion | Motion[], scrollEventOpt?: ScrollEventOpt): ParallaxFit;
 }

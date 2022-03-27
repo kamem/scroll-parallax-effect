@@ -9,16 +9,16 @@ export const updateStatus = (opt: StatusParams) => defaultParallaxStatus.setVal(
 
 export class SvgParallaxFit {
   svgFits: SvgFit[]
-  constructor(element: Ele, opt?: SvgFitOotions, scrollEventOpt?: ScrollEventOpt) {
+  constructor(element: Ele, opt: Omit<SvgFitOotions, 'path'>, scrollEventOpt?: ScrollEventOpt) {
     const el = getElement(element)
-    const paths = Array.from(opt?.paths || el?.querySelectorAll('path'))
+    const paths = Array.from(opt.paths || el?.querySelectorAll('path'))
 
     this.svgFits = paths.map((path) => {
       const svgFit = new SvgFit(
         {
           path,
-          triggerPosition: opt?.triggerPosition,
-          motion: opt?.motion,
+          triggerPosition: opt.triggerPosition,
+          motion: opt.motion,
         }
       )
       svgFit.fit.setFromStyle()

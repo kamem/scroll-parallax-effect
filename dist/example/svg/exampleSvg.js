@@ -18,44 +18,29 @@
 })(self, function() {
 return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
-/******/ 	// The require scope
-/******/ 	var __webpack_require__ = {};
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/************************************************************************/
-var __webpack_exports__ = {};
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
+/******/ 	var __webpack_modules__ = ({
+
+/***/ 382:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "SvgParallaxFit": () => (/* binding */ SvgParallaxFit),
+  "SvgParallaxSpeed": () => (/* binding */ SvgParallaxSpeed),
+  "SvgParallaxTiming": () => (/* binding */ SvgParallaxTiming),
+  "updateStatus": () => (/* binding */ updateStatus)
+});
 
 ;// CONCATENATED MODULE: ./src/scroll-parallax-effect/lib/scrollStatus.ts
 var requestAnimationFrame = window.requestAnimationFrame;
 var ScrollStatus = /** @class */ (function () {
     function ScrollStatus() {
-        this.stage = __webpack_require__.g;
+        this.stage = typeof __webpack_require__.g !== 'undefined' ? __webpack_require__.g : window;
+        this.stageSize = 0;
+        this.contentSize = 0;
         this.direction = 'y';
+        this.directionPositionName = 'Top';
         this.functions = [];
         this.targetPercentage = 0.2;
         this.setDirectionInfo();
@@ -65,7 +50,7 @@ var ScrollStatus = /** @class */ (function () {
         this.scrollEventUpdate();
     }
     ScrollStatus.prototype.setVal = function (opt) {
-        this.stage = opt.stage ? opt.stage : __webpack_require__.g;
+        this.stage = opt.stage ? opt.stage : typeof __webpack_require__.g !== 'undefined' ? __webpack_require__.g : window;
         this.direction = opt.direction || this.direction;
         this.targetPercentage = opt.targetPercentage || 0.2;
         this.updateFunction = opt.updateFunction;
@@ -78,12 +63,13 @@ var ScrollStatus = /** @class */ (function () {
     };
     ScrollStatus.prototype.scrollEventUpdate = function () {
         var _this = this;
+        var _a;
         this.update();
         if (this.updateFunction) {
             this.updateFunction(this);
         }
         else {
-            this.functions.forEach(function (_a) {
+            (_a = this.functions) === null || _a === void 0 ? void 0 : _a.forEach(function (_a) {
                 var func = _a[0], scrollPosition = _a[1];
                 func(scrollPosition ?
                     Object.assign({}, _this, { scrollPosition: scrollPosition.generateScrollPosition() }) :
@@ -93,8 +79,9 @@ var ScrollStatus = /** @class */ (function () {
         requestAnimationFrame(this.scrollEventUpdate.bind(this));
     };
     ScrollStatus.prototype.update = function () {
+        var _a;
         this.scrollPosition = this.ScrollPosition.generateScrollPosition();
-        this.endScrollPosition = this.ScrollPosition.endScrollPosition;
+        this.endScrollPosition = (_a = this.ScrollPosition) === null || _a === void 0 ? void 0 : _a.endScrollPosition;
         // @ts-ignore
         this.stageSize = this.stage["inner".concat(this.stageSizeName)] || this.stage["client".concat(this.stageSizeName)];
         // @ts-ignore
@@ -139,6 +126,7 @@ var Status = new ScrollStatus();
 ;// CONCATENATED MODULE: ./src/scroll-parallax-effect/utils/util.ts
 
 var defaultParallaxStatus = Status;
+var ERRROR_PREFIX = '[scroll-parallax-effect]';
 var setScrollEvents = function (func, _a) {
     var _b = _a === void 0 ? {} : _a, targetPercentage = _b.targetPercentage, threshold = _b.threshold, _c = _b.status, status = _c === void 0 ? defaultParallaxStatus : _c;
     var isNewScrollPosition = !!(targetPercentage && (targetPercentage !== status.targetPercentage)) || !!(threshold && (threshold !== status.threshold));
@@ -146,7 +134,7 @@ var setScrollEvents = function (func, _a) {
         func,
         // targetPercentageが違った場合は新しくScrollPositionを作る、statusが異なった場合もstatusのscrollPositiuonを入れる
         isNewScrollPosition ? new ScrollPosition(Object.assign({}, status, { targetPercentage: targetPercentage, threshold: threshold })) :
-            status !== defaultParallaxStatus && status.ScrollPosition
+            status !== defaultParallaxStatus ? status.ScrollPosition : undefined
     ]);
 };
 var kebabToCamelCase = function (str) {
@@ -163,7 +151,7 @@ var generateCamelCaseStyle = function (str) {
 var getElement = function (element) {
     var el = typeof element === 'string' ? document.querySelector(element) : element;
     if (!el)
-        throw "undefined element \"".concat(element, "\"");
+        throw new Error("".concat(ERRROR_PREFIX, " [").concat(getElement.name, "] undefined element \"").concat(element, "\""));
     return el;
 };
 var numRegExp = /([-]?([1-9]\d*|0)(\.\d+)?)(deg|\)|px|em|rem|%|$|\,)/g;
@@ -178,6 +166,8 @@ var getStyleValues = function (value) {
 };
 // カラーの値や、16真数カラーがあった場合は数値(rgb(0,0,0))に変換して返す
 var generateStyleValue = function (styleValue) {
+    if (!styleValue)
+        return '';
     var value = String(styleValue);
     value = getStringColor(value);
     value = hexadecimalToRgb(value);
@@ -216,7 +206,7 @@ var getStringColor = function (styleValue) {
     return styleValue.replace(/red|blue|green|yellow/g, function (color) { return '#' + colors[color]; });
 };
 var _offset = function (element, endScrollPosition, directionPositionName) {
-    var el = typeof element === 'string' ? document.querySelector(element) : element;
+    var el = typeof element === 'string' ? element ? document.querySelector(element) : '' : element;
     var dir = directionPositionName === 'Left' ? 'left' : 'top';
     return el ? el.getBoundingClientRect()[dir] + endScrollPosition : 0;
 };
@@ -240,6 +230,7 @@ var scrollPositionStringToNumber = function (triggerPosition, status) {
     if (typeof triggerPosition === 'number') {
         return Math.min(triggerPosition, stageEndScrollNum);
     }
+    return 0;
 };
 
 ;// CONCATENATED MODULE: ./src/scroll-parallax-effect/lib/timing.ts
@@ -249,7 +240,7 @@ var Timing = /** @class */ (function () {
         this.isLineOver = false;
         this.el = opt.el;
         this.eventScrollElementPosition = opt.triggerPosition;
-        this.toggle = opt.toggle;
+        this.toggle = opt.toggle || [function (e, o) { }, function (e, o) { }];
     }
     Timing.prototype.getEventScrollElementPosition = function (status) {
         return scrollPositionStringToNumber(this.eventScrollElementPosition ? this.eventScrollElementPosition : _offset(this.el, status.endScrollPosition, status.directionPositionName), status);
@@ -394,7 +385,7 @@ var strokeDraw = function (value, path, easingName) {
 };
 var getMaxPathLength = function (paths) {
     var pathLengths = [];
-    paths.forEach(function (path, i) {
+    paths === null || paths === void 0 ? void 0 : paths.forEach(function (path, i) {
         var style = path.style;
         style.strokeDasharray = style.strokeDashoffset = path.getTotalLength().toString();
         pathLengths[i] = parseFloat(path.getTotalLength().toString()) || 0;
@@ -409,27 +400,27 @@ var SvgTiming = /** @class */ (function () {
     function SvgTiming(opt) {
         var _this = this;
         var _a;
-        this.el = opt.el;
-        this.paths = (opt === null || opt === void 0 ? void 0 : opt.paths) || ((_a = opt.el) === null || _a === void 0 ? void 0 : _a.querySelectorAll('path'));
+        this.el = opt === null || opt === void 0 ? void 0 : opt.el;
+        this.paths = (opt === null || opt === void 0 ? void 0 : opt.paths) || (opt === null || opt === void 0 ? void 0 : opt.el) ? (_a = opt === null || opt === void 0 ? void 0 : opt.el) === null || _a === void 0 ? void 0 : _a.querySelectorAll('path') : undefined;
         this.speed = (opt === null || opt === void 0 ? void 0 : opt.speed) || 2;
         this.easingName = (opt === null || opt === void 0 ? void 0 : opt.easing) || 'linear';
         this.timingValue = 0;
-        this.eventScrollElementPosition = opt.triggerPosition;
         this.maxPathLength = getMaxPathLength(this.paths);
         var toggle = (function (el, isLineOver) {
             _this.startPathDrawing(isLineOver);
         });
         this.timing = new timing({
-            el: opt.el,
-            triggerPosition: opt.triggerPosition,
+            el: opt === null || opt === void 0 ? void 0 : opt.el,
+            triggerPosition: opt === null || opt === void 0 ? void 0 : opt.triggerPosition,
             toggle: [toggle, toggle]
         });
     }
     SvgTiming.prototype.startPathDrawing = function (isStart) {
         var _this = this;
         setTimeout(function () {
+            var _a;
             _this.timingValue += _this.timing.isLineOver ? _this.speed : -_this.speed;
-            _this.paths.forEach(function (path) {
+            (_a = _this.paths) === null || _a === void 0 ? void 0 : _a.forEach(function (path) {
                 strokeDraw(_this.timingValue, path, _this.easingName);
             });
             if (!(_this.timingValue > _this.maxPathLength || _this.timingValue < 0) && _this.timing.isLineOver === isStart) {
@@ -447,11 +438,11 @@ var SvgTiming = /** @class */ (function () {
 var SvgSpeed = /** @class */ (function () {
     function SvgSpeed(opt) {
         var _a;
-        this.el = opt.el;
-        this.paths = (opt === null || opt === void 0 ? void 0 : opt.paths) || ((_a = opt.el) === null || _a === void 0 ? void 0 : _a.querySelectorAll('path'));
+        this.el = opt === null || opt === void 0 ? void 0 : opt.el;
+        this.paths = (opt === null || opt === void 0 ? void 0 : opt.paths) || ((_a = opt === null || opt === void 0 ? void 0 : opt.el) === null || _a === void 0 ? void 0 : _a.querySelectorAll('path'));
         this.speed = (opt === null || opt === void 0 ? void 0 : opt.speed) || 2;
         this.easingName = (opt === null || opt === void 0 ? void 0 : opt.easing) || 'linear';
-        this.eventScrollElementPosition = opt.triggerPosition;
+        this.eventScrollElementPosition = opt === null || opt === void 0 ? void 0 : opt.triggerPosition;
         this.maxPathLength = getMaxPathLength(this.paths);
     }
     SvgSpeed.prototype.getEventScrollElementPosition = function (status) {
@@ -459,8 +450,9 @@ var SvgSpeed = /** @class */ (function () {
     };
     SvgSpeed.prototype.scrollSpeed = function (status) {
         var _this = this;
+        var _a;
         var value = -(-status.scrollPosition / this.speed + this.getEventScrollElementPosition(status) / this.speed) + this.maxPathLength;
-        this.paths.forEach(function (path) {
+        (_a = this.paths) === null || _a === void 0 ? void 0 : _a.forEach(function (path) {
             strokeDraw(value, path, _this.easingName);
         });
     };
@@ -501,14 +493,16 @@ var Fit = /** @class */ (function () {
     Fit.prototype.generateStyleValues = function (motionStyles) {
         var styles = {};
         for (var style in motionStyles) {
-            styles[style] = getStyleValues(motionStyles[style].toString());
+            var styleName = style;
+            styles[styleName] = getStyleValues(motionStyles[styleName].toString());
         }
         return styles;
     };
     Fit.prototype.setStyleValue = function (motionStyles) {
         var styles = {};
         for (var style in motionStyles) {
-            styles[style] = generateStyleValue(motionStyles[style]);
+            var styleName = style;
+            styles[styleName] = generateStyleValue(motionStyles[styleName]);
         }
         return styles;
     };
@@ -526,8 +520,9 @@ var Fit = /** @class */ (function () {
         this.motions.forEach(function (_a) {
             var fromStyle = _a.fromStyle;
             for (var style in fromStyle) {
-                if (defaultStyles[style] === undefined)
-                    defaultStyles[style] = fromStyle[style];
+                var styleName = style;
+                if (defaultStyles[styleName] === undefined)
+                    defaultStyles[styleName] = fromStyle[styleName];
             }
         });
         this.styleValues = defaultStyles;
@@ -537,10 +532,11 @@ var Fit = /** @class */ (function () {
         this.motions.forEach(function (_a, i) {
             var fromStyle = _a.fromStyle, toStyle = _a.toStyle;
             for (var style in toStyle) {
+                var styleName = style;
                 if (fromStyle === undefined)
                     fromStyle = {};
-                if (fromStyle[style] === undefined) {
-                    fromStyle[style] = _this.getLastToStyle(style, i);
+                if (fromStyle[styleName] === undefined) {
+                    fromStyle[styleName] = _this.getLastToStyle(styleName, i);
                 }
             }
         });
@@ -581,6 +577,7 @@ var Fit = /** @class */ (function () {
         return start;
     };
     Fit.prototype.generateScrollStyleValues = function (style, fromtStyle, toStyle, easingName, scrollPercent) {
+        if (easingName === void 0) { easingName = 'linear'; }
         var abs = Math.abs(fromtStyle - toStyle);
         var fixAbs = fromtStyle < toStyle ? abs : -abs;
         var e = typeof easingName === 'string' ? easing[easingName] : easingName;
@@ -602,14 +599,15 @@ var Fit = /** @class */ (function () {
                 (scrollPosition > start) ? 1 :
                     (scrollPosition < end) ? 0 : 0;
             for (var style in motion.fromStyle) {
-                var fromStyleValue = motion.fromStyle[style].toString();
-                var fromStyleValues = motion.fromStyleValues[style];
-                var toStyleValues = motion.toStyleValues[style];
+                var styleName = style;
+                var fromStyleValue = motion.fromStyle[styleName].toString();
+                var fromStyleValues = motion.fromStyleValues[styleName];
+                var toStyleValues = motion.toStyleValues[styleName];
                 var values = [];
                 for (var i = 0; i < fromStyleValues.length; i++) {
                     values[i] = _this.generateScrollStyleValues(fromStyleValue, fromStyleValues[i], toStyleValues[i], motion.easing, scrollPercent);
                 }
-                _this.styleValues[style] = generateStyleValueString(fromStyleValue, values);
+                _this.styleValues[styleName] = generateStyleValueString(fromStyleValue, values);
             }
         });
         return this.styleValues;
@@ -623,10 +621,13 @@ var Fit = /** @class */ (function () {
 
 var SvgFit = /** @class */ (function () {
     function SvgFit(opt) {
-        this.path = opt === null || opt === void 0 ? void 0 : opt.path;
-        this.pathLength = getMaxPathLength([this.path]);
+        this.path = opt.path;
+        this.pathLength = getMaxPathLength(this.path ? [this.path] : undefined);
         this.fit = new fit(this.path);
-        this.fit.setMotion(this.generateSvgMotion(Array.isArray(opt.motion) ? opt.motion : [opt.motion]));
+        var motion = opt.motion;
+        if (motion) {
+            this.fit.setMotion(this.generateSvgMotion(Array.isArray(motion) ? motion : [motion]));
+        }
     }
     SvgFit.prototype.generateSvgMotion = function (motions) {
         var _this = this;
@@ -665,12 +666,12 @@ var SvgParallaxFit = /** @class */ (function () {
     function SvgParallaxFit(element, opt, scrollEventOpt) {
         var _this = this;
         var el = getElement(element);
-        var paths = Array.from((opt === null || opt === void 0 ? void 0 : opt.paths) || (el === null || el === void 0 ? void 0 : el.querySelectorAll('path')));
+        var paths = Array.from(opt.paths || (el === null || el === void 0 ? void 0 : el.querySelectorAll('path')));
         this.svgFits = paths.map(function (path) {
             var svgFit = new lib_SvgFit({
                 path: path,
-                triggerPosition: opt === null || opt === void 0 ? void 0 : opt.triggerPosition,
-                motion: opt === null || opt === void 0 ? void 0 : opt.motion,
+                triggerPosition: opt.triggerPosition,
+                motion: opt.motion,
             });
             svgFit.fit.setFromStyle();
             svgFit.fit.setStyleValues();
@@ -754,16 +755,91 @@ window.Parallax = {
     ScrollStatus: scrollStatus
 };
 
-;// CONCATENATED MODULE: ./src/example/svg/exampleSvg.ts
 
-updateStatus({ threshold: 0.5 });
-var main = new SvgParallaxTiming('#main');
-var music = new SvgParallaxSpeed('#music', {
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _scroll_parallax_effect_svg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(382);
+
+(0,_scroll_parallax_effect_svg__WEBPACK_IMPORTED_MODULE_0__.updateStatus)({ threshold: 0.5 });
+var main = new _scroll_parallax_effect_svg__WEBPACK_IMPORTED_MODULE_0__.SvgParallaxTiming('#main');
+var music = new _scroll_parallax_effect_svg__WEBPACK_IMPORTED_MODULE_0__.SvgParallaxSpeed('#music', {
     triggerPosition: ['#music', -300],
     speed: 0.2,
     threshold: 0.5
 });
-var music3 = new SvgParallaxFit('#music2', { motion: [
+var music3 = new _scroll_parallax_effect_svg__WEBPACK_IMPORTED_MODULE_0__.SvgParallaxFit('#music2', { motion: [
         {
             start: ['#music2', -380],
             end: ['#music2', -300],
@@ -781,10 +857,12 @@ var music3 = new SvgParallaxFit('#music2', { motion: [
             easing: 'easeInOutQuart'
         },
     ] });
-var clover = new SvgParallaxTiming('#clover', {
+var clover = new _scroll_parallax_effect_svg__WEBPACK_IMPORTED_MODULE_0__.SvgParallaxTiming('#clover', {
     speed: 6,
     easing: 'easeOutCubic',
 });
+
+})();
 
 /******/ 	return __webpack_exports__;
 /******/ })()

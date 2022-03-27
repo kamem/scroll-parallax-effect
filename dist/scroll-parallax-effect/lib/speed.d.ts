@@ -25,7 +25,7 @@ interface Style {
     styleValues: number[];
 }
 export default class Speed {
-    el: Ele;
+    el?: Ele;
     styles: Style[];
     speeds?: number[] | number[][];
     mins?: number[] | number[][];

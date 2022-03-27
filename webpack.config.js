@@ -21,16 +21,14 @@ const config = {
     'example/vanilla/x-vanilla': './src/example/vanilla/x-vanilla.js',
     'example/vanilla/y-vanilla': './src/example/vanilla/y-vanilla.js',
     'example/svg/exampleSvg': './src/example/svg/exampleSvg.ts',
-    // 'jquery.scrollParallax': './src/scroll-parallax-effect/jquery.index.js',
-    // 'jquery.scrollParallax.min': './src/scroll-parallax-effect/jquery.index.js',
     'scroll-parallax-effect/scroll-parallax-effect': './src/scroll-parallax-effect/index.ts',
     'scroll-parallax-effect/scroll-parallax-effect.min': './src/scroll-parallax-effect/index.ts',
     'scroll-parallax-effect/index': './src/scroll-parallax-effect/index.ts',
     'scroll-parallax-effect/timing': './src/scroll-parallax-effect/timing.ts',
     'scroll-parallax-effect/speed': './src/scroll-parallax-effect/speed.ts',
     'scroll-parallax-effect/fit': './src/scroll-parallax-effect/fit.ts',
-    // 'jquery': './src/scroll-parallax-effect/jquery.index.js',
-    // 'vue': './src/scroll-parallax-effect/vue.index.js',
+    'scroll-parallax-effect/svg': './src/scroll-parallax-effect/svg.ts',
+    'scroll-parallax-effect/vue': './src/scroll-parallax-effect/vue.ts',
     'scroll-parallax-effect/index': './src/scroll-parallax-effect/index.ts',
   },
   output: {
@@ -164,6 +162,9 @@ ${package.repository.url}
         test: /\.min.js(\?.*)?$/i,
       }),
     ],
+  },
+  externals: {
+    vue: 'vue',
   },
 };
 
