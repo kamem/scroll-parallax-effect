@@ -1,4 +1,6 @@
-import ScrollStatus, { ScrollPosition, Status, DirectionPositionName } from '../lib/scrollStatus'
+import ScrollStatus, { ScrollPosition, Status } from '../lib/scrollStatus'
+import type { DirectionPositionName } from '../lib/scrollStatus'
+
 const defaultParallaxStatus = Status
 
 const ERRROR_PREFIX = '[scroll-parallax-effect]'
