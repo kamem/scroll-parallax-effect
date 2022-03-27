@@ -12,7 +12,7 @@ import type {
   CSSStyleDeclarationName
 } from '../utils/util'
 
-type Ele = Element | HTMLElement
+type Ele = Element | HTMLElement | null
 type OptionValueNumber = number | number[] | number[][]
 export interface SpeedOptions {
   status?: ScrollStatus
