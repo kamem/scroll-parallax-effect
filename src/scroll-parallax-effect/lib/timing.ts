@@ -1,11 +1,10 @@
 import {
   scrollPositionStringToNumber,
   _offset,
-  TriggerPosiiton,
 } from '../utils/util'
 import type { Ele } from '../utils/util'
-
-import ScrollStatus from './scrollStatus'
+import type { TriggerPosiiton } from '../utils/util'
+import type ScrollStatus from './scrollStatus'
 
 export type EventFunctionType = (target: Ele | undefined, isOver: boolean) => void
 

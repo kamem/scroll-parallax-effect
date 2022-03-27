@@ -1,12 +1,15 @@
-import ScrollStatus from './scrollStatus'
+
 import {
   generateCamelCaseStyle,
   getStyleValues,
   generateStyleValue,
   generateStyleValueString,
   scrollPositionStringToNumber,
-  CSSStyleDeclarationName,
+} from '../utils/util'
+import type ScrollStatus from './scrollStatus'
+import type {
   TriggerPosiiton,
+  CSSStyleDeclarationName
 } from '../utils/util'
 
 type Ele = Element | HTMLElement

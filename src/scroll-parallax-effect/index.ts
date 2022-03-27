@@ -1,7 +1,9 @@
-import ScrollStatus, { Status, StatusParams } from './lib/scrollStatus'
+import ScrollStatus, { Status } from './lib/scrollStatus'
 import * as timing from './timing'
 import * as speed from './speed'
 import * as fit from './fit'
+
+import type { StatusParams } from './lib/scrollStatus'
 
 const defaultParallaxStatus = Status
 

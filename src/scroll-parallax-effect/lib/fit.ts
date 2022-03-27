@@ -2,12 +2,15 @@ import {
   getStyleValues,
   generateStyleValue,
   generateStyleValueString,
-  scrollPositionStringToNumber,
+  scrollPositionStringToNumber
+} from '../utils/util'
+import { easing } from '../utils/easing'
+import type {
   TriggerPosiiton,
   CSSStyleDeclarationName
 } from '../utils/util'
-import { easing, Easing, EasingFunction } from '../utils/easing'
-import ScrollStatus from './scrollStatus'
+import type {  Easing, EasingFunction } from '../utils/easing'
+import type ScrollStatus from './scrollStatus'
 type Ele = Element | HTMLElement | null
 
 type MotionStyles =  {

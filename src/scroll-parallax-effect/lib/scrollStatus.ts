@@ -32,7 +32,7 @@ export default class ScrollStatus {
   directionPositionName: DirectionPositionName
   
   constructor() {
-    this.stage = typeof global !== 'undefined' ? global : window
+    this.stage = globalThis || window
     this.stageSize = 0
     this.contentSize = 0
     this.direction = 'y'
@@ -46,7 +46,7 @@ export default class ScrollStatus {
     this.scrollEventUpdate()
   }
   setVal(opt: StatusParams) {
-    this.stage = opt.stage ? opt.stage : typeof global !== 'undefined' ? global : window
+    this.stage = opt.stage ? opt.stage : globalThis || window
     this.direction = opt.direction || this.direction
     this.targetPercentage = opt.targetPercentage || 0.2
     this.updateFunction = opt.updateFunction

@@ -1,6 +1,10 @@
-import ScrollStatus, { Status, StatusParams } from './lib/scrollStatus'
-import Speed, { SpeedOptions } from './lib/speed'
-import { getElement, setScrollEvents, Ele, ScrollEventOpt } from './utils/util'
+import ScrollStatus, { Status } from './lib/scrollStatus'
+import Speed from './lib/speed'
+import { getElement, setScrollEvents } from './utils/util'
+
+import type { SpeedOptions } from './lib/speed'
+import type { StatusParams } from './lib/scrollStatus'
+import type { Ele, ScrollEventOpt } from './utils/util'
 
 const defaultParallaxStatus = Status
 export const updateStatus = (opt: StatusParams) => defaultParallaxStatus.setVal(opt)
