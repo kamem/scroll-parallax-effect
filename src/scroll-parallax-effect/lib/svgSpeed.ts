@@ -1,7 +1,8 @@
 import ScrollStatus from './scrollStatus'
-import { scrollPositionStringToNumber, _offset, Ele, TriggerPosiiton } from '../utils/util'
-import { Easing, EasingFunction } from '../utils/easing'
+import { scrollPositionStringToNumber, _offset } from '../utils/util'
 import { getMaxPathLength, strokeDraw } from '../utils/svg'
+import type { Ele, TriggerPosiiton } from '../utils/util'
+import type { Easing, EasingFunction } from '../utils/easing'
 
 export interface SvgSpeedOotions {
   el?: Element | HTMLElement
@@ -16,19 +17,19 @@ export interface SvgSpeedOotions {
 }
 
 export default class SvgSpeed {
-  el: Ele
+  el?: Ele
   maxPathLength: number
   speed: number
   easingName: Easing | EasingFunction
   paths?: NodeListOf<SVGGeometryElement>
-  eventScrollElementPosition: TriggerPosiiton
+  eventScrollElementPosition?: TriggerPosiiton
 
   constructor(opt?: SvgSpeedOotions) {
-    this.el = opt.el
-    this.paths = opt?.paths || opt.el?.querySelectorAll('path')
+    this.el = opt?.el
+    this.paths = opt?.paths || opt?.el?.querySelectorAll('path')
     this.speed = opt?.speed || 2
     this.easingName = opt?.easing || 'linear'
-    this.eventScrollElementPosition = opt.triggerPosition
+    this.eventScrollElementPosition = opt?.triggerPosition
     this.maxPathLength = getMaxPathLength(this.paths)
   }
 
@@ -38,7 +39,7 @@ export default class SvgSpeed {
 
   scrollSpeed(status: ScrollStatus) {
     const value = -(-status.scrollPosition / this.speed + this.getEventScrollElementPosition(status) / this.speed) + this.maxPathLength
-    this.paths.forEach((path) => {
+    this.paths?.forEach((path) => {
       strokeDraw(value, path, this.easingName)
     })
   }

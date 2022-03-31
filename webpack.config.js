@@ -15,74 +15,73 @@ const package = require('./package.json')
 
 const config = {
   entry: {
-    'app': './src/index.ts',
-    'example/typescript/x-typescript': './src/example/typescript/x-typescript.ts',
-    'example/typescript/y-typescript': './src/example/typescript/y-typescript.ts',
-    'example/vanilla/x-vanilla': './src/example/vanilla/x-vanilla.js',
-    'example/vanilla/y-vanilla': './src/example/vanilla/y-vanilla.js',
-    'example/svg/exampleSvg': './src/example/svg/exampleSvg.ts',
-    // 'jquery.scrollParallax': './src/scroll-parallax-effect/jquery.index.js',
-    // 'jquery.scrollParallax.min': './src/scroll-parallax-effect/jquery.index.js',
-    'scroll-parallax-effect/scroll-parallax-effect': './src/scroll-parallax-effect/index.ts',
-    'scroll-parallax-effect/scroll-parallax-effect.min': './src/scroll-parallax-effect/index.ts',
-    'scroll-parallax-effect/index': './src/scroll-parallax-effect/index.ts',
-    'scroll-parallax-effect/timing': './src/scroll-parallax-effect/timing.ts',
-    'scroll-parallax-effect/speed': './src/scroll-parallax-effect/speed.ts',
-    'scroll-parallax-effect/fit': './src/scroll-parallax-effect/fit.ts',
-    // 'jquery': './src/scroll-parallax-effect/jquery.index.js',
-    // 'vue': './src/scroll-parallax-effect/vue.index.js',
-    'scroll-parallax-effect/index': './src/scroll-parallax-effect/index.ts',
+    'docs/app': './src/index.ts',
+    'docs/example/typescript/x-typescript': './src/example/typescript/x-typescript.ts',
+    'docs/example/typescript/y-typescript': './src/example/typescript/y-typescript.ts',
+    'docs/example/vanilla/x-vanilla': './src/example/vanilla/x-vanilla.js',
+    'docs/example/vanilla/y-vanilla': './src/example/vanilla/y-vanilla.js',
+    'docs/example/svg/exampleSvg': './src/example/svg/exampleSvg.ts',
+    'dist/scroll-parallax-effect/scroll-parallax-effect': './src/scroll-parallax-effect/index.ts',
+    'dist/scroll-parallax-effect/scroll-parallax-effect.min': './src/scroll-parallax-effect/index.ts',
+    'dist/scroll-parallax-effect/index': './src/scroll-parallax-effect/index.ts',
+    'dist/scroll-parallax-effect/timing': './src/scroll-parallax-effect/timing.ts',
+    'dist/scroll-parallax-effect/speed': './src/scroll-parallax-effect/speed.ts',
+    'dist/scroll-parallax-effect/fit': './src/scroll-parallax-effect/fit.ts',
+    'dist/scroll-parallax-effect/svg': './src/scroll-parallax-effect/svg.ts',
+    'dist/scroll-parallax-effect/vue': './src/scroll-parallax-effect/vue.ts',
+    'dist/scroll-parallax-effect/index': './src/scroll-parallax-effect/index.ts',
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
-    publicPath: isProduction ? '/scroll-parallax-effect/dist/' : '/',
+    path: path.resolve(__dirname),
+    publicPath: isProduction ? '/scroll-parallax-effect/docs/' : '/',
     filename: '[name].js',
     library: "scroll-parallax-effect",
     libraryTarget: "umd"
   },
   devServer: {
-    open: true,
     host: "localhost",
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "public/index.html",
+      filename: 'docs/index.html',
+      chunks: ['docs/app']
     }),
 
     // typescript
     new HtmlWebpackPlugin({
       template: "public/example/typescript/x-typescript.html",
-      filename: 'example/typescript/x-typescript.html',
-      chunks: ['example/typescript/x-typescript']
+      filename: 'docs/example/typescript/x-typescript.html',
+      chunks: ['docs/example/typescript/x-typescript']
     }),
     new HtmlWebpackPlugin({
       template: "public/example/typescript/y-typescript.html",
-      filename: 'example/typescript/y-typescript.html',
-      chunks: ['example/typescript/y-typescript']
+      filename: 'docs/example/typescript/y-typescript.html',
+      chunks: ['docs/example/typescript/y-typescript']
     }),
 
     // vanilla
     new HtmlWebpackPlugin({
       template: "public/example/vanilla/x-vanilla.html",
-      filename: 'example/vanilla/x-vanilla.html',
-      chunks: ['example/vanilla/x-vanilla']
+      filename: 'docs/example/vanilla/x-vanilla.html',
+      chunks: ['docs/example/vanilla/x-vanilla']
     }),
     new HtmlWebpackPlugin({
       template: "public/example/vanilla/y-vanilla.html",
-      filename: 'example/vanilla/y-vanilla.html',
-      chunks: ['example/vanilla/y-vanilla']
+      filename: 'docs/example/vanilla/y-vanilla.html',
+      chunks: ['docs/example/vanilla/y-vanilla']
     }),
 
     // svg
     new HtmlWebpackPlugin({
       template: "public/example/svg/svg.html",
-      filename: 'example/svg/svg.html',
-      chunks: ['example/svg/exampleSvg']
+      filename: 'docs/example/svg/svg.html',
+      chunks: ['docs/example/svg/exampleSvg']
     }),
 
     new CopyPlugin({
       patterns: [
-        { from: 'public/example/img', to: 'example/img' },
+        { from: 'public/example/img', to: 'docs/example/img' },
       ],
     }),
 
@@ -107,6 +106,19 @@ ${package.repository.url}
   ],
   module: {
     rules: [
+      {
+        test: /\.md$/,
+        use: [
+          {
+            loader: "html-loader",
+          },
+          {
+            loader: "markdown-loader",
+            options: {
+            },
+          },
+        ],
+      },
       {
         test: /\.(ts|tsx)$/i,
         loader: "ts-loader",
@@ -164,6 +176,9 @@ ${package.repository.url}
         test: /\.min.js(\?.*)?$/i,
       }),
     ],
+  },
+  externals: {
+    vue: 'vue',
   },
 };
 

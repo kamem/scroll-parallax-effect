@@ -1,31 +1,26 @@
 import {
   scrollPositionStringToNumber,
   _offset,
-  TriggerPosiiton,
 } from '../utils/util'
+import type { Ele, ScrollEventOpt } from '../utils/util'
+import type { TriggerPosiiton } from '../utils/util'
+import type ScrollStatus from './scrollStatus'
 
-import ScrollStatus from './scrollStatus'
+export type EventFunctionType = (target: Ele | undefined, isOver: boolean) => void
 
-export type EventFunctionType = (target: Ele, isOver: boolean) => {}
-
-type Ele = Element | HTMLElement
-export interface TimingOotions {
+export interface TimingOotions extends ScrollEventOpt {
   el?: Ele
-  target?: Ele
-  status?: ScrollStatus
+  target?: Ele | keyof HTMLElementTagNameMap | null
   className?: string
   triggerPosition?: TriggerPosiiton
-  targetPercentage?: number
-  threshold?: number
   start?: EventFunctionType
   end?: EventFunctionType
   toggle?: [EventFunctionType, EventFunctionType]
 }
 
 export default class Timing {
-  el: Ele
+  el?: Ele
   isLineOver: boolean
-  triggerPosition: number
   eventScrollElementPosition: TriggerPosiiton
   toggle: [EventFunctionType, EventFunctionType]
 
@@ -33,7 +28,7 @@ export default class Timing {
     this.isLineOver = false
     this.el = opt.el
     this.eventScrollElementPosition = opt.triggerPosition
-    this.toggle = opt.toggle
+    this.toggle = opt.toggle || [(e, o) => {}, (e, o) => {}]
   }
   getEventScrollElementPosition(status: ScrollStatus) {
     return scrollPositionStringToNumber(this.eventScrollElementPosition ? this.eventScrollElementPosition : _offset(this.el, status.endScrollPosition, status.directionPositionName), status)

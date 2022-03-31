@@ -7,7 +7,7 @@ import { getMaxPathLength } from '../utils/svg'
 export interface SvgFitOotions {
   el?: Element | HTMLElement
   paths?: NodeListOf<SVGGeometryElement>
-  path?: SVGGeometryElement
+  path: SVGGeometryElement
   motion: SvgFitMotion | SvgFitMotion[]
 
   status?: ScrollStatus
@@ -25,16 +25,19 @@ export interface SvgFitMotion {
 
 export default class SvgFit {
   pathLength: number
-  path?: SVGGeometryElement
+  path: SVGGeometryElement
   fit: Fit
 
-  constructor(opt?: SvgFitOotions) {
-    this.path = opt?.path
-    this.pathLength = getMaxPathLength([this.path])
+  constructor(opt: SvgFitOotions) {
+    this.path = opt.path
+    this.pathLength = getMaxPathLength(this.path ? [this.path] : undefined)
 
     this.fit = new Fit(this.path)
 
-    this.fit.setMotion(this.generateSvgMotion(Array.isArray(opt.motion) ? opt.motion : [opt.motion]))
+    const motion = opt.motion
+    if(motion) {
+      this.fit.setMotion(this.generateSvgMotion(Array.isArray(motion) ? motion : [motion]))
+    }
   }
 
   generateSvgMotion(motions: SvgFitMotion[]) {
@@ -46,7 +49,7 @@ export default class SvgFit {
       }
       const fromPath = motion.from && this.pathLength * (1 - motion.from)
       const toPath = this.pathLength * (1 - motion.to)
-  
+
       if(fromPath) {
         m.fromStyle = {
           strokeDashoffset: fromPath

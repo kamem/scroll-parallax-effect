@@ -8,7 +8,9 @@
     ".": "./dist/scroll-parallax-effect/index.js",
     "./timing": "./dist/scroll-parallax-effect/timing.js",
     "./speed": "./dist/scroll-parallax-effect/speed.js",
-    "./fit": "./dist/scroll-parallax-effect/fit.js"
+    "./fit": "./dist/scroll-parallax-effect/fit.js",
+    "./svg": "./dist/scroll-parallax-effect/svg.js",
+    "./vue": "./dist/scroll-parallax-effect/vue.js"
   },
   "typesVersions": {
     "*": {
@@ -23,6 +25,9 @@
       ],
       "fit": [
         "./dist/scroll-parallax-effect/fit.d.ts"
+      ],
+      "vue": [
+        "./dist/scroll-parallax-effect/vue.d.ts"
       ]
     }
   },
@@ -40,6 +45,7 @@
     "html-loader": "^3.1.0",
     "jest": "^27.5.1",
     "jquery": "^3.6.0",
+    "markdown-loader": "^8.0.0",
     "postcss-preset-env": "^7.4.2",
     "ts-jest": "^27.1.3",
     "vue": "^3.2.31",

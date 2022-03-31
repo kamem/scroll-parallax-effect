@@ -7,25 +7,25 @@ declare type ScrollName = 'pageYOffset' | 'pageXOffset' | 'scrollTop' | 'scrollL
 export interface StatusParams {
     stage?: Stage;
     direction?: Direction;
-    functions?: ([(status: ScrollStatus) => void, ScrollPosition])[];
+    functions?: ([(status: ScrollStatus) => void, ScrollPosition?])[];
     targetPercentage?: number;
     threshold?: number;
     updateFunction?: (status: ScrollStatus) => void;
 }
 export default class ScrollStatus {
-    stage?: Stage;
-    direction?: Direction;
-    functions?: ([(status: ScrollStatus) => void, ScrollPosition])[];
-    targetPercentage?: number;
-    scrollPosition?: number;
-    endScrollPosition?: number;
+    stage: Stage;
+    direction: Direction;
+    functions: ([(status: ScrollStatus) => void, ScrollPosition?])[];
+    targetPercentage: number;
+    scrollPosition: number;
+    endScrollPosition: number;
     threshold?: number;
-    ScrollPosition?: ScrollPosition;
+    ScrollPosition: ScrollPosition;
     updateFunction?: (status: ScrollStatus) => void;
-    stageSize?: number;
-    contentSize?: number;
+    stageSize: number;
+    contentSize: number;
     stageSizeName?: StageSizeName;
-    directionPositionName?: DirectionPositionName;
+    directionPositionName: DirectionPositionName;
     constructor();
     setVal(opt: StatusParams): this;
     scrollEventUpdate(): void;
@@ -34,7 +34,7 @@ export default class ScrollStatus {
 }
 export declare class ScrollPosition {
     stage: Stage;
-    targetPercentage?: number;
+    targetPercentage: number;
     threshold?: number;
     stageSize: number;
     direction: Direction;

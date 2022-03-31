@@ -1,6 +1,8 @@
-import ScrollStatus, { StatusParams } from './lib/scrollStatus';
-import Fit, { Motion } from './lib/fit';
-import { Ele, ScrollEventOpt } from './utils/util';
+import ScrollStatus from './lib/scrollStatus';
+import Fit from './lib/fit';
+import type { Motion } from './lib/fit';
+import type { StatusParams } from './lib/scrollStatus';
+import type { Ele, ScrollEventOpt } from './utils/util';
 export declare const updateStatus: (opt: StatusParams) => ScrollStatus;
 export declare class ParallaxFit {
     fit: Fit;
@@ -8,5 +10,5 @@ export declare class ParallaxFit {
     getValues(): Fit;
 }
 export interface NewParallaxFit {
-    new (element: Ele, opt?: Motion | Motion[], scrollEventOpt?: ScrollEventOpt): ParallaxFit;
+    new (element: Ele, opt: Motion | Motion[], scrollEventOpt?: ScrollEventOpt): ParallaxFit;
 }

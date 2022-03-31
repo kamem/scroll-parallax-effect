@@ -6,7 +6,10 @@
     "target": "es5",
     "allowJs": true,
     "declaration": true,
-    "outDir": "./dist/"
+    "outDir": "./dist/",
+    "strict": true,
+    "noImplicitThis": true,
+    "isolatedModules": true,
   },
   "files": ["src/index.ts"]
 }
