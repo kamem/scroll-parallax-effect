@@ -1,6 +1,6 @@
-import { TriggerPosiiton, CSSStyleDeclarationName } from '../utils/util';
-import { Easing, EasingFunction } from '../utils/easing';
-import ScrollStatus from './scrollStatus';
+import type { TriggerPosiiton, CSSStyleDeclarationName } from '../utils/util';
+import type { Easing, EasingFunction } from '../utils/easing';
+import type ScrollStatus from './scrollStatus';
 declare type Ele = Element | HTMLElement | null;
 declare type MotionStyles = {
     [key in CSSStyleDeclarationName]?: string | number;

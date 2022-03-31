@@ -71,7 +71,7 @@ export const getStyleValues = (value: string) => {
 
 // カラーの値や、16真数カラーがあった場合は数値(rgb(0,0,0))に変換して返す
 export const generateStyleValue = (styleValue?: string | number) => {
-  if(!styleValue) return ''
+  if(styleValue === undefined) return ''
   let value = String(styleValue)
   value = getStringColor(value)
   value = hexadecimalToRgb(value)
@@ -115,7 +115,7 @@ export const getStringColor = (styleValue: string) => {
   return styleValue.replace(/red|blue|green|yellow/g, (color) => '#' + colors[color])
 }
 
-
+// elementの位置を取得する
 export const _offset = (element: Ele | undefined, endScrollPosition: number, directionPositionName: DirectionPositionName) => {
   const el = typeof element === 'string' ? element ? document.querySelector(element) : '' : element
   const dir = directionPositionName === 'Left' ? 'left' : 'top'

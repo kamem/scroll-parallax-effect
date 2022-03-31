@@ -1,7 +1,11 @@
-# 🚀 Welcome to your new awesome project!
+# scroll-parallax-effect
 
-This project has been created using **webpack-cli**, you can now run
+## serve
+```
+yarn serve
+```
 
+## build
 ```
 npm run build
 ```
@@ -12,4 +16,3 @@ or
 yarn build
 ```
 
-to bundle your application

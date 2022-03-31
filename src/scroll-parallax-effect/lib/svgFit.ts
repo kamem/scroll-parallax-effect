@@ -49,7 +49,7 @@ export default class SvgFit {
       }
       const fromPath = motion.from && this.pathLength * (1 - motion.from)
       const toPath = this.pathLength * (1 - motion.to)
-  
+
       if(fromPath) {
         m.fromStyle = {
           strokeDashoffset: fromPath

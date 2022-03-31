@@ -1,4 +1,5 @@
-import ScrollStatus, { DirectionPositionName } from '../lib/scrollStatus';
+import ScrollStatus from '../lib/scrollStatus';
+import type { DirectionPositionName } from '../lib/scrollStatus';
 export interface ScrollEventOpt {
     targetPercentage?: number;
     threshold?: number;
@@ -9,8 +10,8 @@ declare type CamelToKebabCase<S extends string> = S extends `${infer T}${infer U
 export declare type CamelToKebab<T extends object> = {
     [K in keyof T as `${CamelToKebabCase<string & K>}`]: T[K] extends object ? CamelToKebab<T[K]> : T[K];
 };
-export declare type CSSStyleDeclarationName = keyof CSSStyleDeclaration | keyof CamelToKebab<CSSStyleDeclaration>;
-export declare const kebabToCamelCase: (str: string) => string;
+export declare type CSSStyleDeclarationName = (keyof CSSStyleDeclaration | keyof CamelToKebab<CSSStyleDeclaration>) & string;
+export declare const kebabToCamelCase: (str: CSSStyleDeclarationName) => string;
 export declare const generateCamelCaseStyle: (str: CSSStyleDeclarationName) => keyof CSSStyleDeclaration;
 export declare type Ele = string | Element | HTMLElement | null;
 export declare const getElement: (element: Ele) => HTMLElement;

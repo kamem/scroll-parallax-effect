@@ -1,12 +1,9 @@
-import ScrollStatus from './scrollStatus';
-import { CSSStyleDeclarationName, TriggerPosiiton } from '../utils/util';
-declare type Ele = Element | HTMLElement;
+import type ScrollStatus from './scrollStatus';
+import type { ScrollEventOpt, TriggerPosiiton, CSSStyleDeclarationName } from '../utils/util';
+declare type Ele = Element | HTMLElement | null;
 declare type OptionValueNumber = number | number[] | number[][];
-export interface SpeedOptions {
-    status?: ScrollStatus;
+export interface SpeedOptions extends ScrollEventOpt {
     el?: Ele;
-    targetPercentage?: number;
-    threshold?: number;
     contentScrollPosition?: TriggerPosiiton;
     style?: (CSSStyleDeclarationName) | (CSSStyleDeclarationName)[];
     styles?: (CSSStyleDeclarationName) | (CSSStyleDeclarationName)[];

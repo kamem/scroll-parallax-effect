@@ -8,17 +8,15 @@ import {
 } from '../utils/util'
 import type ScrollStatus from './scrollStatus'
 import type {
+  ScrollEventOpt,
   TriggerPosiiton,
-  CSSStyleDeclarationName
+  CSSStyleDeclarationName,
 } from '../utils/util'
 
 type Ele = Element | HTMLElement | null
 type OptionValueNumber = number | number[] | number[][]
-export interface SpeedOptions {
-  status?: ScrollStatus
+export interface SpeedOptions extends ScrollEventOpt {
   el?: Ele
-  targetPercentage?: number
-  threshold?: number
   contentScrollPosition?: TriggerPosiiton
   style?: (CSSStyleDeclarationName) | (CSSStyleDeclarationName)[]
   styles?: (CSSStyleDeclarationName) | (CSSStyleDeclarationName)[]

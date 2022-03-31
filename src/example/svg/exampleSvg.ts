@@ -14,7 +14,7 @@ const music = new SvgParallaxSpeed('#music', {
 const music3 = new SvgParallaxFit('#music2', { motion: [
   {
     start: ['#music2', -380],
-    end: ['#music2', -300],
+    end: ['#music2', -200],
     from: 0,
     to: 0.5,
     easing: 'easeOutCubic'
@@ -24,7 +24,7 @@ const music3 = new SvgParallaxFit('#music2', { motion: [
     to: 0.3,
   },
   {
-    end: '#music2',
+    end: ['#music2', -10],
     to: 1,
     easing: 'easeInOutQuart'
   },

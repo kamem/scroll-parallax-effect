@@ -2,20 +2,17 @@ import {
   scrollPositionStringToNumber,
   _offset,
 } from '../utils/util'
-import type { Ele } from '../utils/util'
+import type { Ele, ScrollEventOpt } from '../utils/util'
 import type { TriggerPosiiton } from '../utils/util'
 import type ScrollStatus from './scrollStatus'
 
 export type EventFunctionType = (target: Ele | undefined, isOver: boolean) => void
 
-export interface TimingOotions {
+export interface TimingOotions extends ScrollEventOpt {
   el?: Ele
   target?: Ele | keyof HTMLElementTagNameMap | null
-  status?: ScrollStatus
   className?: string
   triggerPosition?: TriggerPosiiton
-  targetPercentage?: number
-  threshold?: number
   start?: EventFunctionType
   end?: EventFunctionType
   toggle?: [EventFunctionType, EventFunctionType]

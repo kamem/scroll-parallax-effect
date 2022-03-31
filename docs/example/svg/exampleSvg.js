@@ -20,7 +20,7 @@ return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 382:
+/***/ 239:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 
@@ -36,7 +36,7 @@ __webpack_require__.d(__webpack_exports__, {
 var requestAnimationFrame = window.requestAnimationFrame;
 var ScrollStatus = /** @class */ (function () {
     function ScrollStatus() {
-        this.stage = typeof __webpack_require__.g !== 'undefined' ? __webpack_require__.g : window;
+        this.stage = globalThis || window;
         this.stageSize = 0;
         this.contentSize = 0;
         this.direction = 'y';
@@ -50,7 +50,7 @@ var ScrollStatus = /** @class */ (function () {
         this.scrollEventUpdate();
     }
     ScrollStatus.prototype.setVal = function (opt) {
-        this.stage = opt.stage ? opt.stage : typeof __webpack_require__.g !== 'undefined' ? __webpack_require__.g : window;
+        this.stage = opt.stage ? opt.stage : globalThis || window;
         this.direction = opt.direction || this.direction;
         this.targetPercentage = opt.targetPercentage || 0.2;
         this.updateFunction = opt.updateFunction;
@@ -138,6 +138,8 @@ var setScrollEvents = function (func, _a) {
     ]);
 };
 var kebabToCamelCase = function (str) {
+    if (!~str.indexOf('-'))
+        return str;
     return str.split('-').map(function (word, i) {
         if (i === 0) {
             return word.toLowerCase();
@@ -166,7 +168,7 @@ var getStyleValues = function (value) {
 };
 // カラーの値や、16真数カラーがあった場合は数値(rgb(0,0,0))に変換して返す
 var generateStyleValue = function (styleValue) {
-    if (!styleValue)
+    if (styleValue === undefined)
         return '';
     var value = String(styleValue);
     value = getStringColor(value);
@@ -205,10 +207,11 @@ var getStringColor = function (styleValue) {
     var colors = { red: 'f00', blue: '00f', yellow: 'ff0', green: '008000' };
     return styleValue.replace(/red|blue|green|yellow/g, function (color) { return '#' + colors[color]; });
 };
+// elementの位置を取得する
 var _offset = function (element, endScrollPosition, directionPositionName) {
     var el = typeof element === 'string' ? element ? document.querySelector(element) : '' : element;
     var dir = directionPositionName === 'Left' ? 'left' : 'top';
-    return el ? el.getBoundingClientRect()[dir] + endScrollPosition : 0;
+    return el ? el.getBoundingClientRect()[dir] + endScrollPosition : 0; // window表示領域内の位置 + 今のスクロール量とすることでブラウザ実際の位置を取得する
 };
 var isEnd = function (value) {
     return typeof value === 'string' && ~['end'].indexOf(value);
@@ -616,7 +619,7 @@ var Fit = /** @class */ (function () {
 }());
 /* harmony default export */ const fit = (Fit);
 
-;// CONCATENATED MODULE: ./src/scroll-parallax-effect/lib/SvgFit.ts
+;// CONCATENATED MODULE: ./src/scroll-parallax-effect/lib/svgFit.ts
 
 
 var SvgFit = /** @class */ (function () {
@@ -652,7 +655,7 @@ var SvgFit = /** @class */ (function () {
     };
     return SvgFit;
 }());
-/* harmony default export */ const lib_SvgFit = (SvgFit);
+/* harmony default export */ const lib_svgFit = (SvgFit);
 
 ;// CONCATENATED MODULE: ./src/scroll-parallax-effect/svg.ts
 
@@ -668,7 +671,7 @@ var SvgParallaxFit = /** @class */ (function () {
         var el = getElement(element);
         var paths = Array.from(opt.paths || (el === null || el === void 0 ? void 0 : el.querySelectorAll('path')));
         this.svgFits = paths.map(function (path) {
-            var svgFit = new lib_SvgFit({
+            var svgFit = new lib_svgFit({
                 path: path,
                 triggerPosition: opt.triggerPosition,
                 motion: opt.motion,
@@ -797,18 +800,6 @@ window.Parallax = {
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -830,7 +821,7 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _scroll_parallax_effect_svg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(382);
+/* harmony import */ var _scroll_parallax_effect_svg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(239);
 
 (0,_scroll_parallax_effect_svg__WEBPACK_IMPORTED_MODULE_0__.updateStatus)({ threshold: 0.5 });
 var main = new _scroll_parallax_effect_svg__WEBPACK_IMPORTED_MODULE_0__.SvgParallaxTiming('#main');
@@ -842,7 +833,7 @@ var music = new _scroll_parallax_effect_svg__WEBPACK_IMPORTED_MODULE_0__.SvgPara
 var music3 = new _scroll_parallax_effect_svg__WEBPACK_IMPORTED_MODULE_0__.SvgParallaxFit('#music2', { motion: [
         {
             start: ['#music2', -380],
-            end: ['#music2', -300],
+            end: ['#music2', -200],
             from: 0,
             to: 0.5,
             easing: 'easeOutCubic'
@@ -852,7 +843,7 @@ var music3 = new _scroll_parallax_effect_svg__WEBPACK_IMPORTED_MODULE_0__.SvgPar
             to: 0.3,
         },
         {
-            end: '#music2',
+            end: ['#music2', -10],
             to: 1,
             easing: 'easeInOutQuart'
         },

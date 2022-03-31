@@ -40,6 +40,9 @@ describe('getStyleValues', () => {
 })
 
 describe('generateStyleValue', () => {
+  it('数値の0で渡した0で返す', () => {
+    expect(generateStyleValue(0)).toBe('0')
+  })
   it('undefinedで渡した場合空文字で返す', () => {
     expect(generateStyleValue(undefined)).toBe('')
   })

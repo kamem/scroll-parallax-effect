@@ -44,8 +44,8 @@ export default class Fit {
   setMotion(motion: Motion | Motion[]) {
     const m = Array.isArray(motion) ? motion : [motion]
     this.motions = m.map(motion => {
-    const fromStyle = this.setStyleValue(motion.fromStyle)
-    const toStyle = this.setStyleValue(motion.toStyle)
+      const fromStyle = this.setStyleValue(motion.fromStyle)
+      const toStyle = this.setStyleValue(motion.toStyle)
       return Object.assign({}, motion, {
         easing: motion.easing || 'linear',
         fromStyle,

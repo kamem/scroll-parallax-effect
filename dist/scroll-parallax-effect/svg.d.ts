@@ -1,7 +1,7 @@
 import ScrollStatus, { StatusParams } from './lib/scrollStatus';
 import SvgTiming, { SvgTimingOotions } from './lib/svgTiming';
 import SvgSpeed, { SvgSpeedOotions } from './lib/svgSpeed';
-import SvgFit, { SvgFitOotions } from './lib/SvgFit';
+import SvgFit, { SvgFitOotions } from './lib/svgFit';
 import { Ele, ScrollEventOpt } from './utils/util';
 export declare const updateStatus: (opt: StatusParams) => ScrollStatus;
 export declare class SvgParallaxFit {

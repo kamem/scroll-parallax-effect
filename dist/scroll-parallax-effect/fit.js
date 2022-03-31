@@ -30,7 +30,7 @@ return /******/ (() => { // webpackBootstrap
 var requestAnimationFrame = window.requestAnimationFrame;
 var ScrollStatus = /** @class */ (function () {
     function ScrollStatus() {
-        this.stage = typeof __webpack_require__.g !== 'undefined' ? __webpack_require__.g : window;
+        this.stage = globalThis || window;
         this.stageSize = 0;
         this.contentSize = 0;
         this.direction = 'y';
@@ -44,7 +44,7 @@ var ScrollStatus = /** @class */ (function () {
         this.scrollEventUpdate();
     }
     ScrollStatus.prototype.setVal = function (opt) {
-        this.stage = opt.stage ? opt.stage : typeof __webpack_require__.g !== 'undefined' ? __webpack_require__.g : window;
+        this.stage = opt.stage ? opt.stage : globalThis || window;
         this.direction = opt.direction || this.direction;
         this.targetPercentage = opt.targetPercentage || 0.2;
         this.updateFunction = opt.updateFunction;
@@ -147,6 +147,8 @@ var setScrollEvents = function (func, _a) {
     ]);
 };
 var kebabToCamelCase = function (str) {
+    if (!~str.indexOf('-'))
+        return str;
     return str.split('-').map(function (word, i) {
         if (i === 0) {
             return word.toLowerCase();
@@ -175,7 +177,7 @@ var getStyleValues = function (value) {
 };
 // カラーの値や、16真数カラーがあった場合は数値(rgb(0,0,0))に変換して返す
 var generateStyleValue = function (styleValue) {
-    if (!styleValue)
+    if (styleValue === undefined)
         return '';
     var value = String(styleValue);
     value = getStringColor(value);
@@ -214,10 +216,11 @@ var getStringColor = function (styleValue) {
     var colors = { red: 'f00', blue: '00f', yellow: 'ff0', green: '008000' };
     return styleValue.replace(/red|blue|green|yellow/g, function (color) { return '#' + colors[color]; });
 };
+// elementの位置を取得する
 var _offset = function (element, endScrollPosition, directionPositionName) {
     var el = typeof element === 'string' ? element ? document.querySelector(element) : '' : element;
     var dir = directionPositionName === 'Left' ? 'left' : 'top';
-    return el ? el.getBoundingClientRect()[dir] + endScrollPosition : 0;
+    return el ? el.getBoundingClientRect()[dir] + endScrollPosition : 0; // window表示領域内の位置 + 今のスクロール量とすることでブラウザ実際の位置を取得する
 };
 var isEnd = function (value) {
     return typeof value === 'string' && ~['end'].indexOf(value);
@@ -282,18 +285,6 @@ var scrollPositionStringToNumber = function (triggerPosition, status) {
 /******/ 				}
 /******/ 			}
 /******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
