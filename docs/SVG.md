@@ -35,6 +35,7 @@
  * [Timing Usage](#timing-usage)
 
 ### Speed Option
+
 | Option Name | Description | Type |default
 |:-----------|:------------|:------------|:------------|
 | speed | パスの出るスピード | `number` | 2
@@ -43,6 +44,7 @@
  * [Timing Usage](#timing-usage)
 
 ### Fit Option
+
 | Option Name | Description | Type |default
 |:-----------|:------------|:------------|:------------|
 | motion | motionの値 | `SvgFitMotion` `SvgFitMotion[]` | []
@@ -50,6 +52,7 @@
  * [Fit Usage](#timing-usage)
 
 #### Motion
+
 | Option Name | Description | Type | Default
 |:-----------|:------------|:------------|:------------|
 | start | 移動を始めるスクロール位置（2つ目からは省略すると最後のendの位置からとなります。）|  [スクロール位置の指定](#スクロール位置の指定) |-

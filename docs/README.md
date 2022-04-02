@@ -216,6 +216,7 @@ new ParallaxFit('.fit', [
 ## Option
 
 ### ScrollStatus Option
+
 | Option Name | Description | default
 |:-----------|:------------|:------------|
 | stage      | スクロールさせたいwindow | `window`
@@ -226,6 +227,7 @@ new ParallaxFit('.fit', [
   * [ScrollStatus Usage](#scrollstatus-Usage)
 
 ### 共通 Option
+
 | Option Name | Description | default
 |:-----------|:------------|:------------|
 | status| スクロール位置・向きなどのクラスを指定 | `default Status`
@@ -269,6 +271,7 @@ new ParallaxFit('.fit', [
 easingを指定することも可能です。
 
 #### Motion | Motion[]
+
 | Option Name | Description | Type | Default
 |:-----------|:------------|:------------|:------------|
 | start | 移動を始めるスクロール位置（2つ目からは省略すると最後のendの位置からとなります。）|  [スクロール位置の指定](#スクロール位置の指定) |-
