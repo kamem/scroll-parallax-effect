@@ -40,7 +40,7 @@ Vue.use(Parallax, { direction: 'x' })
 createApp(App).use(Parallax, { direction: 'x' }).mount('#app')
 ```
 
-他の[オプション](../README.md#Usage)もここで指定できます。
+他の[オプション](./README.md#scrollstatus-option)もここで指定できます。
 
 
 * v-parallax-timing

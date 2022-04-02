@@ -1,21 +1,20 @@
 # scroll-parallax-effect
-
-* [Example](#Example)
-  * [Typescript](#Typescript)
-  * [Vanilla](#Vanilla)
-  * [SVG](#SVG)
-* [Documents](#Documents)
-* [Usage](#Usage)
-  * [ScrollStatus Usage](#ScrollStatus%20Usage)
-  * [Timing Usage](#Timing%20Usage)
-  * [Speed Usage](#Speed%20Usage)
-  * [Fit Usage](#Fit%20Usage)
-* [Option](#Option)
-  * [ScrollStatus Option](#ScrollStatus%20Option)
-  * [共通 Option](#共通%20Option)
-  * [Timing Option](#Timing%20Option)
-  * [Speed Option](#Speed%20Option)
-  * [Fit Option](#Fit%20Option)
+* [Example](#example)
+  * [Typescript](#typescript)
+  * [Vanilla](#vanilla)
+  * [SVG](#svg)
+* [Documents](#documents)
+* [Usage](#usage)
+  * [ScrollStatus Usage](#scrollstatus-usage)
+  * [Timing Usage](#timing-usage)
+  * [Speed Usage](#speed-usage)
+  * [Fit Usage](#fit-usage)
+* [Option](#option)
+  * [ScrollStatus Option](#scrollstatus-option)
+  * [共通 Option](#共通-option)
+  * [Timing Option](#timing-option)
+  * [Speed Option](#speed-option)
+  * [Fit Option](#fit-option)
 
 ## Example
 
@@ -52,7 +51,7 @@ import ParallaxFit from 'scroll-parallax-effect/fit'
 ```
 
 ### ScrollStatus Usage
-* [ScrollStatus Option](#ScrollStatus%20Option)
+* [ScrollStatus Option](#scrollstatus-option)
 ```Typescript
 import {
   updateStatus
@@ -65,7 +64,7 @@ updateStatus({
 
 ### Timing Usage
 
-* [Timing Option](#Timing%20Option)
+* [Timing Option](#timing-option)
 
 #### クラスonを付与
 ```Typescript
@@ -103,7 +102,7 @@ new ParallaxTiming('#timing', {
 ```
 
 ### Speed Usage
-  * [Speed Option](#Speed%20Option)
+  * [Speed Option](#speed-option)
 
 ### top
 ```Typescript
@@ -160,7 +159,7 @@ document.querySelectorAll('.speed').forEach((el, i) => {
 ```
 
 ### Fit Usage
-* [Fit Option](#Fit%20Option)
+* [Fit Option](#fit-option)
 
 #### opacity
 ```Typescript
@@ -224,7 +223,7 @@ new ParallaxFit('.fit', [
 | targetPercentage| 全体の慣性の割合を指定します | `0.2`
 | threshold | スクロール量 + (画面幅 / threshold)となる | `0`
 
-  * [ScrollStatus Usage](#ScrollStatus%20Usage)
+  * [ScrollStatus Usage](#scrollstatus-Usage)
 
 ### 共通 Option
 | Option Name | Description | default
@@ -244,7 +243,7 @@ new ParallaxFit('.fit', [
 | triggerPosition | 指定した位置にきたときに`toggle`を実行します  |  [スクロール位置の指定](#スクロール位置の指定)  | `undefinedの場合targetの位置を取得`
 | toggle | 上から下に通過した場合に[0]を実行し、下から上に通過した場合[1]を実行します。 | `[() => this.addClass('on'), () => this.removeClass('on')]`
 
-  * [Timing Usage](#Timing%20Usage)
+  * [Timing Usage](#timing-Usage)
 
 ### Speed Option
 * スクロール量に応じてcssを変化させます。 
@@ -259,7 +258,7 @@ new ParallaxFit('.fit', [
 | contentScrollPositionStyleValue | スクロールが`contentScrollPosition`の位置にきたときに、ここで指定したstyleに落ち着きます。指定がない場合はcssで予め指定していたstyleになります。| `string` | 自身のタグのstyle
 | contentScrollPosition | スクロールがここで指定した位置に来た時に、希望の位置（contentScrollPositionStyleValue）にstyleが落ち着きます。|  [スクロール位置の指定](#スクロール位置の指定) | 指定したタグの位置
 
-  * [Speed Usage](#Speed%20Usage)
+  * [Speed Usage](#speed-Usage)
 
 **※ contentScrollPositionStyleValueに初期値の値を指定しないと動作しないことがあります。**
 
@@ -278,7 +277,7 @@ easingを指定することも可能です。
 | toStyle | 終わりのcss（cssは文字列で指定してください） | [key in CSSStyleDeclarationName]?: string or number | -
 | easing | [easing plugin](http://semooh.jp/jquery/cont/doc/easing/)の名前を指定、また関数を指定することもできます。[Easing Functions for JavaScript](https://spicyyoghurt.com/tools/easing-functions) | `string` or `function` | `linear`
 
-  * [Fit Usage](#Fit%20Usage)
+  * [Fit Usage](#fit-Usage)
 
 ### スクロール位置の指定
 スクロール位置はいくつかの指定方法があります。

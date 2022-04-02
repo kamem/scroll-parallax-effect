@@ -1,24 +1,23 @@
 # scroll-parallax-effect Typescript ES6 Vanilla
-
-* [Example](#Example)
-* [Usage](#Usage)
-  * [ScrollStatus Usage](#ScrollStatus%20Usage)
-  * [Timing Usage](#Timing%20Usage)
-  * [Speed Usage](#Speed%20Usage)
-  * [Fit Usage](#Fit%20Usage)
-* [Option](#Option)
-  * [ScrollStatus Option](#ScrollStatus%20Option)
-  * [共通 Option](#共通%20Option)
-  * [Timing Option](#Timing%20Option)
-  * [Speed Option](#Speed%20Option)
-  * [Fit Option](#Fit%20Option)
+* [Example](#example)
+* [Usage](#usage)
+  * [ScrollStatus Usage](#scrollstatus-usage)
+  * [Timing Usage](#timing-usage)
+  * [Speed Usage](#speed-usage)
+  * [Fit Usage](#fit-usage)
+* [Option](#option)
+  * [ScrollStatus Option](#scrollstatus-option)
+  * [共通 Option](#共通-option)
+  * [Timing Option](#timing-option)
+  * [Speed Option](#speed-option)
+  * [Fit Option](#fit-option)
 
 ## Example
 * [y scroll sample](http://github.develo.org/scroll-parallax-effect/docs/example/svg/svg.html)
 
 ## Option
 
-* [共通 Option](#共通%20Option)
+* [共通 Option](#共通-option)
 
 | Option Name | Description | Type |default
 |:-----------|:------------|:------------|:------------|
@@ -33,7 +32,7 @@
 | speed | パスの出るスピード | `number` | 2
 | easing | [easing plugin](http://semooh.jp/jquery/cont/doc/easing/)の名前を指定、また関数を指定することもできます。[Easing Functions for JavaScript](https://spicyyoghurt.com/tools/easing-functions) | `string` or `function` | `linear`
 | triggerPosition | 指定した位置にきたときに`toggle`を実行します  |  [スクロール位置の指定](#スクロール位置の指定)  | `undefinedの場合targetの位置を取得`
- * [Timing Usage](#Timing%20Usage)
+ * [Timing Usage](#timing-usage)
 
 ### Speed Option
 | Option Name | Description | Type |default
@@ -41,14 +40,14 @@
 | speed | パスの出るスピード | `number` | 2
 | easing | [easing plugin](http://semooh.jp/jquery/cont/doc/easing/)の名前を指定、また関数を指定することもできます。[Easing Functions for JavaScript](https://spicyyoghurt.com/tools/easing-functions) | `string` or `function` | `linear`
 | triggerPosition | 指定した位置にきたときに`toggle`を実行します  |  [スクロール位置の指定](#スクロール位置の指定)  | `undefinedの場合targetの位置を取得`
- * [Timing Usage](#Timing%20Usage)
+ * [Timing Usage](#timing-usage)
 
 ### Fit Option
 | Option Name | Description | Type |default
 |:-----------|:------------|:------------|:------------|
 | motion | motionの値 | `SvgFitMotion` `SvgFitMotion[]` | []
 | triggerPosition | 指定した位置にきたときに`toggle`を実行します  |  [スクロール位置の指定](#スクロール位置の指定)  | `undefinedの場合targetの位置を取得`
- * [Fit Usage](#Timing%20Usage)
+ * [Fit Usage](#timing-usage)
 
 #### Motion
 | Option Name | Description | Type | Default
@@ -94,7 +93,7 @@ updateStatus({ direction: 'x' })
 Parallax.updateStatus({ direction: 'x' })
 ```
 
-他の[ScrollStatusのオプション](./README.md#ScrollStatus%20Option)もここで指定できます。
+他の[ScrollStatusのオプション](./README.md#scrollstatus-option)もここで指定できます。
 
 ### Timing Usage
 

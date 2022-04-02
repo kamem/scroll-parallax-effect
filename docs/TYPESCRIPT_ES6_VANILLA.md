@@ -12,7 +12,7 @@
 ## Usage
 
 ### ES6 Typescript
-```ES6
+```Typescript
 import {
   ParallaxTiming,
   ParallaxSpeed,
@@ -32,7 +32,7 @@ https://github.develo.org/scroll-parallax-effect/dist/scroll-parallax-effect/scr
 横方向にしたい場合は下記
 
 ### ES6 Typescript
-```es6
+```Typescript
 import {
   updateStatus,
 } from 'scroll-parallax-effect'
@@ -44,13 +44,13 @@ updateStatus({ direction: 'x' })
 Parallax.updateStatus({ direction: 'x' })
 ```
 
-他の[ScrollStatusのオプション](./README.md#ScrollStatus)もここで指定できます。
+他の[ScrollStatusのオプション](./README.md#scrollstatus-option)もここで指定できます。
 
 
 ### Timing
 
-### ES6
-```es6
+### ES6 Typescript
+```Typescript
 import {
   ParallaxTiming,
 } from 'scroll-parallax-effect'
@@ -64,7 +64,8 @@ new Parallax.ParallaxTiming('#timing')
 
 ### speed
 
-```es6
+### ES6 Typescript
+```Typescript
 import {
   ParallaxSpeed,
 } from 'scroll-parallax-effect'
@@ -86,8 +87,8 @@ new Parallax.ParallaxSpeed('.speed', {
 
 ### fit
 
-### ES6
-```es6
+### ES6 Typescript
+```Typescript
 import {
   ParallaxFit,
 } from 'scroll-parallax-effect'
