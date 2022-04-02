@@ -44,11 +44,11 @@ const config = {
     host: "localhost",
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: "public/index.html",
-      filename: 'docs/index.html',
-      chunks: ['docs/app']
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: "public/index.html",
+    //   filename: 'docs/index.html',
+    //   chunks: ['docs/app']
+    // }),
 
     // typescript
     new HtmlWebpackPlugin({

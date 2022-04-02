@@ -30,9 +30,9 @@
 * [y scroll sample](http://github.develo.org/scroll-parallax-effect/docs/example/svg/svg.html)
 
 ## Documents
-* [Typescript ES6 Vanilla Document](http://github.develo.org/scroll-parallax-effect/docs/vanilla_es6_typescript.html)
-* [Vue Document](http://github.develo.org/scroll-parallax-effect/docs/vue.html)
-* [SVG Document](http://github.develo.org/scroll-parallax-effect/docs/svg.html)
+* [Typescript ES6 Vanilla](/docs/TYPESCRIPT_ES6_VANILLA.md)
+* [Vue](/docs/VUE.md)
+* [SVG](/docs/SVG.md)
 
 ## Usage
 
