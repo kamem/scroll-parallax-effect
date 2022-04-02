@@ -4,8 +4,8 @@ import SvgSpeed, { SvgSpeedOotions } from './lib/svgSpeed'
 import SvgFit, { SvgFitOotions } from './lib/svgFit'
 import { getElement, setScrollEvents, Ele, ScrollEventOpt } from './utils/util'
 
-const defaultParallaxStatus = Status
-export const updateStatus = (opt: StatusParams) => defaultParallaxStatus.setVal(opt)
+const defaultStatus = Status
+export const updateStatus = (opt: StatusParams) => defaultStatus.setVal(opt)
 
 export class SvgParallaxFit {
   svgFits: SvgFit[]
@@ -57,8 +57,7 @@ export class SvgParallaxTiming {
         speed: opt?.speed,
         easing: opt?.easing,
         paths: opt?.paths,
-        triggerPosition: opt?.triggerPosition,
-        eventTriggerWindowPercentage: opt?.eventTriggerWindowPercentage
+        triggerPosition: opt?.triggerPosition
       }
     )
 
@@ -110,13 +109,17 @@ export interface NewSvgParallaxTiming {
 export interface NewSvgParallaxSpeed {
   new (element: Ele, opt?: SvgSpeedOotions, scrollEventOpt?: ScrollEventOpt): SvgParallaxSpeed;
 }
+export interface NewSvgParallaxFit {
+  new (element: Ele, opt: Omit<SvgFitOotions, "path">, scrollEventOpt?: ScrollEventOpt): SvgParallaxFit;
+}
 interface NewScrollStatus {
   new (opt?: ScrollStatus): ScrollStatus;
 }
 interface Window {
   Parallax: {
     SvgTiming: NewSvgParallaxTiming,
-    SvgFit: NewSvgParallaxSpeed,
+    SvgSpeed: NewSvgParallaxSpeed,
+    SvgFit: NewSvgParallaxFit,
     updateStatus: (opt: ScrollStatus) => void,
     status: ScrollStatus,
     ScrollStatus: NewScrollStatus
@@ -126,8 +129,9 @@ declare var window: Window
 
 window.Parallax = {
   SvgTiming: SvgParallaxTiming,
-  SvgFit: SvgParallaxSpeed,
+  SvgSpeed: SvgParallaxSpeed,
+  SvgFit: SvgParallaxFit,
   updateStatus,
-  status: defaultParallaxStatus,
+  status: defaultStatus,
   ScrollStatus
 }

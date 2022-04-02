@@ -5,9 +5,13 @@
   <title>scroll-parallax-effect</title>
 </head>
 <body>
-  <% const md = require('../docs/README.md').default; %>
+  <% const readme = require('../docs/README.md').default; %>
+  <% const vue = require('../docs/VUE.md').default; %>
+  <% const ts = require('../docs/TYPESCRIPT_ES6_VANILLA.md').default; %>
   <div>
-    <%= md %>
+    <%= readme %>
+    <%= vue %>
+    <%= ts %>
   </div>
 </body>
 </html>

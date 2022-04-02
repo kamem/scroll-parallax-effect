@@ -663,8 +663,8 @@ var SvgFit = /** @class */ (function () {
 
 
 
-var svg_defaultParallaxStatus = Status;
-var updateStatus = function (opt) { return svg_defaultParallaxStatus.setVal(opt); };
+var svg_defaultStatus = Status;
+var updateStatus = function (opt) { return svg_defaultStatus.setVal(opt); };
 var SvgParallaxFit = /** @class */ (function () {
     function SvgParallaxFit(element, opt, scrollEventOpt) {
         var _this = this;
@@ -708,8 +708,7 @@ var SvgParallaxTiming = /** @class */ (function () {
             speed: opt === null || opt === void 0 ? void 0 : opt.speed,
             easing: opt === null || opt === void 0 ? void 0 : opt.easing,
             paths: opt === null || opt === void 0 ? void 0 : opt.paths,
-            triggerPosition: opt === null || opt === void 0 ? void 0 : opt.triggerPosition,
-            eventTriggerWindowPercentage: opt === null || opt === void 0 ? void 0 : opt.eventTriggerWindowPercentage
+            triggerPosition: opt === null || opt === void 0 ? void 0 : opt.triggerPosition
         });
         setScrollEvents(function (status) {
             _this.svgTiming.timing.timingEvent(status);
@@ -752,9 +751,10 @@ var SvgParallaxSpeed = /** @class */ (function () {
 
 window.Parallax = {
     SvgTiming: SvgParallaxTiming,
-    SvgFit: SvgParallaxSpeed,
+    SvgSpeed: SvgParallaxSpeed,
+    SvgFit: SvgParallaxFit,
     updateStatus: updateStatus,
-    status: svg_defaultParallaxStatus,
+    status: svg_defaultStatus,
     ScrollStatus: scrollStatus
 };
 

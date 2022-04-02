@@ -1,5 +1,8 @@
 # scroll-parallax-effect
 
+## Document and Demo
+[Document and Demo](https://github.develo.org/scroll-parallax-effect/docs/)
+
 ## serve
 ```
 yarn serve
@@ -14,5 +17,10 @@ or
 
 ```
 yarn build
+```
+
+## test
+```
+yarn test
 ```
 

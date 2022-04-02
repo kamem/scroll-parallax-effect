@@ -872,9 +872,8 @@ new _scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__.ParallaxTiming('#
 var borders = document.createElement('div');
 borders.setAttribute('class', 'borders');
 new _scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__.ParallaxSpeed('body', {
-    contentScrollPosition: 0,
     contentScrollPositionStyleValue: 'rgb(0,0,0)',
-    style: ['background-color'],
+    style: 'background-color',
     speed: [[0.02, 0.03, 0.039]],
     min: [[30, 30, 30]],
 });

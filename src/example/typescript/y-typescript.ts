@@ -21,9 +21,8 @@ borders.setAttribute('class', 'borders')
 new ParallaxSpeed(
   'body', 
   {
-    contentScrollPosition: 0,
     contentScrollPositionStyleValue: 'rgb(0,0,0)',
-    style: ['background-color'],
+    style: 'background-color',
     speed: [[0.02, 0.03, 0.039]],
     min: [[30, 30, 30]],
   }

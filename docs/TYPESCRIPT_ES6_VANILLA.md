@@ -1,18 +1,17 @@
-# vanilla es6 scroll-parallax-effect
-
-[![example2](http://github.develo.org/scrollParallax/public/img/thumbs/example2.jpg)](http://github.develo.org/scrollParallax/public/example2/)
+# scroll-parallax-effect Typescript ES6 Vanilla
 
 ## Example
-### es6
-* [y scroll](http://github.develo.org/scrollParallax/public/example1_es6/)
+### Typescript
+* [y scroll sample](http://github.develo.org/scroll-parallax-effect/example/typescript/y-typescript.html)
+* [x scroll sample](http://github.develo.org/scroll-parallax-effect/example/typescript/x-typescript.html)
 
-### vanilla
-* [y scroll](http://github.develo.org/scrollParallax/public/example1_vanilla/)
-
+### Vanilla
+* [y scroll sample](http://github.develo.org/scroll-parallax-effect/example/vanilla/y-vanilla.html)
+* [x scroll sample](http://github.develo.org/scroll-parallax-effect/example/vanilla/x-vanilla.html)
 
 ## Usage
 
-### ES6
+### ES6 Typescript
 ```ES6
 import {
   ParallaxTiming,
@@ -23,15 +22,16 @@ import {
 
 直接HTMLに読みたい場合はdistフォルダのファイルを使い下記の通り読み込んでください。
 
-### vanilla
-```javascript
-<script type="text/javascript" src="../js/scrollParallax.min.js"></script>
-```
+https://github.develo.org/scroll-parallax-effect/dist/scroll-parallax-effect/scroll-parallax-effect.min.js
 
+### Vanilla
+```javascript
+<script type="text/javascript" src="../js/scroll-parallax-effect.min.js"></script>
+```
 
 横方向にしたい場合は下記
 
-### ES6
+### ES6 Typescript
 ```es6
 import {
   updateStatus,
@@ -39,15 +39,15 @@ import {
 updateStatus({ direction: 'x' })
 ```
 
-### vanilla
+### Vanilla
 ```Javascript
 Parallax.updateStatus({ direction: 'x' })
 ```
 
-他の[オプション](../README.md#Usage)もここで指定できます。
+他の[ScrollStatusのオプション](./README.md#ScrollStatus)もここで指定できます。
 
 
-### timing
+### Timing
 
 ### ES6
 ```es6
@@ -57,11 +57,10 @@ import {
 new ParallaxTiming('#timing')
 ```
 
-### vanilla
+### Vanilla
 ```Javascript
 new Parallax.ParallaxTiming('#timing')
 ```
-
 
 ### speed
 
@@ -105,7 +104,7 @@ new ParallaxFit('.fit', {
 })
 ```
 
-### vanilla
+### Vanilla
 ```Javascript
 new Parallax.ParallaxTiming('.fit', {
   start: 1000,
@@ -122,7 +121,7 @@ new Parallax.ParallaxTiming('.fit', {
 
 #### 複数指定したい場合
 
-### ES6
+### ES6 Typescript
 ```es6
 import {
   ParallaxFit,
@@ -153,7 +152,7 @@ new ParallaxFit('.fit', [
 ])
 ```
 
-### vanilla
+### Vanilla
 ```Javascript
 new Parallax.ParallaxTiming('.fit', [
   {

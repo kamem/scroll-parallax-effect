@@ -1,14 +1,11 @@
-import ScrollStatus from './scrollStatus';
 import Fit, { Motion } from './fit';
-import { TriggerPosiiton } from '../utils/util';
-import { Easing, EasingFunction } from '../utils/easing';
-export interface SvgFitOotions {
+import type { TriggerPosiiton, ScrollEventOpt } from '../utils/util';
+import type { Easing, EasingFunction } from '../utils/easing';
+export interface SvgFitOotions extends ScrollEventOpt {
     el?: Element | HTMLElement;
     paths?: NodeListOf<SVGGeometryElement>;
     path: SVGGeometryElement;
     motion: SvgFitMotion | SvgFitMotion[];
-    status?: ScrollStatus;
-    targetPercentage?: number;
     triggerPosition?: TriggerPosiiton;
 }
 export interface SvgFitMotion {
