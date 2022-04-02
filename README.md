@@ -1,6 +1,7 @@
 # scroll-parallax-effect
 
 スクロールによってcssの値を変更することができるプラグインです。
+
 This plugin allows you to change css values by scrolling.
 
 ## このプラグインには3つの機能があります。
