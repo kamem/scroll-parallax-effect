@@ -57,3 +57,5 @@ yarn build
 yarn test
 ```
 
+## Previous versions
+https://github.com/kamem/scrollParallax
