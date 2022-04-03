@@ -23,6 +23,8 @@ const config = {
     'docs/example/svg/exampleSvg': './src/example/svg/exampleSvg.ts',
     'dist/scroll-parallax-effect/scroll-parallax-effect': './src/scroll-parallax-effect/index.ts',
     'dist/scroll-parallax-effect/scroll-parallax-effect.min': './src/scroll-parallax-effect/index.ts',
+    'dist/scroll-parallax-effect/scroll-parallax-effect-svg': './src/scroll-parallax-effect/svg.ts',
+    'dist/scroll-parallax-effect/scroll-parallax-effect-svg.min': './src/scroll-parallax-effect/svg.ts',
     'dist/scroll-parallax-effect/index': './src/scroll-parallax-effect/index.ts',
     'dist/scroll-parallax-effect/timing': './src/scroll-parallax-effect/timing.ts',
     'dist/scroll-parallax-effect/speed': './src/scroll-parallax-effect/speed.ts',
@@ -42,11 +44,11 @@ const config = {
     host: "localhost",
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: "public/index.html",
-      filename: 'docs/index.html',
-      chunks: ['docs/app']
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: "public/index.html",
+    //   filename: 'docs/index.html',
+    //   chunks: ['docs/app']
+    // }),
 
     // typescript
     new HtmlWebpackPlugin({

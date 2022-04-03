@@ -1,21 +1,16 @@
 import ScrollStatus from './scrollStatus'
 import Timing, { EventFunctionType } from './timing'
-import { Ele, TriggerPosiiton } from '../utils/util'
-import { Easing, EasingFunction } from '../utils/easing'
 import { getMaxPathLength, strokeDraw } from '../utils/svg'
+import type { Ele, TriggerPosiiton, ScrollEventOpt } from '../utils/util'
+import type { Easing, EasingFunction } from '../utils/easing'
 
 
-export interface SvgTimingOotions {
+export interface SvgTimingOotions extends ScrollEventOpt {
   el?: Element | HTMLElement
   paths?: NodeListOf<SVGGeometryElement>
   speed?: number
   easing?: Easing | EasingFunction
-
-  status?: ScrollStatus
-  targetPercentage?: number
-  threshold?: number
   triggerPosition?: TriggerPosiiton
-  eventTriggerWindowPercentage?: number
 }
 
 export default class SvgTiming {

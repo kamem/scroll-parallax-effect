@@ -10,6 +10,10 @@ import Circles from '@/components/Circles.vue'
 
 <template>
   <div class="app">
+    <div style="position: fixed;top: 30px;left: 8px;">
+      <p>{{$scrollStatus.scrollPosition}}</p>
+      <p>{{$scrollStatus.contentSize}}</p>
+    </div>
     <Header />
 
     <main id="contents">

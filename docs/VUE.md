@@ -1,11 +1,7 @@
 # vue scroll-parallax-effect
 
-[![example4](http://github.develo.org/scrollParallax/public/img/thumbs/example1.jpg)](http://github.develo.org/scrollParallax/public/example4/)
-
 ## Example
-
-* [y scroll](http://github.develo.org/scrollParallax/public/example4/)
-* [x scroll](http://github.develo.org/scrollParallax/public/example5/)
+https://github.com/kamem/scroll-parallax-effect/tree/master/example/parallax-vue3
 
 ## Usage
 
@@ -44,7 +40,7 @@ Vue.use(Parallax, { direction: 'x' })
 createApp(App).use(Parallax, { direction: 'x' }).mount('#app')
 ```
 
-他の[オプション](../README.md#Usage)もここで指定できます。
+他の[オプション](./README.md#scrollstatus-option)もここで指定できます。
 
 
 * v-parallax-timing
@@ -71,7 +67,6 @@ createApp(App).use(Parallax, { direction: 'x' }).mount('#app')
 />
 </template>
 ```
-
 
 ```javascript
 <template>
@@ -113,7 +108,6 @@ export default {
 />
 </template>
 ```
-
 
 ```javascript
 <template>

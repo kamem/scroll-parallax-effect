@@ -25,3 +25,6 @@ export interface NewSvgParallaxTiming {
 export interface NewSvgParallaxSpeed {
     new (element: Ele, opt?: SvgSpeedOotions, scrollEventOpt?: ScrollEventOpt): SvgParallaxSpeed;
 }
+export interface NewSvgParallaxFit {
+    new (element: Ele, opt: Omit<SvgFitOotions, "path">, scrollEventOpt?: ScrollEventOpt): SvgParallaxFit;
+}
