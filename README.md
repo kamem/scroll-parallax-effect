@@ -14,13 +14,25 @@ This plugin allows you to change css values by scrolling.
 * [Speed](docs/#speed-usage) : css changes according to the amount of scrolling
 * [Fit](docs/#fit-usage) : change css according to distance traveled
 
+## Install
+
+### npm 
+```terminal
+npm install scroll-parallax-effect
+```
+
+### yarn
+```terminal
+yarn add scroll-parallax-effect
+```
+
+
 ## Document and Examples
 [Document and Examples](docs/)
 
 * [typescript](docs/TYPESCRIPT_ES6_VANILLA.md)
 * [vue](docs/VUE.md)
 * [svg](docs/SVG.md)
-
 
 ## Example
 
@@ -36,12 +48,13 @@ This plugin allows you to change css values by scrolling.
 * [y scroll sample](http://github.develo.org/scroll-parallax-effect/docs/example/svg/svg.html)
 
 
-## serve
+## Development
+### serve
 ```
 yarn serve
 ```
 
-## build
+### build
 ```
 npm run build
 ```
@@ -52,7 +65,7 @@ or
 yarn build
 ```
 
-## test
+### test
 ```
 yarn test
 ```

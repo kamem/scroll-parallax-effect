@@ -1,4 +1,5 @@
 # scroll-parallax-effect
+* [Install](#install)
 * [Example](#example)
   * [Typescript](#typescript)
   * [Vanilla](#vanilla)
@@ -15,6 +16,18 @@
   * [Timing Option](#timing-option)
   * [Speed Option](#speed-option)
   * [Fit Option](#fit-option)
+
+## Install
+
+### npm 
+```terminal
+npm install scroll-parallax-effect
+```
+
+### yarn
+```terminal
+yarn add scroll-parallax-effect
+```
 
 ## Example
 
