@@ -1,7 +1,7 @@
 {
   "name": "scroll-parallax-effect",
-  "description": "Implementing parallax effect by utilizing various events of scroll.",
-  "version": "1.0.0",
+  "description": "This plugin adds a parallax effect by changing the style sheet according to scrolling and by adding classes.",
+  "version": "0.3.0",
   "license": "MIT",
   "main": "./dist/scroll-parallax-effect/index.js",
   "exports": {
@@ -83,7 +83,6 @@
     "parallax",
     "effect",
     "events",
-    "jquery-plugin",
     "vue"
   ],
   "jest": {
