@@ -2,7 +2,7 @@
  * scroll-parallax-effect
  * This plugin adds a parallax effect by changing the style sheet according to scrolling and by adding classes.
  * https://github.com/kamem/scroll-parallax-effect.git
- * @version 0.3.0
+ * @version 0.3.1
  * @license Released under MIT license
  * @author kamem
  */
