@@ -108,19 +108,6 @@ ${package.repository.url}
   module: {
     rules: [
       {
-        test: /\.md$/,
-        use: [
-          {
-            loader: "html-loader",
-          },
-          {
-            loader: "markdown-loader",
-            options: {
-            },
-          },
-        ],
-      },
-      {
         test: /\.(ts|tsx)$/i,
         loader: "ts-loader",
         exclude: ["/node_modules/"],
