@@ -7,7 +7,7 @@
 		exports["scroll-parallax-effect"] = factory();
 	else
 		root["scroll-parallax-effect"] = factory();
-})(self, function() {
+})(self, () => {
 return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
