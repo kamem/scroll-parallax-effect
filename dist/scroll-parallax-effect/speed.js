@@ -1,8 +1,8 @@
 /*!
  * scroll-parallax-effect
- * Implementing parallax effect by utilizing various events of scroll.
+ * This plugin adds a parallax effect by changing the style sheet according to scrolling and by adding classes.
  * https://github.com/kamem/scroll-parallax-effect.git
- * @version 1.0.0
+ * @version 0.3.0
  * @license Released under MIT license
  * @author kamem
  */
@@ -15,7 +15,7 @@
 		exports["scroll-parallax-effect"] = factory();
 	else
 		root["scroll-parallax-effect"] = factory();
-})(self, function() {
+})(self, () => {
 return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({

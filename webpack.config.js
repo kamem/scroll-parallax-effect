@@ -15,7 +15,6 @@ const package = require('./package.json')
 
 const config = {
   entry: {
-    'docs/app': './src/index.ts',
     'docs/example/typescript/x-typescript': './src/example/typescript/x-typescript.ts',
     'docs/example/typescript/y-typescript': './src/example/typescript/y-typescript.ts',
     'docs/example/vanilla/x-vanilla': './src/example/vanilla/x-vanilla.js',
