@@ -1,7 +1,7 @@
 {
   "name": "scroll-parallax-effect",
   "description": "This plugin adds a parallax effect by changing the style sheet according to scrolling and by adding classes.",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "license": "MIT",
   "main": "./dist/scroll-parallax-effect/index.js",
   "exports": {
@@ -9,8 +9,8 @@
     "./timing": "./dist/scroll-parallax-effect/timing.js",
     "./speed": "./dist/scroll-parallax-effect/speed.js",
     "./fit": "./dist/scroll-parallax-effect/fit.js",
-    "./svg": "./dist/scroll-parallax-effect/svg.js",
-    "./vue": "./dist/scroll-parallax-effect/vue.js"
+    "./vue": "./dist/scroll-parallax-effect/vue.js",
+    "./svg": "./dist/scroll-parallax-effect/svg.js"
   },
   "typesVersions": {
     "*": {
@@ -28,6 +28,9 @@
       ],
       "vue": [
         "./dist/scroll-parallax-effect/vue.d.ts"
+      ],
+      "svg": [
+        "./dist/scroll-parallax-effect/svg.d.ts"
       ]
     }
   },
