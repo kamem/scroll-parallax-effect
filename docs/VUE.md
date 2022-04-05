@@ -1,7 +1,7 @@
 # vue scroll-parallax-effect
 
 ## Example
-https://github.com/kamem/scroll-parallax-effect/tree/master/example/parallax-vue3
+[parallax-vue3](../example/parallax-vue3)
 
 ## Usage
 

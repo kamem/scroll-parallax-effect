@@ -2,12 +2,12 @@
 
 ## Example
 ### Typescript
-* [y scroll sample](http://github.develo.org/scroll-parallax-effect/example/typescript/y-typescript.html)
-* [x scroll sample](http://github.develo.org/scroll-parallax-effect/example/typescript/x-typescript.html)
+* [y scroll sample](http://github.develo.org/scroll-parallax-effect/docs/example/typescript/y-typescript.html)
+* [x scroll sample](http://github.develo.org/scroll-parallax-effect/docs/example/typescript/x-typescript.html)
 
 ### Vanilla
-* [y scroll sample](http://github.develo.org/scroll-parallax-effect/example/vanilla/y-vanilla.html)
-* [x scroll sample](http://github.develo.org/scroll-parallax-effect/example/vanilla/x-vanilla.html)
+* [y scroll sample](http://github.develo.org/scroll-parallax-effect/docs/example/vanilla/y-vanilla.html)
+* [x scroll sample](http://github.develo.org/scroll-parallax-effect/docs/example/vanilla/x-vanilla.html)
 
 ## Usage
 
