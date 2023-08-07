@@ -13,7 +13,7 @@
   * [Fit Option](#fit-option)
 
 ## Example
-* [y scroll sample](http://github.develo.org/scroll-parallax-effect/docs/example/svg/svg.html)
+* [y scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/svg/svg.html)
 
 ## Option
 
