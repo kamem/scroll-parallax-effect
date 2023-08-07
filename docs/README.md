@@ -32,15 +32,15 @@ yarn add scroll-parallax-effect
 ## Example
 
 ### Typescript
-* [y scroll sample](http://github.develo.org/scroll-parallax-effect/docs/example/typescript/y-typescript.html)
-* [x scroll sample](http://github.develo.org/scroll-parallax-effect/docs/example/typescript/x-typescript.html)
+* [y scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/typescript/y-typescript.html)
+* [x scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/typescript/x-typescript.html)
 
 ### Vanilla
-* [y scroll sample](http://github.develo.org/scroll-parallax-effect/docs/example/vanilla/y-vanilla.html)
-* [x scroll sample](http://github.develo.org/scroll-parallax-effect/docs/example/vanilla/x-vanilla.html)
+* [y scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/vanilla/y-vanilla.html)
+* [x scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/vanilla/x-vanilla.html)
 
 ### SVG
-* [y scroll sample](http://github.develo.org/scroll-parallax-effect/docs/example/svg/svg.html)
+* [y scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/svg/svg.html)
 
 ## Documents
 * [Typescript ES6 Vanilla](/docs/TYPESCRIPT_ES6_VANILLA.md)
