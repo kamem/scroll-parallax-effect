@@ -2,12 +2,12 @@
 
 ## Example
 ### Typescript
-* [y scroll sample](http://github.develo.org/scroll-parallax-effect/docs/example/typescript/y-typescript.html)
-* [x scroll sample](http://github.develo.org/scroll-parallax-effect/docs/example/typescript/x-typescript.html)
+* [y scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/typescript/y-typescript.html)
+* [x scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/typescript/x-typescript.html)
 
 ### Vanilla
-* [y scroll sample](http://github.develo.org/scroll-parallax-effect/docs/example/vanilla/y-vanilla.html)
-* [x scroll sample](http://github.develo.org/scroll-parallax-effect/docs/example/vanilla/x-vanilla.html)
+* [y scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/vanilla/y-vanilla.html)
+* [x scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/vanilla/x-vanilla.html)
 
 ## Usage
 
@@ -22,7 +22,7 @@ import {
 
 直接HTMLに読みたい場合はdistフォルダのファイルを使い下記の通り読み込んでください。
 
-https://github.develo.org/scroll-parallax-effect/dist/scroll-parallax-effect/scroll-parallax-effect.min.js
+https://kamem.github.io/scroll-parallax-effect/dist/scroll-parallax-effect/scroll-parallax-effect.min.js
 
 ### Vanilla
 ```javascript
