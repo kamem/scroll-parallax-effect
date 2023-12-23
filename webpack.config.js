@@ -1,43 +1,53 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
-const webpack = require('webpack')
+const webpack = require("webpack");
 const path = require("path");
-const TerserPlugin = require('terser-webpack-plugin')
+const TerserPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV == "production";
 
 const stylesHandler = MiniCssExtractPlugin.loader;
 
-const package = require('./package.json')
+const package = require("./package.json");
 
 const config = {
   entry: {
-    'docs/example/typescript/x-typescript': './src/example/typescript/x-typescript.ts',
-    'docs/example/typescript/y-typescript': './src/example/typescript/y-typescript.ts',
-    'docs/example/vanilla/x-vanilla': './src/example/vanilla/x-vanilla.js',
-    'docs/example/vanilla/y-vanilla': './src/example/vanilla/y-vanilla.js',
-    'docs/example/svg/exampleSvg': './src/example/svg/exampleSvg.ts',
-    'dist/scroll-parallax-effect/scroll-parallax-effect': './src/scroll-parallax-effect/index.ts',
-    'dist/scroll-parallax-effect/scroll-parallax-effect.min': './src/scroll-parallax-effect/index.ts',
-    'dist/scroll-parallax-effect/scroll-parallax-effect-svg': './src/scroll-parallax-effect/svg.ts',
-    'dist/scroll-parallax-effect/scroll-parallax-effect-svg.min': './src/scroll-parallax-effect/svg.ts',
-    'dist/scroll-parallax-effect/index': './src/scroll-parallax-effect/index.ts',
-    'dist/scroll-parallax-effect/timing': './src/scroll-parallax-effect/timing.ts',
-    'dist/scroll-parallax-effect/speed': './src/scroll-parallax-effect/speed.ts',
-    'dist/scroll-parallax-effect/fit': './src/scroll-parallax-effect/fit.ts',
-    'dist/scroll-parallax-effect/svg': './src/scroll-parallax-effect/svg.ts',
-    'dist/scroll-parallax-effect/vue': './src/scroll-parallax-effect/vue.ts',
-    'dist/scroll-parallax-effect/index': './src/scroll-parallax-effect/index.ts',
+    "docs/example/typescript/x-typescript":
+      "./src/example/typescript/x-typescript.ts",
+    "docs/example/typescript/y-typescript":
+      "./src/example/typescript/y-typescript.ts",
+    "docs/example/vanilla/x-vanilla": "./src/example/vanilla/x-vanilla.js",
+    "docs/example/vanilla/y-vanilla": "./src/example/vanilla/y-vanilla.js",
+    "docs/example/svg/exampleSvg": "./src/example/svg/exampleSvg.ts",
+    "dist/scroll-parallax-effect/scroll-parallax-effect":
+      "./src/scroll-parallax-effect/index.ts",
+    "dist/scroll-parallax-effect/scroll-parallax-effect.min":
+      "./src/scroll-parallax-effect/index.ts",
+    "dist/scroll-parallax-effect/scroll-parallax-effect-svg":
+      "./src/scroll-parallax-effect/svg.ts",
+    "dist/scroll-parallax-effect/scroll-parallax-effect-svg.min":
+      "./src/scroll-parallax-effect/svg.ts",
+    "dist/scroll-parallax-effect/index":
+      "./src/scroll-parallax-effect/index.ts",
+    "dist/scroll-parallax-effect/timing":
+      "./src/scroll-parallax-effect/timing.ts",
+    "dist/scroll-parallax-effect/speed":
+      "./src/scroll-parallax-effect/speed.ts",
+    "dist/scroll-parallax-effect/fit": "./src/scroll-parallax-effect/fit.ts",
+    "dist/scroll-parallax-effect/svg": "./src/scroll-parallax-effect/svg.ts",
+    "dist/scroll-parallax-effect/vue": "./src/scroll-parallax-effect/vue.ts",
+    "dist/scroll-parallax-effect/index":
+      "./src/scroll-parallax-effect/index.ts",
   },
   output: {
     path: path.resolve(__dirname),
-    publicPath: isProduction ? '/scroll-parallax-effect/' : '/',
-    filename: '[name].js',
+    publicPath: isProduction ? "/scroll-parallax-effect/" : "/",
+    filename: "[name].js",
     library: "scroll-parallax-effect",
-    libraryTarget: "umd"
+    libraryTarget: "umd",
   },
   devServer: {
     host: "localhost",
@@ -52,38 +62,36 @@ const config = {
     // typescript
     new HtmlWebpackPlugin({
       template: "public/example/typescript/x-typescript.html",
-      filename: 'docs/example/typescript/x-typescript.html',
-      chunks: ['docs/example/typescript/x-typescript']
+      filename: "docs/example/typescript/x-typescript.html",
+      chunks: ["docs/example/typescript/x-typescript"],
     }),
     new HtmlWebpackPlugin({
       template: "public/example/typescript/y-typescript.html",
-      filename: 'docs/example/typescript/y-typescript.html',
-      chunks: ['docs/example/typescript/y-typescript']
+      filename: "docs/example/typescript/y-typescript.html",
+      chunks: ["docs/example/typescript/y-typescript"],
     }),
 
     // vanilla
     new HtmlWebpackPlugin({
       template: "public/example/vanilla/x-vanilla.html",
-      filename: 'docs/example/vanilla/x-vanilla.html',
-      chunks: ['docs/example/vanilla/x-vanilla']
+      filename: "docs/example/vanilla/x-vanilla.html",
+      chunks: ["docs/example/vanilla/x-vanilla"],
     }),
     new HtmlWebpackPlugin({
       template: "public/example/vanilla/y-vanilla.html",
-      filename: 'docs/example/vanilla/y-vanilla.html',
-      chunks: ['docs/example/vanilla/y-vanilla']
+      filename: "docs/example/vanilla/y-vanilla.html",
+      chunks: ["docs/example/vanilla/y-vanilla"],
     }),
 
     // svg
     new HtmlWebpackPlugin({
       template: "public/example/svg/svg.html",
-      filename: 'docs/example/svg/svg.html',
-      chunks: ['docs/example/svg/exampleSvg']
+      filename: "docs/example/svg/svg.html",
+      chunks: ["docs/example/svg/exampleSvg"],
     }),
 
     new CopyPlugin({
-      patterns: [
-        { from: 'public/example/img', to: 'docs/example/img' },
-      ],
+      patterns: [{ from: "public/example/img", to: "docs/example/img" }],
     }),
 
     new MiniCssExtractPlugin(),
@@ -95,11 +103,11 @@ ${package.repository.url}
 @version ${package.version}
 @license Released under ${package.license} license
 @author ${package.author.name}`,
-      test: /^(?=.*js)(?!.*min).*$/
+      test: /^(?=.*js)(?!.*min).*$/,
     }),
     new webpack.BannerPlugin({
       banner: `${package.name}|${package.repository.url}|${package.version}|${package.license} license|${package.author.name}`,
-      test: /\.min.js(\?.*)?$/i
+      test: /\.min.js(\?.*)?$/i,
     }),
 
     // Add your plugins here
@@ -121,27 +129,27 @@ ${package.repository.url}
         use: [
           stylesHandler,
           {
-            loader: 'css-loader', 
+            loader: "css-loader",
             options: {
               importLoaders: 1,
-              url: false
-            }
+              url: false,
+            },
           },
           {
-            loader: 'postcss-loader',
+            loader: "postcss-loader",
             options: {
               postcssOptions: {
                 plugins: [
                   [
                     "postcss-preset-env",
                     {
-                      stage: 0
+                      stage: 0,
                     },
                   ],
                 ],
               },
-            }
-          }
+            },
+          },
         ],
       },
       {
@@ -166,7 +174,7 @@ ${package.repository.url}
     ],
   },
   externals: {
-    vue: 'vue',
+    vue: "vue",
   },
 };
 

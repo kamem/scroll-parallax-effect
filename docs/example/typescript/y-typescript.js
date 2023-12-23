@@ -26,7 +26,7 @@ return /******/ (() => { // webpackBootstrap
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "ParallaxFit": () => (/* binding */ ParallaxFit)
+  ParallaxFit: () => (/* binding */ ParallaxFit)
 });
 
 // UNUSED EXPORTS: updateStatus
@@ -309,7 +309,7 @@ var Fit = /** @class */ (function () {
 
 
 
-var defaultParallaxStatus = scrollStatus/* Status */.qb;
+var defaultParallaxStatus = (/* unused pure expression or super */ null && (Status));
 var updateStatus = function (opt) { return defaultParallaxStatus.setVal(opt); };
 var ParallaxFit = /** @class */ (function () {
     function ParallaxFit(element, opt, scrollEventOpt) {
@@ -346,9 +346,9 @@ var ParallaxFit = /** @class */ (function () {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ParallaxFit": () => (/* binding */ ParallaxFit),
-/* harmony export */   "ParallaxSpeed": () => (/* binding */ ParallaxSpeed),
-/* harmony export */   "ParallaxTiming": () => (/* binding */ ParallaxTiming)
+/* harmony export */   ParallaxFit: () => (/* binding */ ParallaxFit),
+/* harmony export */   ParallaxSpeed: () => (/* binding */ ParallaxSpeed),
+/* harmony export */   ParallaxTiming: () => (/* binding */ ParallaxTiming)
 /* harmony export */ });
 /* unused harmony export updateStatus */
 /* harmony import */ var _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(251);
@@ -380,9 +380,9 @@ window.Parallax = {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Ij": () => (/* binding */ ScrollPosition),
-/* harmony export */   "ZP": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   "qb": () => (/* binding */ Status)
+/* harmony export */   Ij: () => (/* binding */ ScrollPosition),
+/* harmony export */   ZP: () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   qb: () => (/* binding */ Status)
 /* harmony export */ });
 var requestAnimationFrame = window.requestAnimationFrame;
 var ScrollStatus = /** @class */ (function () {
@@ -483,7 +483,7 @@ var Status = new ScrollStatus();
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "ParallaxSpeed": () => (/* binding */ ParallaxSpeed)
+  ParallaxSpeed: () => (/* binding */ ParallaxSpeed)
 });
 
 // UNUSED EXPORTS: updateStatus
@@ -553,7 +553,7 @@ var Speed = /** @class */ (function () {
 
 
 
-var defaultParallaxStatus = scrollStatus/* Status */.qb;
+var defaultParallaxStatus = (/* unused pure expression or super */ null && (Status));
 var updateStatus = function (opt) { return defaultParallaxStatus.setVal(opt); };
 var ParallaxSpeed = /** @class */ (function () {
     function ParallaxSpeed(element, opt, scrollEventOpt) {
@@ -594,7 +594,7 @@ var ParallaxSpeed = /** @class */ (function () {
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "ParallaxTiming": () => (/* binding */ ParallaxTiming)
+  ParallaxTiming: () => (/* binding */ ParallaxTiming)
 });
 
 // UNUSED EXPORTS: updateStatus
@@ -632,7 +632,7 @@ var Timing = /** @class */ (function () {
 
 
 
-var defaultParallaxStatus = scrollStatus/* Status */.qb;
+var defaultParallaxStatus = (/* unused pure expression or super */ null && (Status));
 var updateStatus = function (opt) { return defaultParallaxStatus.setVal(opt); };
 var ParallaxTiming = /** @class */ (function () {
     function ParallaxTiming(element, opt, scrollEventOpt) {
@@ -671,14 +671,14 @@ var ParallaxTiming = /** @class */ (function () {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Di": () => (/* binding */ generateCamelCaseStyle),
-/* harmony export */   "Ih": () => (/* binding */ setScrollEvents),
-/* harmony export */   "LR": () => (/* binding */ _offset),
-/* harmony export */   "Mv": () => (/* binding */ generateStyleValue),
-/* harmony export */   "U3": () => (/* binding */ scrollPositionStringToNumber),
-/* harmony export */   "fF": () => (/* binding */ generateStyleValueString),
-/* harmony export */   "fL": () => (/* binding */ getStyleValues),
-/* harmony export */   "sb": () => (/* binding */ getElement)
+/* harmony export */   Di: () => (/* binding */ generateCamelCaseStyle),
+/* harmony export */   Ih: () => (/* binding */ setScrollEvents),
+/* harmony export */   LR: () => (/* binding */ _offset),
+/* harmony export */   Mv: () => (/* binding */ generateStyleValue),
+/* harmony export */   U3: () => (/* binding */ scrollPositionStringToNumber),
+/* harmony export */   fF: () => (/* binding */ generateStyleValueString),
+/* harmony export */   fL: () => (/* binding */ getStyleValues),
+/* harmony export */   sb: () => (/* binding */ getElement)
 /* harmony export */ });
 /* unused harmony exports kebabToCamelCase, generateHex, generateRGB, hexadecimalToRgb, getStringColor */
 /* harmony import */ var _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(251);

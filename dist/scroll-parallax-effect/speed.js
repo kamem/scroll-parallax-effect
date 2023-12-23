@@ -24,8 +24,8 @@ return /******/ (() => { // webpackBootstrap
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Ij": () => (/* binding */ ScrollPosition),
-/* harmony export */   "qb": () => (/* binding */ Status)
+/* harmony export */   Ij: () => (/* binding */ ScrollPosition),
+/* harmony export */   qb: () => (/* binding */ Status)
 /* harmony export */ });
 var requestAnimationFrame = window.requestAnimationFrame;
 var ScrollStatus = /** @class */ (function () {
@@ -124,13 +124,13 @@ var Status = new ScrollStatus();
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Di": () => (/* binding */ generateCamelCaseStyle),
-/* harmony export */   "Ih": () => (/* binding */ setScrollEvents),
-/* harmony export */   "Mv": () => (/* binding */ generateStyleValue),
-/* harmony export */   "U3": () => (/* binding */ scrollPositionStringToNumber),
-/* harmony export */   "fF": () => (/* binding */ generateStyleValueString),
-/* harmony export */   "fL": () => (/* binding */ getStyleValues),
-/* harmony export */   "sb": () => (/* binding */ getElement)
+/* harmony export */   Di: () => (/* binding */ generateCamelCaseStyle),
+/* harmony export */   Ih: () => (/* binding */ setScrollEvents),
+/* harmony export */   Mv: () => (/* binding */ generateStyleValue),
+/* harmony export */   U3: () => (/* binding */ scrollPositionStringToNumber),
+/* harmony export */   fF: () => (/* binding */ generateStyleValueString),
+/* harmony export */   fL: () => (/* binding */ getStyleValues),
+/* harmony export */   sb: () => (/* binding */ getElement)
 /* harmony export */ });
 /* unused harmony exports kebabToCamelCase, generateHex, generateRGB, hexadecimalToRgb, getStringColor, _offset */
 /* harmony import */ var _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(251);
@@ -313,8 +313,8 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "ParallaxSpeed": () => (/* binding */ ParallaxSpeed),
-  "updateStatus": () => (/* binding */ updateStatus)
+  ParallaxSpeed: () => (/* binding */ ParallaxSpeed),
+  updateStatus: () => (/* binding */ updateStatus)
 });
 
 // EXTERNAL MODULE: ./src/scroll-parallax-effect/lib/scrollStatus.ts

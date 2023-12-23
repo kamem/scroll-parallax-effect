@@ -26,10 +26,10 @@ return /******/ (() => { // webpackBootstrap
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "SvgParallaxFit": () => (/* binding */ SvgParallaxFit),
-  "SvgParallaxSpeed": () => (/* binding */ SvgParallaxSpeed),
-  "SvgParallaxTiming": () => (/* binding */ SvgParallaxTiming),
-  "updateStatus": () => (/* binding */ updateStatus)
+  SvgParallaxFit: () => (/* binding */ SvgParallaxFit),
+  SvgParallaxSpeed: () => (/* binding */ SvgParallaxSpeed),
+  SvgParallaxTiming: () => (/* binding */ SvgParallaxTiming),
+  updateStatus: () => (/* binding */ updateStatus)
 });
 
 ;// CONCATENATED MODULE: ./src/scroll-parallax-effect/lib/scrollStatus.ts
