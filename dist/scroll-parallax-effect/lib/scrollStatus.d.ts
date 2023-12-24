@@ -7,7 +7,7 @@ declare type ScrollName = 'pageYOffset' | 'pageXOffset' | 'scrollTop' | 'scrollL
 export interface StatusParams {
     stage?: Stage;
     direction?: Direction;
-    functions?: ([(status: ScrollStatus) => void, ScrollPosition?])[];
+    functions?: [(status: ScrollStatus) => void, ScrollPosition?][];
     targetPercentage?: number;
     threshold?: number;
     updateFunction?: (status: ScrollStatus) => void;
@@ -15,7 +15,7 @@ export interface StatusParams {
 export default class ScrollStatus {
     stage: Stage;
     direction: Direction;
-    functions: ([(status: ScrollStatus) => void, ScrollPosition?])[];
+    functions: [(status: ScrollStatus) => void, ScrollPosition?][];
     targetPercentage: number;
     scrollPosition: number;
     endScrollPosition: number;

@@ -65,9 +65,11 @@ var ScrollStatus = /** @class */ (function () {
         else {
             (_a = this.functions) === null || _a === void 0 ? void 0 : _a.forEach(function (_a) {
                 var func = _a[0], scrollPosition = _a[1];
-                func(scrollPosition ?
-                    Object.assign({}, _this, { scrollPosition: scrollPosition.generateScrollPosition() }) :
-                    _this);
+                func(scrollPosition
+                    ? Object.assign({}, _this, {
+                        scrollPosition: scrollPosition.generateScrollPosition(),
+                    })
+                    : _this);
             });
         }
         requestAnimationFrame(this.scrollEventUpdate.bind(this));
@@ -77,8 +79,10 @@ var ScrollStatus = /** @class */ (function () {
         this.scrollPosition = this.ScrollPosition.generateScrollPosition();
         this.endScrollPosition = (_a = this.ScrollPosition) === null || _a === void 0 ? void 0 : _a.endScrollPosition;
         // @ts-ignore
+        // prettier-ignore
         this.stageSize = this.stage["inner".concat(this.stageSizeName)] || this.stage["client".concat(this.stageSizeName)];
         // @ts-ignore
+        // prettier-ignore
         this.contentSize = this.stage["scroll".concat(this.stageSizeName)] || document.documentElement["scroll".concat(this.stageSizeName)];
     };
     ScrollStatus.prototype.setDirectionInfo = function () {
@@ -95,7 +99,10 @@ var ScrollPosition = /** @class */ (function () {
         this.stageSize = opt.stageSize;
         this.targetPercentage = opt.targetPercentage || 0.2;
         this.threshold = opt.threshold || 0;
-        this.scrollName = this.stage === window ? "page".concat(this.direction.toUpperCase(), "Offset") : "scroll".concat(opt.directionPositionName);
+        this.scrollName =
+            this.stage === window
+                ? "page".concat(this.direction.toUpperCase(), "Offset")
+                : "scroll".concat(opt.directionPositionName);
         var scrollPosition = this.getScrollPosition();
         this.scrollPosition = scrollPosition; // 実際にスクロール
         this.endScrollPosition = scrollPosition; // 最後スクロールが止まる位置
@@ -139,29 +146,38 @@ var defaultParallaxStatus = _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__/* .St
 var ERRROR_PREFIX = '[scroll-parallax-effect]';
 var setScrollEvents = function (func, _a) {
     var _b = _a === void 0 ? {} : _a, targetPercentage = _b.targetPercentage, threshold = _b.threshold, _c = _b.status, status = _c === void 0 ? defaultParallaxStatus : _c;
-    var isNewScrollPosition = !!(targetPercentage && (targetPercentage !== status.targetPercentage)) || !!(threshold && (threshold !== status.threshold));
+    var isNewScrollPosition = !!(targetPercentage && targetPercentage !== status.targetPercentage) ||
+        !!(threshold && threshold !== status.threshold);
     status.functions.push([
         func,
         // targetPercentageが違った場合は新しくScrollPositionを作る、statusが異なった場合もstatusのscrollPositiuonを入れる
-        isNewScrollPosition ? new _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__/* .ScrollPosition */ .Ij(Object.assign({}, status, { targetPercentage: targetPercentage, threshold: threshold })) :
-            status !== defaultParallaxStatus ? status.ScrollPosition : undefined
+        isNewScrollPosition
+            ? new _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__/* .ScrollPosition */ .Ij(Object.assign({}, status, { targetPercentage: targetPercentage, threshold: threshold }))
+            : status !== defaultParallaxStatus
+                ? status.ScrollPosition
+                : undefined,
     ]);
 };
 var kebabToCamelCase = function (str) {
     if (!~str.indexOf('-'))
         return str;
-    return str.split('-').map(function (word, i) {
+    return str
+        .split('-')
+        .map(function (word, i) {
         if (i === 0) {
             return word.toLowerCase();
         }
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-    }).join('');
+    })
+        .join('');
 };
 var generateCamelCaseStyle = function (str) {
     return kebabToCamelCase(str);
 };
 var getElement = function (element) {
-    var el = typeof element === 'string' ? document.querySelector(element) : element;
+    var el = typeof element === 'string'
+        ? document.querySelector(element)
+        : element;
     if (!el)
         throw new Error("".concat(ERRROR_PREFIX, " [").concat(getElement.name, "] undefined element \"").concat(element, "\""));
     return el;
@@ -204,7 +220,7 @@ var generateRGB = function (colorString) {
     return [
         parseInt(c.substring(0, 2), 16) || 0,
         parseInt(c.substring(2, 4), 16) || 0,
-        parseInt(c.substring(4, 6), 16) || 0
+        parseInt(c.substring(4, 6), 16) || 0,
     ];
 };
 var hexadecimalToRgb = function (value) {
@@ -214,12 +230,21 @@ var hexadecimalToRgb = function (value) {
     });
 };
 var getStringColor = function (styleValue) {
-    var colors = { red: 'f00', blue: '00f', yellow: 'ff0', green: '008000' };
+    var colors = {
+        red: 'f00',
+        blue: '00f',
+        yellow: 'ff0',
+        green: '008000',
+    };
     return styleValue.replace(/red|blue|green|yellow/g, function (color) { return '#' + colors[color]; });
 };
 // elementの位置を取得する
 var _offset = function (element, endScrollPosition, directionPositionName) {
-    var el = typeof element === 'string' ? element ? document.querySelector(element) : '' : element;
+    var el = typeof element === 'string'
+        ? element
+            ? document.querySelector(element)
+            : ''
+        : element;
     var dir = directionPositionName === 'Left' ? 'left' : 'top';
     return el ? el.getBoundingClientRect()[dir] + endScrollPosition : 0; // window表示領域内の位置 + 今のスクロール量とすることでブラウザ実際の位置を取得する
 };
@@ -234,10 +259,15 @@ var scrollPositionStringToNumber = function (triggerPosition, status) {
     }
     // [#test, -100]のような値を想定
     if (~['string', 'object'].indexOf(typeof triggerPosition)) {
-        var triggerPositionArray = (typeof triggerPosition === 'string' ? triggerPosition.split(',') : triggerPosition);
+        var triggerPositionArray = (typeof triggerPosition === 'string'
+            ? triggerPosition.split(',')
+            : triggerPosition);
         var positionName = triggerPositionArray[0] || '';
-        var position = isEnd(positionName) ? stageEndScrollNum : _offset(positionName, status.endScrollPosition, status.directionPositionName);
-        var s = (parseInt(String(triggerPositionArray[1])) || 0) + Math.min(position, stageEndScrollNum);
+        var position = isEnd(positionName)
+            ? stageEndScrollNum
+            : _offset(positionName, status.endScrollPosition, status.directionPositionName);
+        var s = (parseInt(String(triggerPositionArray[1])) || 0) +
+            Math.min(position, stageEndScrollNum);
         return Math.min(s, stageEndScrollNum);
     }
     if (typeof triggerPosition === 'number') {
@@ -326,18 +356,29 @@ var util = __webpack_require__(833);
 var Speed = /** @class */ (function () {
     function Speed(ops) {
         this.el = ops.el;
-        this.speeds = typeof ops.speed === 'object' ? ops.speed : ops.speed ? [ops.speed] : [];
-        this.mins = typeof ops.min === 'object' ? ops.min : ops.min ? [ops.min] : [];
-        this.maxs = typeof ops.max === 'object' ? ops.max : ops.max ? [ops.max] : [];
-        this.contentScrollPositionStyleValues = typeof ops.contentScrollPositionStyleValue === 'object' ? ops.contentScrollPositionStyleValue : ops.contentScrollPositionStyleValue ? [ops.contentScrollPositionStyleValue] : [];
+        this.speeds =
+            typeof ops.speed === 'object' ? ops.speed : ops.speed ? [ops.speed] : [];
+        this.mins =
+            typeof ops.min === 'object' ? ops.min : ops.min ? [ops.min] : [];
+        this.maxs =
+            typeof ops.max === 'object' ? ops.max : ops.max ? [ops.max] : [];
+        this.contentScrollPositionStyleValues =
+            typeof ops.contentScrollPositionStyleValue === 'object'
+                ? ops.contentScrollPositionStyleValue
+                : ops.contentScrollPositionStyleValue
+                    ? [ops.contentScrollPositionStyleValue]
+                    : [];
         this.contentScrollPosition = ops.contentScrollPosition || 0;
-        this.styles = this.generateStyles((typeof ops.style === 'object' ? ops.style : ops.style ? [ops.style] : []));
+        this.styles = this.generateStyles(typeof ops.style === 'object' ? ops.style : ops.style ? [ops.style] : []);
     }
     Speed.prototype.generateStyles = function (styles) {
         var _this = this;
         return styles.map(function (name, i) {
             var _a;
-            var contentScrollPositionStyleValues = _this.contentScrollPositionStyleValues[i] || (_this.el ? (_a = document.defaultView) === null || _a === void 0 ? void 0 : _a.getComputedStyle(_this.el, null)[(0,util/* generateCamelCaseStyle */.Di)(name)] : 0);
+            var contentScrollPositionStyleValues = _this.contentScrollPositionStyleValues[i] ||
+                (_this.el
+                    ? (_a = document.defaultView) === null || _a === void 0 ? void 0 : _a.getComputedStyle(_this.el, null)[(0,util/* generateCamelCaseStyle */.Di)(name)]
+                    : 0);
             var styleValue = (0,util/* generateStyleValue */.Mv)(contentScrollPositionStyleValues);
             return {
                 name: name,
@@ -345,18 +386,20 @@ var Speed = /** @class */ (function () {
                 min: _this.mins[i] || _this.mins[0],
                 max: _this.maxs[i] || _this.maxs[0],
                 contentStyleValue: styleValue,
-                styleValues: (0,util/* getStyleValues */.fL)(styleValue)
+                styleValues: (0,util/* getStyleValues */.fL)(styleValue),
             };
         });
     };
     Speed.prototype.generateValues = function (status, style) {
         var _this = this;
         return style.styleValues.map(function (value, j) {
-            var _speed = (typeof style.speed === 'object' ? style.speed[j] : style.speed);
+            var _speed = typeof style.speed === 'object' ? style.speed[j] : style.speed;
             _speed = typeof _speed === 'number' ? _speed : 2;
-            var newValue = -(-status.scrollPosition * _speed + (0,util/* scrollPositionStringToNumber */.U3)(_this.contentScrollPosition, status) * _speed) + value;
-            var _min = (typeof style.min === 'object' ? style.min && style.min[j] : style.min);
-            var _max = (typeof style.max === 'object' ? style.max && style.max[j] : style.max);
+            var newValue = -(-status.scrollPosition * _speed +
+                (0,util/* scrollPositionStringToNumber */.U3)(_this.contentScrollPosition, status) *
+                    _speed) + value;
+            var _min = typeof style.min === 'object' ? style.min && style.min[j] : style.min;
+            var _max = typeof style.max === 'object' ? style.max && style.max[j] : style.max;
             newValue = Math.max(newValue, typeof _min === 'number' ? _min : -99999);
             newValue = Math.min(newValue, typeof _max === 'number' ? _max : 99999);
             if (style.contentStyleValue.indexOf('rgb') >= 0) {
@@ -383,7 +426,9 @@ var Speed = /** @class */ (function () {
 
 
 var defaultParallaxStatus = scrollStatus/* Status */.qb;
-var updateStatus = function (opt) { return defaultParallaxStatus.setVal(opt); };
+var updateStatus = function (opt) {
+    return defaultParallaxStatus.setVal(opt);
+};
 var ParallaxSpeed = /** @class */ (function () {
     function ParallaxSpeed(element, opt, scrollEventOpt) {
         var _this = this;
@@ -394,8 +439,10 @@ var ParallaxSpeed = /** @class */ (function () {
             speed: opt === null || opt === void 0 ? void 0 : opt.speed,
             min: opt === null || opt === void 0 ? void 0 : opt.min,
             max: opt === null || opt === void 0 ? void 0 : opt.max,
-            contentScrollPosition: (opt === null || opt === void 0 ? void 0 : opt.contentScrollPosition) === 0 || (opt === null || opt === void 0 ? void 0 : opt.contentScrollPosition) ? opt === null || opt === void 0 ? void 0 : opt.contentScrollPosition : el,
-            contentScrollPositionStyleValue: opt === null || opt === void 0 ? void 0 : opt.contentScrollPositionStyleValue
+            contentScrollPosition: (opt === null || opt === void 0 ? void 0 : opt.contentScrollPosition) === 0 || (opt === null || opt === void 0 ? void 0 : opt.contentScrollPosition)
+                ? opt === null || opt === void 0 ? void 0 : opt.contentScrollPosition
+                : el,
+            contentScrollPositionStyleValue: opt === null || opt === void 0 ? void 0 : opt.contentScrollPositionStyleValue,
         });
         this.speed = s;
         (0,util/* setScrollEvents */.Ih)(function (status) {
@@ -404,7 +451,7 @@ var ParallaxSpeed = /** @class */ (function () {
         }, {
             targetPercentage: (opt === null || opt === void 0 ? void 0 : opt.targetPercentage) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.targetPercentage),
             threshold: (opt === null || opt === void 0 ? void 0 : opt.threshold) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.threshold),
-            status: (opt === null || opt === void 0 ? void 0 : opt.status) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.status)
+            status: (opt === null || opt === void 0 ? void 0 : opt.status) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.status),
         });
     }
     ParallaxSpeed.prototype.getValues = function () {

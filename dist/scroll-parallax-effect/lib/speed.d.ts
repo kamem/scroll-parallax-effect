@@ -5,8 +5,8 @@ declare type OptionValueNumber = number | number[] | number[][];
 export interface SpeedOptions extends ScrollEventOpt {
     el?: Ele;
     contentScrollPosition?: TriggerPosiiton;
-    style?: (CSSStyleDeclarationName) | (CSSStyleDeclarationName)[];
-    styles?: (CSSStyleDeclarationName) | (CSSStyleDeclarationName)[];
+    style?: CSSStyleDeclarationName | CSSStyleDeclarationName[];
+    styles?: CSSStyleDeclarationName | CSSStyleDeclarationName[];
     speed?: OptionValueNumber;
     min?: OptionValueNumber;
     max?: OptionValueNumber;
@@ -30,7 +30,7 @@ export default class Speed {
     contentScrollPositionStyleValues: (number | string)[];
     contentScrollPosition: TriggerPosiiton;
     constructor(ops: SpeedOptions);
-    generateStyles(styles: (CSSStyleDeclarationName)[]): {
+    generateStyles(styles: CSSStyleDeclarationName[]): {
         name: CSSStyleDeclarationName;
         speed: number | number[];
         min: number | number[];

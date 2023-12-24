@@ -5,8 +5,8 @@ export interface ScrollEventOpt {
     threshold?: number;
     status?: ScrollStatus;
 }
-export declare const setScrollEvents: (func: (status: ScrollStatus) => void, { targetPercentage, threshold, status }?: ScrollEventOpt) => void;
-declare type CamelToKebabCase<S extends string> = S extends `${infer T}${infer U}` ? `${T extends Capitalize<T> ? "-" : ""}${Lowercase<T>}${CamelToKebabCase<U>}` : S;
+export declare const setScrollEvents: (func: (status: ScrollStatus) => void, { targetPercentage, threshold, status, }?: ScrollEventOpt) => void;
+declare type CamelToKebabCase<S extends string> = S extends `${infer T}${infer U}` ? `${T extends Capitalize<T> ? '-' : ''}${Lowercase<T>}${CamelToKebabCase<U>}` : S;
 export declare type CamelToKebab<T extends object> = {
     [K in keyof T as `${CamelToKebabCase<string & K>}`]: T[K] extends object ? CamelToKebab<T[K]> : T[K];
 };
