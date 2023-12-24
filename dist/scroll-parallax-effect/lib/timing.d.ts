@@ -1,7 +1,7 @@
 import type { Ele, ScrollEventOpt } from '../utils/util';
 import type { TriggerPosiiton } from '../utils/util';
 import type ScrollStatus from './scrollStatus';
-export declare type EventFunctionType = (target: Ele | undefined, isOver: boolean) => void;
+export type EventFunctionType = (target: Ele | undefined, isOver: boolean) => void;
 export interface TimingOotions extends ScrollEventOpt {
     el?: Ele;
     target?: Ele | keyof HTMLElementTagNameMap | null;

@@ -31,5 +31,5 @@ export declare const easing: {
     easeOutBounce: (i: number, b: number, c: number, d: number) => number;
     easeInOutBounce: (i: number, b: number, c: number, d: number) => number;
 };
-export declare type EasingFunction = (i: number, b: number, c: number, d: number) => number;
-export declare type Easing = keyof typeof easing | ((i: number, b: number, c: number, d: number) => number);
+export type EasingFunction = (i: number, b: number, c: number, d: number) => number;
+export type Easing = keyof typeof easing | ((i: number, b: number, c: number, d: number) => number);

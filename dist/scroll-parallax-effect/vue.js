@@ -962,7 +962,9 @@ var isEnd = function (value) {
 var scrollPositionStringToNumber = function (triggerPosition, status) {
     if (status === void 0) { status = defaultParallaxStatus; }
     var stageEndScrollNum = status.contentSize - status.stageSize;
-    if (triggerPosition > stageEndScrollNum || isEnd(triggerPosition)) {
+    if ((typeof triggerPosition === 'number' &&
+        triggerPosition > stageEndScrollNum) ||
+        isEnd(triggerPosition)) {
         return stageEndScrollNum;
     }
     // [#test, -100]のような値を想定

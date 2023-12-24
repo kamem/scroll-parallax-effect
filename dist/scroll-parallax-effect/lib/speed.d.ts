@@ -1,7 +1,7 @@
 import type ScrollStatus from './scrollStatus';
 import type { ScrollEventOpt, TriggerPosiiton, CSSStyleDeclarationName } from '../utils/util';
-declare type Ele = Element | HTMLElement | null;
-declare type OptionValueNumber = number | number[] | number[][];
+type Ele = Element | HTMLElement | null;
+type OptionValueNumber = number | number[] | number[][];
 export interface SpeedOptions extends ScrollEventOpt {
     el?: Ele;
     contentScrollPosition?: TriggerPosiiton;

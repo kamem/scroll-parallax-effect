@@ -180,7 +180,11 @@ export const scrollPositionStringToNumber = (
 ) => {
   const stageEndScrollNum = status.contentSize - status.stageSize;
 
-  if (triggerPosition! > stageEndScrollNum || isEnd(triggerPosition)) {
+  if (
+    (typeof triggerPosition === 'number' &&
+      triggerPosition! > stageEndScrollNum) ||
+    isEnd(triggerPosition)
+  ) {
     return stageEndScrollNum;
   }
 

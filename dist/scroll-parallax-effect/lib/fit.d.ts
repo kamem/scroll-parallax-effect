@@ -1,11 +1,11 @@
 import type { TriggerPosiiton, CSSStyleDeclarationName } from '../utils/util';
 import type { Easing, EasingFunction } from '../utils/easing';
 import type ScrollStatus from './scrollStatus';
-declare type Ele = Element | HTMLElement | null;
-declare type MotionStyles = {
+type Ele = Element | HTMLElement | null;
+type MotionStyles = {
     [key in CSSStyleDeclarationName]?: string | number;
 };
-declare type MotionValues = {
+type MotionValues = {
     [key in CSSStyleDeclarationName]?: number[];
 };
 export interface Motion {

@@ -1,9 +1,9 @@
-declare type Ele = Element | HTMLElement;
-declare type Direction = 'y' | 'x';
-declare type Stage = typeof globalThis | Window | Ele;
-export declare type DirectionPositionName = 'Top' | 'Left';
-export declare type StageSizeName = 'Height' | 'Width';
-declare type ScrollName = 'pageYOffset' | 'pageXOffset' | 'scrollTop' | 'scrollLeft';
+type Ele = Element | HTMLElement;
+type Direction = 'y' | 'x';
+type Stage = typeof globalThis | Window | Ele;
+export type DirectionPositionName = 'Top' | 'Left';
+export type StageSizeName = 'Height' | 'Width';
+type ScrollName = 'pageYOffset' | 'pageXOffset' | 'scrollTop' | 'scrollLeft';
 export interface StatusParams {
     stage?: Stage;
     direction?: Direction;
