@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@types/jest": "^27.4.1",
-    "copy-webpack-plugin": "^10.2.4",
+    "copy-webpack-plugin": "^11.0.0",
     "jest": "^27.5.1",
     "postcss-preset-env": "^9.3.0",
     "ts-jest": "^27.1.3",
