@@ -1,30 +1,33 @@
 # scroll-parallax-effect
-* [Install](#install)
-* [Example](#example)
-  * [Typescript](#typescript)
-  * [Vanilla](#vanilla)
-  * [SVG](#svg)
-* [Documents](#documents)
-* [Usage](#usage)
-  * [ScrollStatus Usage](#scrollstatus-usage)
-  * [Timing Usage](#timing-usage)
-  * [Speed Usage](#speed-usage)
-  * [Fit Usage](#fit-usage)
-* [Option](#option)
-  * [ScrollStatus Option](#scrollstatus-option)
-  * [共通 Option](#共通-option)
-  * [Timing Option](#timing-option)
-  * [Speed Option](#speed-option)
-  * [Fit Option](#fit-option)
+
+- [Install](#install)
+- [Example](#example)
+  - [Typescript](#typescript)
+  - [Vanilla](#vanilla)
+  - [SVG](#svg)
+- [Documents](#documents)
+- [Usage](#usage)
+  - [ScrollStatus Usage](#scrollstatus-usage)
+  - [Timing Usage](#timing-usage)
+  - [Speed Usage](#speed-usage)
+  - [Fit Usage](#fit-usage)
+- [Option](#option)
+  - [ScrollStatus Option](#scrollstatus-option)
+  - [共通 Option](#共通-option)
+  - [Timing Option](#timing-option)
+  - [Speed Option](#speed-option)
+  - [Fit Option](#fit-option)
 
 ## Install
 
-### npm 
+### npm
+
 ```terminal
 npm install scroll-parallax-effect
 ```
 
 ### yarn
+
 ```terminal
 yarn add scroll-parallax-effect
 ```
@@ -32,20 +35,24 @@ yarn add scroll-parallax-effect
 ## Example
 
 ### Typescript
-* [y scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/typescript/y-typescript.html)
-* [x scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/typescript/x-typescript.html)
+
+- [y scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/typescript/y-typescript.html)
+- [x scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/typescript/x-typescript.html)
 
 ### Vanilla
-* [y scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/vanilla/y-vanilla.html)
-* [x scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/vanilla/x-vanilla.html)
+
+- [y scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/vanilla/y-vanilla.html)
+- [x scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/vanilla/x-vanilla.html)
 
 ### SVG
-* [y scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/svg/svg.html)
+
+- [y scroll sample](http://kamem.github.io/scroll-parallax-effect/docs/example/svg/svg.html)
 
 ## Documents
-* [Typescript ES6 Vanilla](/docs/TYPESCRIPT_ES6_VANILLA.md)
-* [Vue](/docs/VUE.md)
-* [SVG](/docs/SVG.md)
+
+- [Typescript ES6 Vanilla](/docs/TYPESCRIPT_ES6_VANILLA.md)
+- [Vue](/docs/VUE.md)
+- [SVG](/docs/SVG.md)
 
 ## Usage
 
@@ -56,7 +63,9 @@ import {
   ParallaxFit
 } from 'scroll-parallax-effect'
 ```
-or 
+
+or
+
 ```Typescript
 import ParallaxTiming from 'scroll-parallax-effect/timing'
 import ParallaxSpeed from 'scroll-parallax-effect/speed'
@@ -64,7 +73,9 @@ import ParallaxFit from 'scroll-parallax-effect/fit'
 ```
 
 ### ScrollStatus Usage
-* [ScrollStatus Option](#scrollstatus-option)
+
+- [ScrollStatus Option](#scrollstatus-option)
+
 ```Typescript
 import {
   updateStatus
@@ -77,26 +88,30 @@ updateStatus({
 
 ### Timing Usage
 
-* [Timing Option](#timing-option)
+- [Timing Option](#timing-option)
 
-#### クラスonを付与
+#### クラス on を付与
+
 ```Typescript
 new ParallaxTiming('#timing')
 ```
 
 #### クラス名だけ変更したい
+
 ```Typescript
 new ParallaxTiming('#timing', { className: 'test'})
 ```
 
 #### 少し早めのタイミングで
+
 ```Typescript
 new ParallaxTiming('#timing', {
   threshold: 0.5
 })
 ```
 
-#### ナビゲーションにonを付与したい場合など（別のターゲットを指定したい）
+#### ナビゲーションに on を付与したい場合など（別のターゲットを指定したい）
+
 ```Typescript
 document.querySelectorAll('.gnav > ul > *').forEach(function(el) {
   const targetElementName = el.querySelector('a')?.getAttribute('href')
@@ -105,6 +120,7 @@ document.querySelectorAll('.gnav > ul > *').forEach(function(el) {
 ```
 
 #### 関数を指定
+
 ```Typescript
 new ParallaxTiming('#timing', {
   toggle: [
@@ -115,9 +131,11 @@ new ParallaxTiming('#timing', {
 ```
 
 ### Speed Usage
-  * [Speed Option](#speed-option)
+
+- [Speed Option](#speed-option)
 
 ### top
+
 ```Typescript
 new ParallaxSpeed('.speed', {
   style: 'top',
@@ -127,6 +145,7 @@ new ParallaxSpeed('.speed', {
 ```
 
 ### transform
+
 ```Typescript
 new ParallaxSpeed('.speed', {
     style: 'transform',
@@ -139,9 +158,10 @@ new ParallaxSpeed('.speed', {
 ```
 
 ### background-color
+
 ```Typescript
 new ParallaxSpeed(
-  'body', 
+  'body',
   {
     contentScrollPositionStyleValue: 'rgb(0,0,0)',
     style: ['background-color'],
@@ -151,7 +171,8 @@ new ParallaxSpeed(
 )
 ```
 
-### 複数スタイルを与える、ランダムでspeedを変える
+### 複数スタイルを与える、ランダムで speed を変える
+
 ```Typescript
 document.querySelectorAll('.speed').forEach((el, i) => {
   new ParallaxSpeed(el, {
@@ -172,9 +193,11 @@ document.querySelectorAll('.speed').forEach((el, i) => {
 ```
 
 ### Fit Usage
-* [Fit Option](#fit-option)
+
+- [Fit Option](#fit-option)
 
 #### opacity
+
 ```Typescript
 new ParallaxFit('.fit', [
   {
@@ -202,8 +225,10 @@ new ParallaxFit('.fit', [
 ])
 ```
 
-#### startとfromStyleは省略することができます。
-省略した場合は一つ前のend,toStyleを取得します。
+#### start と fromStyle は省略することができます。
+
+省略した場合は一つ前の end,toStyle を取得します。
+
 ```Typescript
 new ParallaxFit('.fit', [
   {
@@ -230,78 +255,81 @@ new ParallaxFit('.fit', [
 
 ### ScrollStatus Option
 
-| Option Name | Description | default
-|:-----------|:------------|:------------|
-| stage      | スクロールさせたいwindow | `window`
-| direction  | スクロールの方向(`y` or `x`) | `y`
-| targetPercentage| 全体の慣性の割合を指定します | `0.2`
-| threshold | スクロール量 + (画面幅 / threshold)となる | `0`
+| Option Name      | Description                               | default  |
+| :--------------- | :---------------------------------------- | :------- |
+| stage            | スクロールさせたい window                 | `window` |
+| direction        | スクロールの方向(`y` or `x`)              | `y`      |
+| targetPercentage | 全体の慣性の割合を指定します              | `0.2`    |
+| threshold        | スクロール量 + (画面幅 / threshold)となる | `0`      |
 
-  * [ScrollStatus Usage](#scrollstatus-Usage)
+- [ScrollStatus Usage](#scrollstatus-Usage)
 
 ### 共通 Option
 
-| Option Name | Description | default
-|:-----------|:------------|:------------|
-| status| スクロール位置・向きなどのクラスを指定 | `default Status`
-| targetPercentage| 全体の慣性の割合を指定します | `0.2`
-| threshold | スクロール量 + (画面幅 / threshold)となる | `0`
+| Option Name      | Description                               | default          |
+| :--------------- | :---------------------------------------- | :--------------- |
+| status           | スクロール位置・向きなどのクラスを指定    | `default Status` |
+| targetPercentage | 全体の慣性の割合を指定します              | `0.2`            |
+| threshold        | スクロール量 + (画面幅 / threshold)となる | `0`              |
 
 ### Timing Option
-* 指定位置を通過したとき、指定のクラスを追加・削除します。  
-* 特定位置を通過したときに、指定の関数を実行することもできます。
 
-| Option Name | Description | Type |default
-|:-----------|:------------|:------------|:------------|
-| target | ここで指定したタグを通過したときにtoggleが実行されます。 | `string`  `Element`  `HTMLElement` | 指定したタグ
-| className | 追加したいクラス名 | `string` | `on`
-| triggerPosition | 指定した位置にきたときに`toggle`を実行します  |  [スクロール位置の指定](#スクロール位置の指定)  | `undefinedの場合targetの位置を取得`
-| toggle | 上から下に通過した場合に[0]を実行し、下から上に通過した場合[1]を実行します。 | `[() => this.addClass('on'), () => this.removeClass('on')]`
+- 指定位置を通過したとき、指定のクラスを追加・削除します。
+- 特定位置を通過したときに、指定の関数を実行することもできます。
 
-  * [Timing Usage](#timing-Usage)
+| Option Name     | Description                                                                  | Type                                                        | default                             |
+| :-------------- | :--------------------------------------------------------------------------- | :---------------------------------------------------------- | :---------------------------------- |
+| target          | ここで指定したタグを通過したときに toggle が実行されます。                   | `string` `Element` `HTMLElement`                            | 指定したタグ                        |
+| className       | 追加したいクラス名                                                           | `string`                                                    | `on`                                |
+| triggerPosition | 指定した位置にきたときに`toggle`を実行します                                 | [スクロール位置の指定](#スクロール位置の指定)               | `undefinedの場合targetの位置を取得` |
+| toggle          | 上から下に通過した場合に[0]を実行し、下から上に通過した場合[1]を実行します。 | `[() => this.addClass('on'), () => this.removeClass('on')]` |
+
+- [Timing Usage](#timing-Usage)
 
 ### Speed Option
-* スクロール量に応じてcssを変化させます。 
-* スクロール1に対して、どのぐらい移動するかをspeedで指定することができます。
 
-| Option Name | Description | Type | Default
-|:-----------|:------------|:------------|:------------|
-| style or styles | 変化させたいcssの値 | `string` | `'top'`
-| speed | スクロール量 * speed ので値を変化させる | `number` | `2`
-| min | 最小値 | `number` | `-999999`
-| max | 最大値 | `number` | `999999`
-| contentScrollPositionStyleValue | スクロールが`contentScrollPosition`の位置にきたときに、ここで指定したstyleに落ち着きます。指定がない場合はcssで予め指定していたstyleになります。| `string` | 自身のタグのstyle
-| contentScrollPosition | スクロールがここで指定した位置に来た時に、希望の位置（contentScrollPositionStyleValue）にstyleが落ち着きます。|  [スクロール位置の指定](#スクロール位置の指定) | 指定したタグの位置
+- スクロール量に応じて css を変化させます。
+- スクロール 1 に対して、どのぐらい移動するかを speed で指定することができます。
 
-  * [Speed Usage](#speed-Usage)
+| Option Name                     | Description                                                                                                                                            | Type                                          | Default            |
+| :------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------- | :----------------- |
+| style or styles                 | 変化させたい css の値                                                                                                                                  | `string`                                      | `'top'`            |
+| speed                           | スクロール量 \* speed ので値を変化させる                                                                                                               | `number`                                      | `2`                |
+| min                             | 最小値                                                                                                                                                 | `number`                                      | `-999999`          |
+| max                             | 最大値                                                                                                                                                 | `number`                                      | `999999`           |
+| contentScrollPositionStyleValue | スクロールが`contentScrollPosition`の位置にきたときに、ここで指定した style に落ち着きます。指定がない場合は css で予め指定していた style になります。 | `string`                                      | 自身のタグの style |
+| contentScrollPosition           | スクロールがここで指定した位置に来た時に、希望の位置（contentScrollPositionStyleValue）に style が落ち着きます。                                       | [スクロール位置の指定](#スクロール位置の指定) | 指定したタグの位置 |
 
-**※ contentScrollPositionStyleValueに初期値の値を指定しないと動作しないことがあります。**
+- [Speed Usage](#speed-Usage)
+
+**※ contentScrollPositionStyleValue に初期値の値を指定しないと動作しないことがあります。**
 
 ### Fit Option
 
-移動距離に応じてcssを変化させます。
-スクロールがstartからendまで移動したときにfromStyleからtoStyleにcssが変化していきます。
-easingを指定することも可能です。
+移動距離に応じて css を変化させます。
+スクロールが start から end まで移動したときに fromStyle から toStyle に css が変化していきます。
+easing を指定することも可能です。
 
 #### Motion | Motion[]
 
-| Option Name | Description | Type | Default
-|:-----------|:------------|:------------|:------------|
-| start | 移動を始めるスクロール位置（2つ目からは省略すると最後のendの位置からとなります。）|  [スクロール位置の指定](#スクロール位置の指定) |-
-| end | 移動が終わるスクロール位置 | [スクロール位置の指定](#スクロール位置の指定)  | -
-| fromStyle | 始めのcss（cssは文字列で指定してください）（2つ目からは省略すると最後のtoStyleの最後の値からとなります。） | [key in CSSStyleDeclarationName]?: string or number | -
-| toStyle | 終わりのcss（cssは文字列で指定してください） | [key in CSSStyleDeclarationName]?: string or number | -
-| easing | [easing plugin](http://semooh.jp/jquery/cont/doc/easing/)の名前を指定、また関数を指定することもできます。[Easing Functions for JavaScript](https://spicyyoghurt.com/tools/easing-functions) | `string` or `function` | `linear`
+| Option Name | Description                                                                                                                                                                                 | Type                                                | Default  |
+| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------- | :------- |
+| start       | 移動を始めるスクロール位置（2 つ目からは省略すると最後の end の位置からとなります。）                                                                                                       | [スクロール位置の指定](#スクロール位置の指定)       | -        |
+| end         | 移動が終わるスクロール位置                                                                                                                                                                  | [スクロール位置の指定](#スクロール位置の指定)       | -        |
+| fromStyle   | 始めの css（css は文字列で指定してください）（2 つ目からは省略すると最後の toStyle の最後の値からとなります。）                                                                             | [key in CSSStyleDeclarationName]?: string or number | -        |
+| toStyle     | 終わりの css（css は文字列で指定してください）                                                                                                                                              | [key in CSSStyleDeclarationName]?: string or number | -        |
+| easing      | [easing plugin](http://semooh.jp/jquery/cont/doc/easing/)の名前を指定、また関数を指定することもできます。[Easing Functions for JavaScript](https://spicyyoghurt.com/tools/easing-functions) | `string` or `function`                              | `linear` |
 
-  * [Fit Usage](#fit-Usage)
+- [Fit Usage](#fit-Usage)
 
 ### スクロール位置の指定
+
 スクロール位置はいくつかの指定方法があります。
 
-| Value | Output | Description
-|:-----------|:------------|:------------|
-| 1000 | 1000 | 数値で指定
-| '.header' | `タグの位置を取得` | タグ名で指定
-| document.querySelector('.header') | `タグの位置を取得` | elementで指定
-| ['.header', -100] | `タグの位置 - 100` | タグの位置から微調整
-| end | `一番下` | Windowの最後のスクロール位置を指定
+| Value                             | Output             | Description                         |
+| :-------------------------------- | :----------------- | :---------------------------------- |
+| 1000                              | 1000               | 数値で指定                          |
+| '.header'                         | `タグの位置を取得` | タグ名で指定                        |
+| document.querySelector('.header') | `タグの位置を取得` | element で指定                      |
+| ['.header', -100]                 | `タグの位置 - 100` | タグの位置から微調整                |
+| end                               | `一番下`           | Window の最後のスクロール位置を指定 |
