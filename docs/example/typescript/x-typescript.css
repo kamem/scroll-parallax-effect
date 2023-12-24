@@ -71,7 +71,6 @@ body {
 
 .site-name {
   background-color: rgba(0, 0, 0, 0.8);
-  background-color: rgba(0, 0, 0, 0.8);
   background-color: var(--color-black);
   position: absolute;
   top: 0;
@@ -157,6 +156,7 @@ body {
 .main-parallax-item {
   color: #fff;
   text-align: center;
+  -webkit-text-decoration: none;
   text-decoration: none;
   width: 100%;
   position: relative;
@@ -177,9 +177,9 @@ body {
   padding: 10px 0;
   width: 160px;
   background-color: rgba(0, 0, 0, 0.8);
-  background-color: rgba(0, 0, 0, 0.8);
   background-color: var(--color-black);
   text-align: center;
+  -webkit-text-decoration: underline;
   text-decoration: underline;
   display: inline-block;
   margin-bottom: 24px;
@@ -188,6 +188,7 @@ body {
 
 .main-parallax-item-value {
   padding: 10px 20px;
+  -webkit-text-decoration: underline;
   text-decoration: underline;
   display: inline-block;
   margin-bottom: 24px;
@@ -225,7 +226,6 @@ body {
   margin: 0 auto 48px;
   padding: 16px 24px;
   background-color: rgba(0, 0, 0, 0.8);
-  background-color: rgba(0, 0, 0, 0.8);
   background-color: var(--color-black);
   letter-spacing: 0.1em;
 }
@@ -233,7 +233,6 @@ body {
 .install-code {
   margin: 32px auto 0;
   padding: 8px 16px;
-  background-color: rgba(0, 0, 0, 0.8);
   background-color: rgba(0, 0, 0, 0.8);
   background-color: var(--color-black);
   letter-spacing: 0.1em;

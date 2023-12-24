@@ -26,7 +26,7 @@ return /******/ (() => { // webpackBootstrap
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "ParallaxFit": () => (/* binding */ ParallaxFit)
+  ParallaxFit: () => (/* binding */ ParallaxFit)
 });
 
 // UNUSED EXPORTS: updateStatus
@@ -37,116 +37,226 @@ var scrollStatus = __webpack_require__(251);
 var util = __webpack_require__(833);
 ;// CONCATENATED MODULE: ./src/scroll-parallax-effect/utils/easing.ts
 var easing = {
-    linear: function (t, b, c) { return b + c * t; },
-    easeInQuad: function (i, b, c, d) { return c * (i /= d) * i + b; },
-    easeOutQuad: function (i, b, c, d) { return -c * (i /= d) * (i - 2) + b; },
-    easeInOutQuad: function (i, b, c, d) { if ((i /= d / 2) < 1) {
-        return c / 2 * i * i + b;
-    } return -c / 2 * ((--i) * (i - 2) - 1) + b; },
-    easeInCubic: function (i, b, c, d) { return c * (i /= d) * i * i + b; },
-    easeOutCubic: function (i, b, c, d) { return c * ((i = i / d - 1) * i * i + 1) + b; },
-    easeInOutCubic: function (i, b, c, d) { if ((i /= d / 2) < 1) {
-        return c / 2 * i * i * i + b;
-    } return c / 2 * ((i -= 2) * i * i + 2) + b; },
-    easeInQuart: function (i, b, c, d) { return c * (i /= d) * i * i * i + b; },
-    easeOutQuart: function (i, b, c, d) { return -c * ((i = i / d - 1) * i * i * i - 1) + b; },
-    easeInOutQuart: function (i, b, c, d) { if ((i /= d / 2) < 1) {
-        return c / 2 * i * i * i * i + b;
-    } return -c / 2 * ((i -= 2) * i * i * i - 2) + b; },
-    easeInQuint: function (i, b, c, d) { return c * (i /= d) * i * i * i * i + b; },
-    easeOutQuint: function (i, b, c, d) { return c * ((i = i / d - 1) * i * i * i * i + 1) + b; },
-    easeInOutQuint: function (i, b, c, d) { if ((i /= d / 2) < 1) {
-        return c / 2 * i * i * i * i * i + b;
-    } return c / 2 * ((i -= 2) * i * i * i * i + 2) + b; },
-    easeInSine: function (i, b, c, d) { return -c * Math.cos(i / d * (Math.PI / 2)) + c + b; },
-    easeOutSine: function (i, b, c, d) { return c * Math.sin(i / d * (Math.PI / 2)) + b; },
-    easeInOutSine: function (i, b, c, d) { return -c / 2 * (Math.cos(Math.PI * i / d) - 1) + b; },
-    easeInExpo: function (i, b, c, d) { return (i == 0) ? b : c * Math.pow(2, 10 * (i / d - 1)) + b; },
-    easeOutExpo: function (i, b, c, d) { return (i == d) ? b + c : c * (-Math.pow(2, -10 * i / d) + 1) + b; },
-    easeInOutExpo: function (i, b, c, d) { if (i == 0) {
-        return b;
-    } if (i == d) {
-        return b + c;
-    } if ((i /= d / 2) < 1) {
-        return c / 2 * Math.pow(2, 10 * (i - 1)) + b;
-    } return c / 2 * (-Math.pow(2, -10 * --i) + 2) + b; },
-    easeInCirc: function (i, b, c, d) { return -c * (Math.sqrt(1 - (i /= d) * i) - 1) + b; },
-    easeOutCirc: function (i, b, c, d) { return c * Math.sqrt(1 - (i = i / d - 1) * i) + b; },
-    easeInOutCirc: function (i, b, c, d) { if ((i /= d / 2) < 1) {
-        return -c / 2 * (Math.sqrt(1 - i * i) - 1) + b;
-    } return c / 2 * (Math.sqrt(1 - (i -= 2) * i) + 1) + b; },
-    easeInElastic: function (m, p, a, b) { var d = 1.70158; var c = 0; var n = a; if (m == 0) {
-        return p;
-    } if ((m /= b) == 1) {
-        return p + a;
-    } if (!c) {
-        c = b * 0.3;
-    } if (n < Math.abs(a)) {
-        n = a;
-        var d = c / 4;
-    }
-    else {
-        var d = c / (2 * Math.PI) * Math.asin(a / n);
-    } return -(n * Math.pow(2, 10 * (m -= 1)) * Math.sin((m * b - d) * (2 * Math.PI) / c)) + p; },
-    easeOutElastic: function (m, p, a, b) { var d = 1.70158; var c = 0; var n = a; if (m == 0) {
-        return p;
-    } if ((m /= b) == 1) {
-        return p + a;
-    } if (!c) {
-        c = b * 0.3;
-    } if (n < Math.abs(a)) {
-        n = a;
-        var d = c / 4;
-    }
-    else {
-        var d = c / (2 * Math.PI) * Math.asin(a / n);
-    } return n * Math.pow(2, -10 * m) * Math.sin((m * b - d) * (2 * Math.PI) / c) + a + p; },
-    easeInOutElastic: function (m, p, a, b) { var d = 1.70158; var c = 0; var n = a; if (m == 0) {
-        return p;
-    } if ((m /= b / 2) == 2) {
-        return p + a;
-    } if (!c) {
-        c = b * (0.3 * 1.5);
-    } if (n < Math.abs(a)) {
-        n = a;
-        var d = c / 4;
-    }
-    else {
-        var d = c / (2 * Math.PI) * Math.asin(a / n);
-    } if (m < 1) {
-        return -0.5 * (n * Math.pow(2, 10 * (m -= 1)) * Math.sin((m * b - d) * (2 * Math.PI) / c)) + p;
-    } return n * Math.pow(2, -10 * (m -= 1)) * Math.sin((m * b - d) * (2 * Math.PI) / c) * 0.5 + a + p; },
-    easeInBack: function (k, b, c, d, j) { if (j == undefined) {
-        j = 1.70158;
-    } return c * (k /= d) * k * ((j + 1) * k - j) + b; },
-    easeOutBack: function (k, b, c, d, j) { if (j == undefined) {
-        j = 1.70158;
-    } return c * ((k = k / d - 1) * k * ((j + 1) * k + j) + 1) + b; },
-    easeInOutBack: function (k, b, c, d, j) { if (j == undefined) {
-        j = 1.70158;
-    } if ((k /= d / 2) < 1) {
-        return c / 2 * (k * k * (((j *= (1.525)) + 1) * k - j)) + b;
-    } return c / 2 * ((k -= 2) * k * (((j *= (1.525)) + 1) * k + j) + 2) + b; },
-    easeInBounce: function (i, b, c, d) { return c - easing.easeOutBounce(d - i, 0, c, d) + b; },
-    easeOutBounce: function (i, b, c, d) { if ((i /= d) < (1 / 2.75)) {
-        return c * (7.5625 * i * i) + b;
-    }
-    else {
-        if (i < (2 / 2.75)) {
-            return c * (7.5625 * (i -= (1.5 / 2.75)) * i + 0.75) + b;
+    linear: function (t, b, c) {
+        return b + c * t;
+    },
+    easeInQuad: function (i, b, c, d) {
+        return c * (i /= d) * i + b;
+    },
+    easeOutQuad: function (i, b, c, d) {
+        return -c * (i /= d) * (i - 2) + b;
+    },
+    easeInOutQuad: function (i, b, c, d) {
+        if ((i /= d / 2) < 1) {
+            return (c / 2) * i * i + b;
+        }
+        return (-c / 2) * (--i * (i - 2) - 1) + b;
+    },
+    easeInCubic: function (i, b, c, d) {
+        return c * (i /= d) * i * i + b;
+    },
+    easeOutCubic: function (i, b, c, d) {
+        return c * ((i = i / d - 1) * i * i + 1) + b;
+    },
+    easeInOutCubic: function (i, b, c, d) {
+        if ((i /= d / 2) < 1) {
+            return (c / 2) * i * i * i + b;
+        }
+        return (c / 2) * ((i -= 2) * i * i + 2) + b;
+    },
+    easeInQuart: function (i, b, c, d) {
+        return c * (i /= d) * i * i * i + b;
+    },
+    easeOutQuart: function (i, b, c, d) {
+        return -c * ((i = i / d - 1) * i * i * i - 1) + b;
+    },
+    easeInOutQuart: function (i, b, c, d) {
+        if ((i /= d / 2) < 1) {
+            return (c / 2) * i * i * i * i + b;
+        }
+        return (-c / 2) * ((i -= 2) * i * i * i - 2) + b;
+    },
+    easeInQuint: function (i, b, c, d) {
+        return c * (i /= d) * i * i * i * i + b;
+    },
+    easeOutQuint: function (i, b, c, d) {
+        return c * ((i = i / d - 1) * i * i * i * i + 1) + b;
+    },
+    easeInOutQuint: function (i, b, c, d) {
+        if ((i /= d / 2) < 1) {
+            return (c / 2) * i * i * i * i * i + b;
+        }
+        return (c / 2) * ((i -= 2) * i * i * i * i + 2) + b;
+    },
+    easeInSine: function (i, b, c, d) {
+        return -c * Math.cos((i / d) * (Math.PI / 2)) + c + b;
+    },
+    easeOutSine: function (i, b, c, d) {
+        return c * Math.sin((i / d) * (Math.PI / 2)) + b;
+    },
+    easeInOutSine: function (i, b, c, d) {
+        return (-c / 2) * (Math.cos((Math.PI * i) / d) - 1) + b;
+    },
+    easeInExpo: function (i, b, c, d) {
+        return i == 0 ? b : c * Math.pow(2, 10 * (i / d - 1)) + b;
+    },
+    easeOutExpo: function (i, b, c, d) {
+        return i == d ? b + c : c * (-Math.pow(2, (-10 * i) / d) + 1) + b;
+    },
+    easeInOutExpo: function (i, b, c, d) {
+        if (i == 0) {
+            return b;
+        }
+        if (i == d) {
+            return b + c;
+        }
+        if ((i /= d / 2) < 1) {
+            return (c / 2) * Math.pow(2, 10 * (i - 1)) + b;
+        }
+        return (c / 2) * (-Math.pow(2, -10 * --i) + 2) + b;
+    },
+    easeInCirc: function (i, b, c, d) {
+        return -c * (Math.sqrt(1 - (i /= d) * i) - 1) + b;
+    },
+    easeOutCirc: function (i, b, c, d) {
+        return c * Math.sqrt(1 - (i = i / d - 1) * i) + b;
+    },
+    easeInOutCirc: function (i, b, c, d) {
+        if ((i /= d / 2) < 1) {
+            return (-c / 2) * (Math.sqrt(1 - i * i) - 1) + b;
+        }
+        return (c / 2) * (Math.sqrt(1 - (i -= 2) * i) + 1) + b;
+    },
+    easeInElastic: function (m, p, a, b) {
+        var d = 1.70158;
+        var c = 0;
+        var n = a;
+        if (m == 0) {
+            return p;
+        }
+        if ((m /= b) == 1) {
+            return p + a;
+        }
+        if (!c) {
+            c = b * 0.3;
+        }
+        if (n < Math.abs(a)) {
+            n = a;
+            var d = c / 4;
         }
         else {
-            if (i < (2.5 / 2.75)) {
-                return c * (7.5625 * (i -= (2.25 / 2.75)) * i + 0.9375) + b;
+            var d = (c / (2 * Math.PI)) * Math.asin(a / n);
+        }
+        return (-(n *
+            Math.pow(2, 10 * (m -= 1)) *
+            Math.sin(((m * b - d) * (2 * Math.PI)) / c)) + p);
+    },
+    easeOutElastic: function (m, p, a, b) {
+        var d = 1.70158;
+        var c = 0;
+        var n = a;
+        if (m == 0) {
+            return p;
+        }
+        if ((m /= b) == 1) {
+            return p + a;
+        }
+        if (!c) {
+            c = b * 0.3;
+        }
+        if (n < Math.abs(a)) {
+            n = a;
+            var d = c / 4;
+        }
+        else {
+            var d = (c / (2 * Math.PI)) * Math.asin(a / n);
+        }
+        return (n * Math.pow(2, -10 * m) * Math.sin(((m * b - d) * (2 * Math.PI)) / c) +
+            a +
+            p);
+    },
+    easeInOutElastic: function (m, p, a, b) {
+        var d = 1.70158;
+        var c = 0;
+        var n = a;
+        if (m == 0) {
+            return p;
+        }
+        if ((m /= b / 2) == 2) {
+            return p + a;
+        }
+        if (!c) {
+            c = b * (0.3 * 1.5);
+        }
+        if (n < Math.abs(a)) {
+            n = a;
+            var d = c / 4;
+        }
+        else {
+            var d = (c / (2 * Math.PI)) * Math.asin(a / n);
+        }
+        if (m < 1) {
+            return (-0.5 *
+                (n *
+                    Math.pow(2, 10 * (m -= 1)) *
+                    Math.sin(((m * b - d) * (2 * Math.PI)) / c)) +
+                p);
+        }
+        return (n *
+            Math.pow(2, -10 * (m -= 1)) *
+            Math.sin(((m * b - d) * (2 * Math.PI)) / c) *
+            0.5 +
+            a +
+            p);
+    },
+    easeInBack: function (k, b, c, d, j) {
+        if (j == undefined) {
+            j = 1.70158;
+        }
+        return c * (k /= d) * k * ((j + 1) * k - j) + b;
+    },
+    easeOutBack: function (k, b, c, d, j) {
+        if (j == undefined) {
+            j = 1.70158;
+        }
+        return c * ((k = k / d - 1) * k * ((j + 1) * k + j) + 1) + b;
+    },
+    easeInOutBack: function (k, b, c, d, j) {
+        if (j == undefined) {
+            j = 1.70158;
+        }
+        if ((k /= d / 2) < 1) {
+            return (c / 2) * (k * k * (((j *= 1.525) + 1) * k - j)) + b;
+        }
+        return (c / 2) * ((k -= 2) * k * (((j *= 1.525) + 1) * k + j) + 2) + b;
+    },
+    easeInBounce: function (i, b, c, d) {
+        return c - easing.easeOutBounce(d - i, 0, c, d) + b;
+    },
+    easeOutBounce: function (i, b, c, d) {
+        if ((i /= d) < 1 / 2.75) {
+            return c * (7.5625 * i * i) + b;
+        }
+        else {
+            if (i < 2 / 2.75) {
+                return c * (7.5625 * (i -= 1.5 / 2.75) * i + 0.75) + b;
             }
             else {
-                return c * (7.5625 * (i -= (2.625 / 2.75)) * i + 0.984375) + b;
+                if (i < 2.5 / 2.75) {
+                    return c * (7.5625 * (i -= 2.25 / 2.75) * i + 0.9375) + b;
+                }
+                else {
+                    return c * (7.5625 * (i -= 2.625 / 2.75) * i + 0.984375) + b;
+                }
             }
         }
-    } },
-    easeInOutBounce: function (i, b, c, d) { if (i < d / 2) {
-        return easing.easeInBounce(i * 2, 0, c, d) * 0.5 + b;
-    } return easing.easeOutBounce(i * 2 - d, 0, c, d) * 0.5 + c * 0.5 + b; }
+    },
+    easeInOutBounce: function (i, b, c, d) {
+        if (i < d / 2) {
+            return easing.easeInBounce(i * 2, 0, c, d) * 0.5 + b;
+        }
+        return easing.easeOutBounce(i * 2 - d, 0, c, d) * 0.5 + c * 0.5 + b;
+    },
 };
 
 ;// CONCATENATED MODULE: ./src/scroll-parallax-effect/lib/fit.ts
@@ -174,10 +284,12 @@ var Fit = /** @class */ (function () {
     };
     Fit.prototype.setStyleValues = function () {
         var _this = this;
-        this.motions = this.motions.map(function (motion) { return Object.assign({}, motion, ({
-            fromStyleValues: _this.generateStyleValues(motion.fromStyle),
-            toStyleValues: _this.generateStyleValues(motion.toStyle)
-        })); });
+        this.motions = this.motions.map(function (motion) {
+            return Object.assign({}, motion, {
+                fromStyleValues: _this.generateStyleValues(motion.fromStyle),
+                toStyleValues: _this.generateStyleValues(motion.toStyle),
+            });
+        });
     };
     Fit.prototype.generateStyleValues = function (motionStyles) {
         var styles = {};
@@ -241,6 +353,7 @@ var Fit = /** @class */ (function () {
             }
         }
         // @ts-ignore
+        // prettier-ignore
         if (fromStyle === '')
             fromStyle = document.defaultView.getComputedStyle(typeof this.el === 'string' ? document.querySelector(this.el) : this.el, null)[style];
         return fromStyle;
@@ -269,10 +382,17 @@ var Fit = /** @class */ (function () {
         if (easingName === void 0) { easingName = 'linear'; }
         var abs = Math.abs(fromtStyle - toStyle);
         var fixAbs = fromtStyle < toStyle ? abs : -abs;
-        var e = typeof easingName === 'string' ? easing[easingName] : easingName;
+        var e = typeof easingName === 'string'
+            ? easing[easingName]
+            : easingName;
         var styleValue = e(scrollPercent, fromtStyle, fixAbs, 1);
         if (style.indexOf('rgb') >= 0) {
-            styleValue = styleValue >= 1 ? Math.floor(styleValue) : styleValue < 0 ? 0 : styleValue;
+            styleValue =
+                styleValue >= 1
+                    ? Math.floor(styleValue)
+                    : styleValue < 0
+                        ? 0
+                        : styleValue;
         }
         return styleValue;
     };
@@ -284,9 +404,13 @@ var Fit = /** @class */ (function () {
             var end = (0,util/* scrollPositionStringToNumber */.U3)(motion.end, status);
             var isInRange = start < scrollPosition && scrollPosition < end;
             var range = end - start;
-            var scrollPercent = isInRange ? (scrollPosition - start) / range :
-                (scrollPosition > start) ? 1 :
-                    (scrollPosition < end) ? 0 : 0;
+            var scrollPercent = isInRange
+                ? (scrollPosition - start) / range
+                : scrollPosition > start
+                    ? 1
+                    : scrollPosition < end
+                        ? 0
+                        : 0;
             for (var style in motion.fromStyle) {
                 var styleName = style;
                 var fromStyleValue = motion.fromStyle[styleName].toString();
@@ -309,8 +433,10 @@ var Fit = /** @class */ (function () {
 
 
 
-var defaultParallaxStatus = scrollStatus/* Status */.qb;
-var updateStatus = function (opt) { return defaultParallaxStatus.setVal(opt); };
+var defaultParallaxStatus = (/* unused pure expression or super */ null && (Status));
+var updateStatus = function (opt) {
+    return defaultParallaxStatus.setVal(opt);
+};
 var ParallaxFit = /** @class */ (function () {
     function ParallaxFit(element, opt, scrollEventOpt) {
         var _this = this;
@@ -329,7 +455,7 @@ var ParallaxFit = /** @class */ (function () {
         }, {
             targetPercentage: scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.targetPercentage,
             threshold: scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.threshold,
-            status: scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.status
+            status: scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.status,
         });
     }
     ParallaxFit.prototype.getValues = function () {
@@ -346,9 +472,9 @@ var ParallaxFit = /** @class */ (function () {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ParallaxFit": () => (/* binding */ ParallaxFit),
-/* harmony export */   "ParallaxSpeed": () => (/* binding */ ParallaxSpeed),
-/* harmony export */   "ParallaxTiming": () => (/* binding */ ParallaxTiming)
+/* harmony export */   ParallaxFit: () => (/* binding */ ParallaxFit),
+/* harmony export */   ParallaxSpeed: () => (/* binding */ ParallaxSpeed),
+/* harmony export */   ParallaxTiming: () => (/* binding */ ParallaxTiming)
 /* harmony export */ });
 /* unused harmony export updateStatus */
 /* harmony import */ var _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(251);
@@ -363,14 +489,16 @@ var defaultParallaxStatus = _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__/* .St
 var ParallaxTiming = _timing__WEBPACK_IMPORTED_MODULE_1__.ParallaxTiming;
 var ParallaxSpeed = _speed__WEBPACK_IMPORTED_MODULE_2__.ParallaxSpeed;
 var ParallaxFit = _fit__WEBPACK_IMPORTED_MODULE_3__.ParallaxFit;
-var updateStatus = function (opt) { return defaultParallaxStatus.setVal(opt); };
+var updateStatus = function (opt) {
+    return defaultParallaxStatus.setVal(opt);
+};
 window.Parallax = {
     Timing: ParallaxTiming,
     Speed: ParallaxSpeed,
     Fit: ParallaxFit,
     updateStatus: updateStatus,
     status: defaultParallaxStatus,
-    ScrollStatus: _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .ZP
+    ScrollStatus: _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .ZP,
 };
 
 
@@ -380,9 +508,9 @@ window.Parallax = {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Ij": () => (/* binding */ ScrollPosition),
-/* harmony export */   "ZP": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   "qb": () => (/* binding */ Status)
+/* harmony export */   Ij: () => (/* binding */ ScrollPosition),
+/* harmony export */   ZP: () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   qb: () => (/* binding */ Status)
 /* harmony export */ });
 var requestAnimationFrame = window.requestAnimationFrame;
 var ScrollStatus = /** @class */ (function () {
@@ -422,9 +550,11 @@ var ScrollStatus = /** @class */ (function () {
         else {
             (_a = this.functions) === null || _a === void 0 ? void 0 : _a.forEach(function (_a) {
                 var func = _a[0], scrollPosition = _a[1];
-                func(scrollPosition ?
-                    Object.assign({}, _this, { scrollPosition: scrollPosition.generateScrollPosition() }) :
-                    _this);
+                func(scrollPosition
+                    ? Object.assign({}, _this, {
+                        scrollPosition: scrollPosition.generateScrollPosition(),
+                    })
+                    : _this);
             });
         }
         requestAnimationFrame(this.scrollEventUpdate.bind(this));
@@ -434,8 +564,10 @@ var ScrollStatus = /** @class */ (function () {
         this.scrollPosition = this.ScrollPosition.generateScrollPosition();
         this.endScrollPosition = (_a = this.ScrollPosition) === null || _a === void 0 ? void 0 : _a.endScrollPosition;
         // @ts-ignore
+        // prettier-ignore
         this.stageSize = this.stage["inner".concat(this.stageSizeName)] || this.stage["client".concat(this.stageSizeName)];
         // @ts-ignore
+        // prettier-ignore
         this.contentSize = this.stage["scroll".concat(this.stageSizeName)] || document.documentElement["scroll".concat(this.stageSizeName)];
     };
     ScrollStatus.prototype.setDirectionInfo = function () {
@@ -452,7 +584,10 @@ var ScrollPosition = /** @class */ (function () {
         this.stageSize = opt.stageSize;
         this.targetPercentage = opt.targetPercentage || 0.2;
         this.threshold = opt.threshold || 0;
-        this.scrollName = this.stage === window ? "page".concat(this.direction.toUpperCase(), "Offset") : "scroll".concat(opt.directionPositionName);
+        this.scrollName =
+            this.stage === window
+                ? "page".concat(this.direction.toUpperCase(), "Offset")
+                : "scroll".concat(opt.directionPositionName);
         var scrollPosition = this.getScrollPosition();
         this.scrollPosition = scrollPosition; // 実際にスクロール
         this.endScrollPosition = scrollPosition; // 最後スクロールが止まる位置
@@ -483,7 +618,7 @@ var Status = new ScrollStatus();
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "ParallaxSpeed": () => (/* binding */ ParallaxSpeed)
+  ParallaxSpeed: () => (/* binding */ ParallaxSpeed)
 });
 
 // UNUSED EXPORTS: updateStatus
@@ -497,18 +632,29 @@ var util = __webpack_require__(833);
 var Speed = /** @class */ (function () {
     function Speed(ops) {
         this.el = ops.el;
-        this.speeds = typeof ops.speed === 'object' ? ops.speed : ops.speed ? [ops.speed] : [];
-        this.mins = typeof ops.min === 'object' ? ops.min : ops.min ? [ops.min] : [];
-        this.maxs = typeof ops.max === 'object' ? ops.max : ops.max ? [ops.max] : [];
-        this.contentScrollPositionStyleValues = typeof ops.contentScrollPositionStyleValue === 'object' ? ops.contentScrollPositionStyleValue : ops.contentScrollPositionStyleValue ? [ops.contentScrollPositionStyleValue] : [];
+        this.speeds =
+            typeof ops.speed === 'object' ? ops.speed : ops.speed ? [ops.speed] : [];
+        this.mins =
+            typeof ops.min === 'object' ? ops.min : ops.min ? [ops.min] : [];
+        this.maxs =
+            typeof ops.max === 'object' ? ops.max : ops.max ? [ops.max] : [];
+        this.contentScrollPositionStyleValues =
+            typeof ops.contentScrollPositionStyleValue === 'object'
+                ? ops.contentScrollPositionStyleValue
+                : ops.contentScrollPositionStyleValue
+                    ? [ops.contentScrollPositionStyleValue]
+                    : [];
         this.contentScrollPosition = ops.contentScrollPosition || 0;
-        this.styles = this.generateStyles((typeof ops.style === 'object' ? ops.style : ops.style ? [ops.style] : []));
+        this.styles = this.generateStyles(typeof ops.style === 'object' ? ops.style : ops.style ? [ops.style] : []);
     }
     Speed.prototype.generateStyles = function (styles) {
         var _this = this;
         return styles.map(function (name, i) {
             var _a;
-            var contentScrollPositionStyleValues = _this.contentScrollPositionStyleValues[i] || (_this.el ? (_a = document.defaultView) === null || _a === void 0 ? void 0 : _a.getComputedStyle(_this.el, null)[(0,util/* generateCamelCaseStyle */.Di)(name)] : 0);
+            var contentScrollPositionStyleValues = _this.contentScrollPositionStyleValues[i] ||
+                (_this.el
+                    ? (_a = document.defaultView) === null || _a === void 0 ? void 0 : _a.getComputedStyle(_this.el, null)[(0,util/* generateCamelCaseStyle */.Di)(name)]
+                    : 0);
             var styleValue = (0,util/* generateStyleValue */.Mv)(contentScrollPositionStyleValues);
             return {
                 name: name,
@@ -516,18 +662,20 @@ var Speed = /** @class */ (function () {
                 min: _this.mins[i] || _this.mins[0],
                 max: _this.maxs[i] || _this.maxs[0],
                 contentStyleValue: styleValue,
-                styleValues: (0,util/* getStyleValues */.fL)(styleValue)
+                styleValues: (0,util/* getStyleValues */.fL)(styleValue),
             };
         });
     };
     Speed.prototype.generateValues = function (status, style) {
         var _this = this;
         return style.styleValues.map(function (value, j) {
-            var _speed = (typeof style.speed === 'object' ? style.speed[j] : style.speed);
+            var _speed = typeof style.speed === 'object' ? style.speed[j] : style.speed;
             _speed = typeof _speed === 'number' ? _speed : 2;
-            var newValue = -(-status.scrollPosition * _speed + (0,util/* scrollPositionStringToNumber */.U3)(_this.contentScrollPosition, status) * _speed) + value;
-            var _min = (typeof style.min === 'object' ? style.min && style.min[j] : style.min);
-            var _max = (typeof style.max === 'object' ? style.max && style.max[j] : style.max);
+            var newValue = -(-status.scrollPosition * _speed +
+                (0,util/* scrollPositionStringToNumber */.U3)(_this.contentScrollPosition, status) *
+                    _speed) + value;
+            var _min = typeof style.min === 'object' ? style.min && style.min[j] : style.min;
+            var _max = typeof style.max === 'object' ? style.max && style.max[j] : style.max;
             newValue = Math.max(newValue, typeof _min === 'number' ? _min : -99999);
             newValue = Math.min(newValue, typeof _max === 'number' ? _max : 99999);
             if (style.contentStyleValue.indexOf('rgb') >= 0) {
@@ -553,8 +701,10 @@ var Speed = /** @class */ (function () {
 
 
 
-var defaultParallaxStatus = scrollStatus/* Status */.qb;
-var updateStatus = function (opt) { return defaultParallaxStatus.setVal(opt); };
+var defaultParallaxStatus = (/* unused pure expression or super */ null && (Status));
+var updateStatus = function (opt) {
+    return defaultParallaxStatus.setVal(opt);
+};
 var ParallaxSpeed = /** @class */ (function () {
     function ParallaxSpeed(element, opt, scrollEventOpt) {
         var _this = this;
@@ -565,8 +715,10 @@ var ParallaxSpeed = /** @class */ (function () {
             speed: opt === null || opt === void 0 ? void 0 : opt.speed,
             min: opt === null || opt === void 0 ? void 0 : opt.min,
             max: opt === null || opt === void 0 ? void 0 : opt.max,
-            contentScrollPosition: (opt === null || opt === void 0 ? void 0 : opt.contentScrollPosition) === 0 || (opt === null || opt === void 0 ? void 0 : opt.contentScrollPosition) ? opt === null || opt === void 0 ? void 0 : opt.contentScrollPosition : el,
-            contentScrollPositionStyleValue: opt === null || opt === void 0 ? void 0 : opt.contentScrollPositionStyleValue
+            contentScrollPosition: (opt === null || opt === void 0 ? void 0 : opt.contentScrollPosition) === 0 || (opt === null || opt === void 0 ? void 0 : opt.contentScrollPosition)
+                ? opt === null || opt === void 0 ? void 0 : opt.contentScrollPosition
+                : el,
+            contentScrollPositionStyleValue: opt === null || opt === void 0 ? void 0 : opt.contentScrollPositionStyleValue,
         });
         this.speed = s;
         (0,util/* setScrollEvents */.Ih)(function (status) {
@@ -575,7 +727,7 @@ var ParallaxSpeed = /** @class */ (function () {
         }, {
             targetPercentage: (opt === null || opt === void 0 ? void 0 : opt.targetPercentage) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.targetPercentage),
             threshold: (opt === null || opt === void 0 ? void 0 : opt.threshold) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.threshold),
-            status: (opt === null || opt === void 0 ? void 0 : opt.status) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.status)
+            status: (opt === null || opt === void 0 ? void 0 : opt.status) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.status),
         });
     }
     ParallaxSpeed.prototype.getValues = function () {
@@ -594,7 +746,7 @@ var ParallaxSpeed = /** @class */ (function () {
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "ParallaxTiming": () => (/* binding */ ParallaxTiming)
+  ParallaxTiming: () => (/* binding */ ParallaxTiming)
 });
 
 // UNUSED EXPORTS: updateStatus
@@ -613,14 +765,18 @@ var Timing = /** @class */ (function () {
         this.toggle = opt.toggle || [function (e, o) { }, function (e, o) { }];
     }
     Timing.prototype.getEventScrollElementPosition = function (status) {
-        return (0,util/* scrollPositionStringToNumber */.U3)(this.eventScrollElementPosition ? this.eventScrollElementPosition : (0,util/* _offset */.LR)(this.el, status.endScrollPosition, status.directionPositionName), status);
+        return (0,util/* scrollPositionStringToNumber */.U3)(this.eventScrollElementPosition
+            ? this.eventScrollElementPosition
+            : (0,util/* _offset */.LR)(this.el, status.endScrollPosition, status.directionPositionName), status);
     };
     Timing.prototype.timingEvent = function (status) {
         var isLineOver = status.scrollPosition >= this.getEventScrollElementPosition(status);
         if (isLineOver !== this.isLineOver) {
             this.isLineOver = isLineOver;
             var eventSelect = this.toggle[isLineOver ? 0 : 1];
-            var element = typeof this.el === 'string' ? document.querySelector(this.el) : this.el;
+            var element = typeof this.el === 'string'
+                ? document.querySelector(this.el)
+                : this.el;
             return eventSelect(element, isLineOver);
         }
     };
@@ -632,21 +788,32 @@ var Timing = /** @class */ (function () {
 
 
 
-var defaultParallaxStatus = scrollStatus/* Status */.qb;
-var updateStatus = function (opt) { return defaultParallaxStatus.setVal(opt); };
+var defaultParallaxStatus = (/* unused pure expression or super */ null && (Status));
+var updateStatus = function (opt) {
+    return defaultParallaxStatus.setVal(opt);
+};
 var ParallaxTiming = /** @class */ (function () {
     function ParallaxTiming(element, opt, scrollEventOpt) {
         var _this = this;
         var el = element ? (0,util/* getElement */.sb)(element) : undefined;
-        var timingEvent = Object.prototype.toString.call(opt) === '[object Array]' ? opt : ((opt === null || opt === void 0 ? void 0 : opt.start) ? [opt === null || opt === void 0 ? void 0 : opt.start, opt === null || opt === void 0 ? void 0 : opt.end] : opt === null || opt === void 0 ? void 0 : opt.toggle);
+        var timingEvent = Object.prototype.toString.call(opt) === '[object Array]'
+            ? opt
+            : (opt === null || opt === void 0 ? void 0 : opt.start)
+                ? [opt === null || opt === void 0 ? void 0 : opt.start, opt === null || opt === void 0 ? void 0 : opt.end]
+                : opt === null || opt === void 0 ? void 0 : opt.toggle;
         var c = (opt === null || opt === void 0 ? void 0 : opt.className) || 'on';
         this.timing = new timing({
             el: (opt === null || opt === void 0 ? void 0 : opt.target) ? (0,util/* getElement */.sb)(opt.target) : el,
             triggerPosition: opt === null || opt === void 0 ? void 0 : opt.triggerPosition,
-            toggle: timingEvent || [
-                function (t, o) { el === null || el === void 0 ? void 0 : el.classList.add(c); },
-                function (t, o) { el === null || el === void 0 ? void 0 : el.classList.remove(c); },
-            ]
+            toggle: timingEvent ||
+                [
+                    function (t, o) {
+                        el === null || el === void 0 ? void 0 : el.classList.add(c);
+                    },
+                    function (t, o) {
+                        el === null || el === void 0 ? void 0 : el.classList.remove(c);
+                    },
+                ],
         });
         (0,util/* setScrollEvents */.Ih)(function (status) {
             _this.timing.timingEvent(status);
@@ -654,7 +821,7 @@ var ParallaxTiming = /** @class */ (function () {
         }, {
             targetPercentage: (opt === null || opt === void 0 ? void 0 : opt.targetPercentage) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.targetPercentage),
             threshold: (opt === null || opt === void 0 ? void 0 : opt.threshold) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.threshold),
-            status: (opt === null || opt === void 0 ? void 0 : opt.status) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.status)
+            status: (opt === null || opt === void 0 ? void 0 : opt.status) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.status),
         });
     }
     ParallaxTiming.prototype.getValues = function () {
@@ -671,14 +838,14 @@ var ParallaxTiming = /** @class */ (function () {
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Di": () => (/* binding */ generateCamelCaseStyle),
-/* harmony export */   "Ih": () => (/* binding */ setScrollEvents),
-/* harmony export */   "LR": () => (/* binding */ _offset),
-/* harmony export */   "Mv": () => (/* binding */ generateStyleValue),
-/* harmony export */   "U3": () => (/* binding */ scrollPositionStringToNumber),
-/* harmony export */   "fF": () => (/* binding */ generateStyleValueString),
-/* harmony export */   "fL": () => (/* binding */ getStyleValues),
-/* harmony export */   "sb": () => (/* binding */ getElement)
+/* harmony export */   Di: () => (/* binding */ generateCamelCaseStyle),
+/* harmony export */   Ih: () => (/* binding */ setScrollEvents),
+/* harmony export */   LR: () => (/* binding */ _offset),
+/* harmony export */   Mv: () => (/* binding */ generateStyleValue),
+/* harmony export */   U3: () => (/* binding */ scrollPositionStringToNumber),
+/* harmony export */   fF: () => (/* binding */ generateStyleValueString),
+/* harmony export */   fL: () => (/* binding */ getStyleValues),
+/* harmony export */   sb: () => (/* binding */ getElement)
 /* harmony export */ });
 /* unused harmony exports kebabToCamelCase, generateHex, generateRGB, hexadecimalToRgb, getStringColor */
 /* harmony import */ var _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(251);
@@ -687,29 +854,38 @@ var defaultParallaxStatus = _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__/* .St
 var ERRROR_PREFIX = '[scroll-parallax-effect]';
 var setScrollEvents = function (func, _a) {
     var _b = _a === void 0 ? {} : _a, targetPercentage = _b.targetPercentage, threshold = _b.threshold, _c = _b.status, status = _c === void 0 ? defaultParallaxStatus : _c;
-    var isNewScrollPosition = !!(targetPercentage && (targetPercentage !== status.targetPercentage)) || !!(threshold && (threshold !== status.threshold));
+    var isNewScrollPosition = !!(targetPercentage && targetPercentage !== status.targetPercentage) ||
+        !!(threshold && threshold !== status.threshold);
     status.functions.push([
         func,
         // targetPercentageが違った場合は新しくScrollPositionを作る、statusが異なった場合もstatusのscrollPositiuonを入れる
-        isNewScrollPosition ? new _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__/* .ScrollPosition */ .Ij(Object.assign({}, status, { targetPercentage: targetPercentage, threshold: threshold })) :
-            status !== defaultParallaxStatus ? status.ScrollPosition : undefined
+        isNewScrollPosition
+            ? new _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__/* .ScrollPosition */ .Ij(Object.assign({}, status, { targetPercentage: targetPercentage, threshold: threshold }))
+            : status !== defaultParallaxStatus
+                ? status.ScrollPosition
+                : undefined,
     ]);
 };
 var kebabToCamelCase = function (str) {
     if (!~str.indexOf('-'))
         return str;
-    return str.split('-').map(function (word, i) {
+    return str
+        .split('-')
+        .map(function (word, i) {
         if (i === 0) {
             return word.toLowerCase();
         }
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-    }).join('');
+    })
+        .join('');
 };
 var generateCamelCaseStyle = function (str) {
     return kebabToCamelCase(str);
 };
 var getElement = function (element) {
-    var el = typeof element === 'string' ? document.querySelector(element) : element;
+    var el = typeof element === 'string'
+        ? document.querySelector(element)
+        : element;
     if (!el)
         throw new Error("".concat(ERRROR_PREFIX, " [").concat(getElement.name, "] undefined element \"").concat(element, "\""));
     return el;
@@ -752,7 +928,7 @@ var generateRGB = function (colorString) {
     return [
         parseInt(c.substring(0, 2), 16) || 0,
         parseInt(c.substring(2, 4), 16) || 0,
-        parseInt(c.substring(4, 6), 16) || 0
+        parseInt(c.substring(4, 6), 16) || 0,
     ];
 };
 var hexadecimalToRgb = function (value) {
@@ -762,12 +938,21 @@ var hexadecimalToRgb = function (value) {
     });
 };
 var getStringColor = function (styleValue) {
-    var colors = { red: 'f00', blue: '00f', yellow: 'ff0', green: '008000' };
+    var colors = {
+        red: 'f00',
+        blue: '00f',
+        yellow: 'ff0',
+        green: '008000',
+    };
     return styleValue.replace(/red|blue|green|yellow/g, function (color) { return '#' + colors[color]; });
 };
 // elementの位置を取得する
 var _offset = function (element, endScrollPosition, directionPositionName) {
-    var el = typeof element === 'string' ? element ? document.querySelector(element) : '' : element;
+    var el = typeof element === 'string'
+        ? element
+            ? document.querySelector(element)
+            : ''
+        : element;
     var dir = directionPositionName === 'Left' ? 'left' : 'top';
     return el ? el.getBoundingClientRect()[dir] + endScrollPosition : 0; // window表示領域内の位置 + 今のスクロール量とすることでブラウザ実際の位置を取得する
 };
@@ -777,15 +962,22 @@ var isEnd = function (value) {
 var scrollPositionStringToNumber = function (triggerPosition, status) {
     if (status === void 0) { status = defaultParallaxStatus; }
     var stageEndScrollNum = status.contentSize - status.stageSize;
-    if (triggerPosition > stageEndScrollNum || isEnd(triggerPosition)) {
+    if ((typeof triggerPosition === 'number' &&
+        triggerPosition > stageEndScrollNum) ||
+        isEnd(triggerPosition)) {
         return stageEndScrollNum;
     }
     // [#test, -100]のような値を想定
     if (~['string', 'object'].indexOf(typeof triggerPosition)) {
-        var triggerPositionArray = (typeof triggerPosition === 'string' ? triggerPosition.split(',') : triggerPosition);
+        var triggerPositionArray = (typeof triggerPosition === 'string'
+            ? triggerPosition.split(',')
+            : triggerPosition);
         var positionName = triggerPositionArray[0] || '';
-        var position = isEnd(positionName) ? stageEndScrollNum : _offset(positionName, status.endScrollPosition, status.directionPositionName);
-        var s = (parseInt(String(triggerPositionArray[1])) || 0) + Math.min(position, stageEndScrollNum);
+        var position = isEnd(positionName)
+            ? stageEndScrollNum
+            : _offset(positionName, status.endScrollPosition, status.directionPositionName);
+        var s = (parseInt(String(triggerPositionArray[1])) || 0) +
+            Math.min(position, stageEndScrollNum);
         return Math.min(s, stageEndScrollNum);
     }
     if (typeof triggerPosition === 'number') {
@@ -867,7 +1059,7 @@ document.querySelectorAll('.gnav > ul > *').forEach(function (el) {
     new _scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__.ParallaxTiming(el, { target: targetElementName });
 });
 new _scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__.ParallaxTiming('#timing', {
-    threshold: 0.5
+    threshold: 0.5,
 });
 var borders = document.createElement('div');
 borders.setAttribute('class', 'borders');
@@ -888,7 +1080,7 @@ for (var i = 0; i < borderContent; i++) {
     new _scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__.ParallaxSpeed(border, {
         contentScrollPosition: 0,
         style: ['width', 'left'],
-        speed: Math.random() * 0.2 + 0.5 * ([-1, 1][Math.floor(Math.random() * 2)]),
+        speed: Math.random() * 0.2 + 0.5 * [-1, 1][Math.floor(Math.random() * 2)],
     });
 }
 var drop = new _scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__.ParallaxFit('.drop', [
@@ -896,12 +1088,12 @@ var drop = new _scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__.Parall
         start: 0,
         end: 'end',
         fromStyle: {
-            top: '5%'
+            top: '5%',
         },
         toStyle: {
-            top: '80%'
+            top: '80%',
         },
-    }
+    },
 ]);
 // setInterval(() => console.log(drop.getValues().styleValues), 100)
 var dropPath = new _scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__.ParallaxFit('.dropPath', [
@@ -909,22 +1101,22 @@ var dropPath = new _scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__.Pa
         start: 0,
         end: '#timing',
         fromStyle: {
-            fill: '#1176ff'
+            fill: '#1176ff',
         },
         toStyle: {
-            fill: '#67ad0c'
+            fill: '#67ad0c',
         },
     },
     {
         end: ['#speed', -300],
         toStyle: {
-            fill: '#ff15d0'
+            fill: '#ff15d0',
         },
     },
     {
         end: 'end',
         toStyle: {
-            fill: '#1176ff'
+            fill: '#1176ff',
         },
     },
 ]);
@@ -937,16 +1129,12 @@ new _scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__.ParallaxSpeed('.g
 });
 document.querySelectorAll('.triangle').forEach(function (el, i) {
     new _scroll_parallax_effect_index__WEBPACK_IMPORTED_MODULE_0__.ParallaxSpeed(el, {
-        style: [
-            'transform',
-            'top',
-            'opacity'
-        ],
+        style: ['transform', 'top', 'opacity'],
         contentScrollPositionStyleValue: "rotate(".concat(Math.floor(Math.random() * 60 * i), "deg)"),
         speed: [
-            Math.random() * 0.05 * ([-1, 1][Math.floor(Math.random() * 2)]),
+            Math.random() * 0.05 * [-1, 1][Math.floor(Math.random() * 2)],
             Math.random() * 0.15,
-            0.005
+            0.005,
         ],
         contentScrollPosition: '#speed',
     });
@@ -959,18 +1147,18 @@ document.querySelectorAll('.circle').forEach(function (el, i) {
             fromStyle: {
                 opacity: '0',
                 transform: 'scale(0.3)',
-                top: el.style.top
+                top: el.style.top,
             },
             toStyle: {
                 opacity: '1',
                 transform: 'scale(1)',
-                top: el.style.top
+                top: el.style.top,
             },
             easing: function (t, b, c, d) {
                 var ts = (t /= d) * t;
                 var tc = ts * t;
-                return b + c * (-49 * tc * ts + 135 * ts * ts + -130 * tc + 50 * ts + -5 * t);
-            }
+                return (b + c * (-49 * tc * ts + 135 * ts * ts + -130 * tc + 50 * ts + -5 * t));
+            },
         },
     ]);
 });

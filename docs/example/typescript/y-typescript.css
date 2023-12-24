@@ -76,7 +76,7 @@ body {
 
 .gnav-item {
   list-style-type: none;
-  margin: 12px 0
+  margin: 12px 0;
 }
 
 .gnav-item > a {
@@ -132,7 +132,8 @@ body {
 .main-parallax-item {
   color: #fff;
   text-align: center;
-  text-decoration: none
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 
@@ -151,6 +152,7 @@ body {
   background-color: rgba(0, 0, 0, 0.8);
   background-color: var(--color-black);
   text-align: center;
+  -webkit-text-decoration: underline;
   text-decoration: underline;
   display: inline-block;
   margin-bottom: 24px;
@@ -159,6 +161,7 @@ body {
 
 .main-parallax-item-value {
   padding: 10px 20px;
+  -webkit-text-decoration: underline;
   text-decoration: underline;
   display: inline-block;
   margin-bottom: 24px;
@@ -172,7 +175,7 @@ body {
   margin: 64px 0 160px;
   flex-direction: column;
   justify-content: center;
-  position: relative
+  position: relative;
 }
 
 
@@ -247,7 +250,7 @@ body {
 }
 
 .triangle {
-  position: absolute
+  position: absolute;
 }
 
 .triangle:nth-child(1) {
@@ -274,7 +277,7 @@ body {
   z-index: -1;
   opacity: 0;
   transition: opacity 0.3s;
-  background-color: #67ad0c
+  background-color: #67ad0c;
 }
 
 .square:nth-child(1) {
@@ -313,7 +316,7 @@ body {
   position: absolute;
   z-index: -1;
   background-color: #1176ff;
-  border-radius: 50%
+  border-radius: 50%;
 }
 
 .circle:nth-child(1) {

@@ -16,8 +16,8 @@ return /******/ (() => { // webpackBootstrap
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Ij": () => (/* binding */ ScrollPosition),
-/* harmony export */   "qb": () => (/* binding */ Status)
+/* harmony export */   Ij: () => (/* binding */ ScrollPosition),
+/* harmony export */   qb: () => (/* binding */ Status)
 /* harmony export */ });
 var requestAnimationFrame = window.requestAnimationFrame;
 var ScrollStatus = /** @class */ (function () {
@@ -57,9 +57,11 @@ var ScrollStatus = /** @class */ (function () {
         else {
             (_a = this.functions) === null || _a === void 0 ? void 0 : _a.forEach(function (_a) {
                 var func = _a[0], scrollPosition = _a[1];
-                func(scrollPosition ?
-                    Object.assign({}, _this, { scrollPosition: scrollPosition.generateScrollPosition() }) :
-                    _this);
+                func(scrollPosition
+                    ? Object.assign({}, _this, {
+                        scrollPosition: scrollPosition.generateScrollPosition(),
+                    })
+                    : _this);
             });
         }
         requestAnimationFrame(this.scrollEventUpdate.bind(this));
@@ -69,8 +71,10 @@ var ScrollStatus = /** @class */ (function () {
         this.scrollPosition = this.ScrollPosition.generateScrollPosition();
         this.endScrollPosition = (_a = this.ScrollPosition) === null || _a === void 0 ? void 0 : _a.endScrollPosition;
         // @ts-ignore
+        // prettier-ignore
         this.stageSize = this.stage["inner".concat(this.stageSizeName)] || this.stage["client".concat(this.stageSizeName)];
         // @ts-ignore
+        // prettier-ignore
         this.contentSize = this.stage["scroll".concat(this.stageSizeName)] || document.documentElement["scroll".concat(this.stageSizeName)];
     };
     ScrollStatus.prototype.setDirectionInfo = function () {
@@ -87,7 +91,10 @@ var ScrollPosition = /** @class */ (function () {
         this.stageSize = opt.stageSize;
         this.targetPercentage = opt.targetPercentage || 0.2;
         this.threshold = opt.threshold || 0;
-        this.scrollName = this.stage === window ? "page".concat(this.direction.toUpperCase(), "Offset") : "scroll".concat(opt.directionPositionName);
+        this.scrollName =
+            this.stage === window
+                ? "page".concat(this.direction.toUpperCase(), "Offset")
+                : "scroll".concat(opt.directionPositionName);
         var scrollPosition = this.getScrollPosition();
         this.scrollPosition = scrollPosition; // 実際にスクロール
         this.endScrollPosition = scrollPosition; // 最後スクロールが止まる位置
@@ -116,10 +123,10 @@ var Status = new ScrollStatus();
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Ih": () => (/* binding */ setScrollEvents),
-/* harmony export */   "LR": () => (/* binding */ _offset),
-/* harmony export */   "U3": () => (/* binding */ scrollPositionStringToNumber),
-/* harmony export */   "sb": () => (/* binding */ getElement)
+/* harmony export */   Ih: () => (/* binding */ setScrollEvents),
+/* harmony export */   LR: () => (/* binding */ _offset),
+/* harmony export */   U3: () => (/* binding */ scrollPositionStringToNumber),
+/* harmony export */   sb: () => (/* binding */ getElement)
 /* harmony export */ });
 /* unused harmony exports kebabToCamelCase, generateCamelCaseStyle, getStyleValues, generateStyleValue, generateStyleValueString, generateHex, generateRGB, hexadecimalToRgb, getStringColor */
 /* harmony import */ var _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(251);
@@ -128,29 +135,38 @@ var defaultParallaxStatus = _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__/* .St
 var ERRROR_PREFIX = '[scroll-parallax-effect]';
 var setScrollEvents = function (func, _a) {
     var _b = _a === void 0 ? {} : _a, targetPercentage = _b.targetPercentage, threshold = _b.threshold, _c = _b.status, status = _c === void 0 ? defaultParallaxStatus : _c;
-    var isNewScrollPosition = !!(targetPercentage && (targetPercentage !== status.targetPercentage)) || !!(threshold && (threshold !== status.threshold));
+    var isNewScrollPosition = !!(targetPercentage && targetPercentage !== status.targetPercentage) ||
+        !!(threshold && threshold !== status.threshold);
     status.functions.push([
         func,
         // targetPercentageが違った場合は新しくScrollPositionを作る、statusが異なった場合もstatusのscrollPositiuonを入れる
-        isNewScrollPosition ? new _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__/* .ScrollPosition */ .Ij(Object.assign({}, status, { targetPercentage: targetPercentage, threshold: threshold })) :
-            status !== defaultParallaxStatus ? status.ScrollPosition : undefined
+        isNewScrollPosition
+            ? new _lib_scrollStatus__WEBPACK_IMPORTED_MODULE_0__/* .ScrollPosition */ .Ij(Object.assign({}, status, { targetPercentage: targetPercentage, threshold: threshold }))
+            : status !== defaultParallaxStatus
+                ? status.ScrollPosition
+                : undefined,
     ]);
 };
 var kebabToCamelCase = function (str) {
     if (!~str.indexOf('-'))
         return str;
-    return str.split('-').map(function (word, i) {
+    return str
+        .split('-')
+        .map(function (word, i) {
         if (i === 0) {
             return word.toLowerCase();
         }
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-    }).join('');
+    })
+        .join('');
 };
 var generateCamelCaseStyle = function (str) {
     return kebabToCamelCase(str);
 };
 var getElement = function (element) {
-    var el = typeof element === 'string' ? document.querySelector(element) : element;
+    var el = typeof element === 'string'
+        ? document.querySelector(element)
+        : element;
     if (!el)
         throw new Error("".concat(ERRROR_PREFIX, " [").concat(getElement.name, "] undefined element \"").concat(element, "\""));
     return el;
@@ -193,7 +209,7 @@ var generateRGB = function (colorString) {
     return [
         parseInt(c.substring(0, 2), 16) || 0,
         parseInt(c.substring(2, 4), 16) || 0,
-        parseInt(c.substring(4, 6), 16) || 0
+        parseInt(c.substring(4, 6), 16) || 0,
     ];
 };
 var hexadecimalToRgb = function (value) {
@@ -203,12 +219,21 @@ var hexadecimalToRgb = function (value) {
     });
 };
 var getStringColor = function (styleValue) {
-    var colors = { red: 'f00', blue: '00f', yellow: 'ff0', green: '008000' };
+    var colors = {
+        red: 'f00',
+        blue: '00f',
+        yellow: 'ff0',
+        green: '008000',
+    };
     return styleValue.replace(/red|blue|green|yellow/g, function (color) { return '#' + colors[color]; });
 };
 // elementの位置を取得する
 var _offset = function (element, endScrollPosition, directionPositionName) {
-    var el = typeof element === 'string' ? element ? document.querySelector(element) : '' : element;
+    var el = typeof element === 'string'
+        ? element
+            ? document.querySelector(element)
+            : ''
+        : element;
     var dir = directionPositionName === 'Left' ? 'left' : 'top';
     return el ? el.getBoundingClientRect()[dir] + endScrollPosition : 0; // window表示領域内の位置 + 今のスクロール量とすることでブラウザ実際の位置を取得する
 };
@@ -218,15 +243,22 @@ var isEnd = function (value) {
 var scrollPositionStringToNumber = function (triggerPosition, status) {
     if (status === void 0) { status = defaultParallaxStatus; }
     var stageEndScrollNum = status.contentSize - status.stageSize;
-    if (triggerPosition > stageEndScrollNum || isEnd(triggerPosition)) {
+    if ((typeof triggerPosition === 'number' &&
+        triggerPosition > stageEndScrollNum) ||
+        isEnd(triggerPosition)) {
         return stageEndScrollNum;
     }
     // [#test, -100]のような値を想定
     if (~['string', 'object'].indexOf(typeof triggerPosition)) {
-        var triggerPositionArray = (typeof triggerPosition === 'string' ? triggerPosition.split(',') : triggerPosition);
+        var triggerPositionArray = (typeof triggerPosition === 'string'
+            ? triggerPosition.split(',')
+            : triggerPosition);
         var positionName = triggerPositionArray[0] || '';
-        var position = isEnd(positionName) ? stageEndScrollNum : _offset(positionName, status.endScrollPosition, status.directionPositionName);
-        var s = (parseInt(String(triggerPositionArray[1])) || 0) + Math.min(position, stageEndScrollNum);
+        var position = isEnd(positionName)
+            ? stageEndScrollNum
+            : _offset(positionName, status.endScrollPosition, status.directionPositionName);
+        var s = (parseInt(String(triggerPositionArray[1])) || 0) +
+            Math.min(position, stageEndScrollNum);
         return Math.min(s, stageEndScrollNum);
     }
     if (typeof triggerPosition === 'number') {
@@ -302,8 +334,8 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "ParallaxTiming": () => (/* binding */ ParallaxTiming),
-  "updateStatus": () => (/* binding */ updateStatus)
+  ParallaxTiming: () => (/* binding */ ParallaxTiming),
+  updateStatus: () => (/* binding */ updateStatus)
 });
 
 // EXTERNAL MODULE: ./src/scroll-parallax-effect/lib/scrollStatus.ts
@@ -320,14 +352,18 @@ var Timing = /** @class */ (function () {
         this.toggle = opt.toggle || [function (e, o) { }, function (e, o) { }];
     }
     Timing.prototype.getEventScrollElementPosition = function (status) {
-        return (0,util/* scrollPositionStringToNumber */.U3)(this.eventScrollElementPosition ? this.eventScrollElementPosition : (0,util/* _offset */.LR)(this.el, status.endScrollPosition, status.directionPositionName), status);
+        return (0,util/* scrollPositionStringToNumber */.U3)(this.eventScrollElementPosition
+            ? this.eventScrollElementPosition
+            : (0,util/* _offset */.LR)(this.el, status.endScrollPosition, status.directionPositionName), status);
     };
     Timing.prototype.timingEvent = function (status) {
         var isLineOver = status.scrollPosition >= this.getEventScrollElementPosition(status);
         if (isLineOver !== this.isLineOver) {
             this.isLineOver = isLineOver;
             var eventSelect = this.toggle[isLineOver ? 0 : 1];
-            var element = typeof this.el === 'string' ? document.querySelector(this.el) : this.el;
+            var element = typeof this.el === 'string'
+                ? document.querySelector(this.el)
+                : this.el;
             return eventSelect(element, isLineOver);
         }
     };
@@ -340,20 +376,31 @@ var Timing = /** @class */ (function () {
 
 
 var defaultParallaxStatus = scrollStatus/* Status */.qb;
-var updateStatus = function (opt) { return defaultParallaxStatus.setVal(opt); };
+var updateStatus = function (opt) {
+    return defaultParallaxStatus.setVal(opt);
+};
 var ParallaxTiming = /** @class */ (function () {
     function ParallaxTiming(element, opt, scrollEventOpt) {
         var _this = this;
         var el = element ? (0,util/* getElement */.sb)(element) : undefined;
-        var timingEvent = Object.prototype.toString.call(opt) === '[object Array]' ? opt : ((opt === null || opt === void 0 ? void 0 : opt.start) ? [opt === null || opt === void 0 ? void 0 : opt.start, opt === null || opt === void 0 ? void 0 : opt.end] : opt === null || opt === void 0 ? void 0 : opt.toggle);
+        var timingEvent = Object.prototype.toString.call(opt) === '[object Array]'
+            ? opt
+            : (opt === null || opt === void 0 ? void 0 : opt.start)
+                ? [opt === null || opt === void 0 ? void 0 : opt.start, opt === null || opt === void 0 ? void 0 : opt.end]
+                : opt === null || opt === void 0 ? void 0 : opt.toggle;
         var c = (opt === null || opt === void 0 ? void 0 : opt.className) || 'on';
         this.timing = new timing({
             el: (opt === null || opt === void 0 ? void 0 : opt.target) ? (0,util/* getElement */.sb)(opt.target) : el,
             triggerPosition: opt === null || opt === void 0 ? void 0 : opt.triggerPosition,
-            toggle: timingEvent || [
-                function (t, o) { el === null || el === void 0 ? void 0 : el.classList.add(c); },
-                function (t, o) { el === null || el === void 0 ? void 0 : el.classList.remove(c); },
-            ]
+            toggle: timingEvent ||
+                [
+                    function (t, o) {
+                        el === null || el === void 0 ? void 0 : el.classList.add(c);
+                    },
+                    function (t, o) {
+                        el === null || el === void 0 ? void 0 : el.classList.remove(c);
+                    },
+                ],
         });
         (0,util/* setScrollEvents */.Ih)(function (status) {
             _this.timing.timingEvent(status);
@@ -361,7 +408,7 @@ var ParallaxTiming = /** @class */ (function () {
         }, {
             targetPercentage: (opt === null || opt === void 0 ? void 0 : opt.targetPercentage) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.targetPercentage),
             threshold: (opt === null || opt === void 0 ? void 0 : opt.threshold) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.threshold),
-            status: (opt === null || opt === void 0 ? void 0 : opt.status) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.status)
+            status: (opt === null || opt === void 0 ? void 0 : opt.status) || (scrollEventOpt === null || scrollEventOpt === void 0 ? void 0 : scrollEventOpt.status),
         });
     }
     ParallaxTiming.prototype.getValues = function () {
