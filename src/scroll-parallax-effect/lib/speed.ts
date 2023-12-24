@@ -56,8 +56,8 @@ export default class Speed {
       typeof ops.contentScrollPositionStyleValue === 'object'
         ? ops.contentScrollPositionStyleValue
         : ops.contentScrollPositionStyleValue
-        ? [ops.contentScrollPositionStyleValue]
-        : [];
+          ? [ops.contentScrollPositionStyleValue]
+          : [];
     this.contentScrollPosition = ops.contentScrollPosition || 0;
     this.styles = this.generateStyles(
       typeof ops.style === 'object' ? ops.style : ops.style ? [ops.style] : []

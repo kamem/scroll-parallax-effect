@@ -168,8 +168,8 @@ export default class Fit {
         styleValue >= 1
           ? Math.floor(styleValue)
           : styleValue < 0
-          ? 0
-          : styleValue;
+            ? 0
+            : styleValue;
     }
     return styleValue;
   }
@@ -185,10 +185,10 @@ export default class Fit {
       const scrollPercent = isInRange
         ? (scrollPosition - start) / range
         : scrollPosition > start
-        ? 1
-        : scrollPosition < end
-        ? 0
-        : 0;
+          ? 1
+          : scrollPosition < end
+            ? 0
+            : 0;
 
       for (let style in motion.fromStyle) {
         const styleName = style as CSSStyleDeclarationName;

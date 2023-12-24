@@ -22,8 +22,8 @@ export class ParallaxTiming {
       Object.prototype.toString.call(opt) === '[object Array]'
         ? (opt as [EventFunctionType, EventFunctionType])
         : opt?.start
-        ? ([opt?.start, opt?.end] as [EventFunctionType, EventFunctionType])
-        : opt?.toggle;
+          ? ([opt?.start, opt?.end] as [EventFunctionType, EventFunctionType])
+          : opt?.toggle;
     const c = opt?.className || 'on';
     this.timing = new Timing({
       el: opt?.target ? getElement(opt.target) : el,

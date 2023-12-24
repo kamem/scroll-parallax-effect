@@ -29,8 +29,8 @@ export const setScrollEvents = (
           Object.assign({}, status, { targetPercentage, threshold })
         )
       : status !== defaultParallaxStatus
-      ? status.ScrollPosition
-      : undefined,
+        ? status.ScrollPosition
+        : undefined,
   ]);
 };
 
